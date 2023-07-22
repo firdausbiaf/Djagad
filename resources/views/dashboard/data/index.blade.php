@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="table-responsive col-lg-10 mx-5 mt-4">
-    <h2>Data</h2>
+    <h2>Data User</h2><br>
     <a href="{{ route('data.create') }}" class="btn btn-primary mb-3">Tambah Data</a>
     <table class="table table-striped table-sm">
         <thead>
@@ -34,8 +34,8 @@
                 <td>{{ $item->cicilan }}</td>
                 <td><img src="{{ asset('storage/' . $item->photo) }}" class="card-img-top" alt="{{ $item->photo }}"></td>
                 <td>
-                    <a href="{{ route('data.show', $item->id) }}" class="badge bg-info">Show</a>
-                    <a href="{{ route('data.edit', $item->id) }}" class="badge bg-warning">Edit</a>
+                    <a href="{{ route('data.show', $item->id) }}" class="badge bg-info" style="text-decoration: none;">Show</a>
+                    <a href="{{ route('data.edit', $item->id) }}" class="badge bg-warning" style="text-decoration: none;">Edit</a>
                     <form action="{{ route('data.destroy', $item->id) }}" method="post" class="d-inline">
                         @method('delete')
                         @csrf
