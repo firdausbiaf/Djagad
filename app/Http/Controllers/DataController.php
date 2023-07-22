@@ -41,6 +41,7 @@ class DataController extends Controller
     {
         $validatedData = $request->validate([
             'user_id' => 'required|exists:users,id',
+            'alamat' => 'required',
             'kavling' => 'required',
             'tipe' => 'required|integer',
             'spk' => 'required',

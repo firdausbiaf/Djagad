@@ -13,6 +13,7 @@ class Data extends Model
 
     protected $fillable = [
         'user_id',
+        'alamat',
         'kavling',
         'tipe',
         'spk',

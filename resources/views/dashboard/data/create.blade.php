@@ -20,6 +20,15 @@
             @enderror
         </div>
         <div class="mb-3">
+            <label for="alamat" class="form-label">Alamat</label>
+            <input type="text" class="form-control @error('kavling') is-invalid @enderror" id="alamat" name="alamat" value="{{ old('alamat') }}" required>
+            @error('alamat')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="mb-3">
             <label for="kavling" class="form-label">Kavling</label>
             <input type="text" class="form-control @error('kavling') is-invalid @enderror" id="kavling" name="kavling" value="{{ old('kavling') }}" required>
             @error('kavling')

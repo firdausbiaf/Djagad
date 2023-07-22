@@ -16,6 +16,7 @@ class CreateDataTable extends Migration
         Schema::create('data', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->string('alamat');
             $table->string('kavling');
             $table->unsignedBigInteger('tipe');
             $table->string('spk');
