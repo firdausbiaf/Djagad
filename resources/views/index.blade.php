@@ -11,11 +11,14 @@
                     <div class="container">
                         <div class="row justify-content-start">
                             <div class="col-sm-10 col-lg-8">
-                                <h5 class="text-primary text-uppercase mb-3 animated slideInDown">Lembaga Bimbingan Belajar Terbaik</h5>
-                                <h1 class="display-3 text-white animated slideInDown">Fantastic Smart Institute</h1>
+                                {{-- <h5 class="text-primary text-uppercase mb-3 animated slideInDown">Djagad Land Group</h5> --}}
+                                <h1 class="display-3 text-white animated slideInDown">Djagad Land Group</h1>
+                                <h3 class="text-white text-uppercase mb-3 animated slideInDown">Pilihan Investasi Terbaik</h3>
                                 @if(auth()->check() == 0)
-                                    <p class="fs-5 text-white mb-4 pb-2">Fantastic Smart Institute merupakan lembaga bimbingan belajar untuk siswa SD
-                                    hingga SMP yang berada di Kecamatan Kedungpring, Kabupaten Lamongan, Jawa Timur</p>
+                                    <p class="fs-5 text-white mb-4 pb-2">PT JAGAD KARYA UTAMA  adalah Developer Rumah yang terpercaya dengan nomer 
+                                        TDP 132516801408 dan telah terdaftar sebagai anggota Asosiasi Pengembang Perumahan dan 
+                                        Pemukiman Seluruh Indonesia (APERSI) dengan NIA: 04.18.0777. telah sukses membangun perumahan dengan Konsep 
+                                        Rumah Villa di Kabupaten Malang dan Kota Batu Selain di Indonesia</p>
                                 @endif
                                 
                                 @auth
