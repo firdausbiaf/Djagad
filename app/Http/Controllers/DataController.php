@@ -50,10 +50,11 @@ class DataController extends Controller
             'photo' => 'image|file|max:2048'
         ]);
 
-        if($request->file('photo')){
+        if($request->hasfile('photo')){
             $nama_photo = $request->file('photo')->store('photo', 'public');
+        } else {
+            $nama_photo = null;
         }
-
         $data = new Data;
         $data->user_id = $request->get('user_id');
         $data->alamat = $request->get('alamat');
@@ -64,7 +65,7 @@ class DataController extends Controller
         $data->cicilan = $request->get('cicilan');
         $data->photo = $nama_photo;
 
-        Data::create($request->all());
+        $data->save();
 
         return redirect()->route('data.index')->with('success', 'Data baru telah ditambahkan');
     }

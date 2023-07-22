@@ -16,6 +16,7 @@
                 <th scope="col">SPK</th>
                 <th scope="col">Progres</th>
                 <th scope="col">Cicilan</th>
+                <th scope="col">Foto Progress</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
