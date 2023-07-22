@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "coastal-cascade-364307",
+  "private_key_id": "f29b376b81a7b655a7896aac026023dd87e3f0d5",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC65PaC9UPXYSzS\nUO7E4NoOP962Ox8FcdUGD+Dglu6fdddApUwE3G6/MzxOd2j14SggVjRlhoza/g14\nVWt8pC/Xagh7RANIaRGFFIkWGkm0io7rKGT1nLCYxDe1FI+tYD6Pk7cFYPbxffCU\nsOIKYXPeZ9rRUlVOHVsLMnUSnSfQTx1M/jmcC9mdnQ5V3ZDeRV91eIgHg1Eid+m8\nVnskzlAoFvL6HAsXA7dW44pNGaCza4H3A47vF9RBpKFYg3nVOv/Yp8XAXmp6CgaS\nPM4honpvBiEdRxaPdRd99P60ksc9LEcMLQo/ElysLrZ5E2cFOYYg8RaTNzrVUSYb\nlfGA5walAgMBAAECggEAEJmXn6gjP3UdIw0XOBt0osFfibYUmkozDpfIdIpTZYx0\n8wP7jY76szbcy2dlxjkadEzT2JSr3COmlKKZqnd23F5JpJE07XCPos9hIbpyA3wv\nF4n99abWNKtw+z95R3/97ojDP9IN/QMfpEVVvnBLd1yoHeF/PDH1TThNF7sntyO4\n7aW35H6WmYpU67P1e8g3hMMf4C6FUNp91bwAiA89MTTwIo8/wJV/1E/vnxxYroiy\nUBh1DfMHK1dECRu2sz21Q69ryc9K+Z4iizFfquK5TFlnExIT8Humz1WZ0i4f6SOp\nCVGtrv3kI+YEGYp3Aq6lZMtOyYLFy1i4w8v5UvTNwQKBgQDdFT5uYb2WLMTAKu7n\nTuDkAdKipKSoJbuRKzGBXI70qIibwxj8Bcp4g1ounD3qvBWj3w2bFoRN4Gt5X1vf\nItyK9EOokf7qKfEn1os9B+IEraKanEMRd2ZXwtszPz37hodnIpUIk9+6A7SVdoSR\nua5YfjkjIBbIvQiexSoSz7k99QKBgQDYaWqr3JDjE+vEg0pwDCEX+Q0WA1/kQQsJ\nnYJ2dYidZxkfVw43OigemSSmXVgXeOFJaSfRWUxctzn5pbG0sK4JK8hG0Z5P8LPY\nCLQ2L2qEfC3w0tp1p59ABHBtC7Jg4Kmd2305LzJSXL0nDfeyuKt/z/xbNBSlXmgZ\nuEkT0koH8QKBgDrC6bwW+HgQ4B6fiq4qNfYEUgLuteEHXmpAS8ExY8G9hcm4ukxK\nEb2kU/TtjDt20F2k7I3bF0FHs+knoliVgH7iW5VTcKi2iyVmjc2j6bwKlpx3ig/7\nZ1VOMkrVtVjEMfsEow4Ll7xuPbI4NRYyfxeAPRmL7uJd9AuXJg6n7Xl9AoGBAKJU\nWI53kTqz66rpLIHlp0E7MGStvVUSsPvSaVUADqy68+49N82XUxa4mvQrmnNo2dxe\nA18WU6BMVDF951F5IeKBM+ZjQBQIom5PARaP9J9SIoe9Md8FEABOFCLHnlLq0nA1\nfrXRQDbll4DfCkjGGuZxlYK4CzCMIxv/ztkOaTeRAoGBANnbLuM32wq4Ga1CHSEO\nnZTK/uWT8XKgfZnu31ux7SzLWeSc8dO5CszbkGOJeANz9VWR1wJvCxI9baW86n5l\ngrP8fELBgsRbZ8A8n8w/6fKxGNIv3IbraWVI541ZYi4RLIlDKO/VOYXl0bqW+qnP\nBvjqmsDV4jySYSVUIXu3xErH\n-----END PRIVATE KEY-----\n",
+  "client_email": "nisrinauasbifast@coastal-cascade-364307.iam.gserviceaccount.com",
+  "client_id": "100000634245527504226",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/nisrinauasbifast%40coastal-cascade-364307.iam.gserviceaccount.com"
+}
