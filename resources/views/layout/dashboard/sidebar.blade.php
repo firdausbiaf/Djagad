@@ -54,12 +54,12 @@
           <span class="menu-title">Data</span>
         </a>
       </li>
-      <li class="nav-item">
+      {{-- <li class="nav-item">
         <a class="nav-link" href="/admin/kelas">
           <i class="menu-icon mdi mdi-layers-outline"></i>
           <span class="menu-title">Kelas</span>
         </a>
-      </li>
+      </li> --}}
       {{-- <li class="nav-item">
         <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
           <i class="menu-icon mdi mdi-card-text-outline"></i>
@@ -72,7 +72,7 @@
           </ul>
         </div>
       </li> --}}
-      <li class="nav-item">
+      {{-- <li class="nav-item">
         <a class="nav-link" data-bs-toggle="collapse" href="#course" aria-expanded="false" aria-controls="charts">
           <i class="menu-icon mdi mdi-book-multiple"></i>
           <span class="menu-title">Bimbel</span>
@@ -94,7 +94,7 @@
           <i class="menu-icon mdi mdi-file-document"></i>
           <span class="menu-title">Tugas</span>
         </a>
-      </li>
+      </li> --}}
       {{-- <li class="nav-item">
         <a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
           <i class="menu-icon mdi mdi-table"></i>
@@ -119,7 +119,7 @@
           </ul>
         </div>
       </li> --}}
-      <li class="nav-item nav-category">Transaction</li>
+      {{-- <li class="nav-item nav-category">Transaction</li>
       <li class="nav-item">
         <a class="nav-link" data-bs-toggle="collapse" href="#trans" aria-expanded="false" aria-controls="trans">
           <i class="menu-icon mdi mdi-chart-line"></i>
@@ -131,6 +131,6 @@
             <li class="nav-item"> <a class="nav-link" href="/transaksi">Manage Transaction</a></li>
           </ul>
         </div>
-      </li>
+      </li> --}}
     </ul>
   </nav>
