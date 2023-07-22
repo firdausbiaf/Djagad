@@ -76,6 +76,21 @@
             </div>
             @enderror
         </div>
+        <div class="mb-3">
+            <label for="photo" class="form-label @error('photo') is-invalid @enderror">Foto Progress</label>
+            <input type="hidden" name="oldPhoto" value="{{ $data->photo }}">
+            @if ($data->photo)
+            <img src="{{ asset('storage/' . $data->photo) }}" class="img-preview img-fluid mb-3 col-sm-5 d-block">
+            @else
+            <img class="img-preview img-fluid mb-3 col-sm-5">
+            @endif
+            <input class="form-control" type="file" id="photo" name="photo"  onchange="previewImage()">
+            @error('photo')
+            <div class="invalid-feedback">
+            {{ $message }}
+            </div>
+            @enderror
+          </div>
         <button type="submit" class="btn btn-primary">Update</button>
     </form>
 </div>

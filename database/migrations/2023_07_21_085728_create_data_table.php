@@ -22,6 +22,7 @@ class CreateDataTable extends Migration
             $table->string('spk');
             $table->unsignedBigInteger('progres');
             $table->unsignedBigInteger('cicilan');
+            $table->string('photo')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

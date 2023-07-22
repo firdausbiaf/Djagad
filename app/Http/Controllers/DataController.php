@@ -47,9 +47,24 @@ class DataController extends Controller
             'spk' => 'required',
             'progres' => 'required|integer',
             'cicilan' => 'required|integer',
+            'photo' => 'image|file|max:2048'
         ]);
 
-        Data::create($validatedData);
+        if($request->file('photo')){
+            $nama_photo = $request->file('photo')->store('photo', 'public');
+        }
+
+        $data = new Data;
+        $data->user_id = $request->get('user_id');
+        $data->alamat = $request->get('alamat');
+        $data->kavling = $request->get('kavling');
+        $data->tipe = $request->get('tipe');
+        $data->spk = $request->get('spk');
+        $data->progres = $request->get('progres');
+        $data->cicilan = $request->get('cicilan');
+        $data->photo = $nama_photo;
+
+        Data::create($request->all());
 
         return redirect()->route('data.index')->with('success', 'Data baru telah ditambahkan');
     }

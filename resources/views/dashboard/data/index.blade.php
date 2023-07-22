@@ -31,6 +31,7 @@
                 <td>{{ $item->spk }}</td>
                 <td>{{ $item->progres }}</td>
                 <td>{{ $item->cicilan }}</td>
+                <td><img src="{{ asset('storage/' . $item->photo) }}" class="card-img-top" alt="{{ $item->photo }}"></td>
                 <td>
                     <a href="{{ route('data.show', $item->id) }}" class="badge bg-info">Show</a>
                     <a href="{{ route('data.edit', $item->id) }}" class="badge bg-warning">Edit</a>

@@ -18,6 +18,7 @@
                     <li class="list-group-item"><b>SPK : </b>{{ $data->spk }}</li>
                     <li class="list-group-item"><b>Progres : </b>{{ $data->progres }}</li>
                     <li class="list-group-item"><b>Cicilan : </b>{{ $data->cicilan }}</li>
+                    <li class="list-group-item"><b>Foto Progress : </b>{{ $data->photo }}</li>
                 </ul>
             </div>
             <a class="btn btn-success mt-3 mb-3" href="{{ route('data.index') }}">Kembali</a>
