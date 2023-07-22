@@ -27,7 +27,7 @@ class DataController extends Controller
      */
     public function create()
     {
-        $users = User::select('id', 'name')->get();
+        $users = User::where('role', '!=', 'admin')->select('id', 'name')->get();
         return view('dashboard.data.create', compact('users'));
     }
 
@@ -90,8 +90,12 @@ class DataController extends Controller
      */
     public function edit($id)
     {
+        // Get the data to be edited
         $data = Data::findOrFail($id);
-        $users = User::select('id', 'name')->get();
+
+        // Get users with roles other than "admin"
+        $users = User::where('role', '!=', 'admin')->select('id', 'name')->get();
+
         return view('dashboard.data.edit', compact('data', 'users'));
     }
 

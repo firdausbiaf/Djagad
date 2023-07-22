@@ -10,9 +10,13 @@
             <select class="form-select @error('user_id') is-invalid @enderror" name="user_id" id="user_id" required>
                 <option value="">Pilih Nama User</option>
                 @foreach ($users as $user)
-                <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
+                    @if ($user->role != 'admin')
+                        <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>
+                            {{ $user->name }}
+                        </option>
+                    @endif
                 @endforeach
-            </select>
+            </select>                      
             @error('user_id')
             <div class="invalid-feedback">
                 {{ $message }}
