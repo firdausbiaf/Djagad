@@ -16,7 +16,7 @@ class DataController extends Controller
      */
     public function index()
     {
-        $data = Data::select("*")->orderBy("id", "desc")->paginate(10);
+        $data = Data::select("*")->orderBy("id", "asc")->paginate(10);
         return view('dashboard.data.index', compact('data'));
     }
 
