@@ -2,8 +2,28 @@
 
 @section('content')
 <div class="table-responsive col-lg-10 mx-5 mt-4">
-    <h2>Foto</h2>
-    <a href="{{ route('foto.create') }}" class="btn btn-primary mb-3">Tambah Foto</a>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <h2>Foto</h2>
+            <a href="{{ route('foto.create') }}" class="btn btn-primary mb-3">Tambah Foto</a>
+        </div>
+        <div class="col-md-6 text-right">
+            <!-- Filter Kavling Select Option -->
+            <form action="{{ route('foto.filter') }}" method="GET" class="form-inline">
+                <div class="form-group mb-2">
+                    <label for="kavling" class="mr-2">Filter Kavling:</label>
+                    <select name="kavling" id="kavling" class="form-control">
+                        <option value="">Semua Kavling</option>
+                        @foreach ($data as $id => $kavling)
+                            <option value="{{ $id }}">{{ $kavling }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary mb-2 ml-2">Filter</button>
+            </form>
+        </div>
+    </div>
+    
     <table class="table table-striped table-sm">
         <thead>
             <tr>

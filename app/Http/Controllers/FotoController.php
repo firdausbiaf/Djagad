@@ -7,6 +7,7 @@ use App\Http\Requests\StoreFotoRequest;
 use App\Http\Requests\UpdateFotoRequest;
 use App\Models\Data;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 class FotoController extends Controller
 {
@@ -17,8 +18,9 @@ class FotoController extends Controller
      */
     public function index()
     {
+        $data = Data::pluck('kavling', 'id');
         $fotos = Foto::select('*')->orderBy('id', 'asc')->paginate(10);
-        return view('dashboard.foto.index', compact('fotos'));
+        return view('dashboard.foto.index', compact('fotos', 'data'));
     }
 
     /**
@@ -44,19 +46,25 @@ class FotoController extends Controller
     {
         $request->validate([
             'data_id' => 'required|exists:data,id',
-            'photo' => 'image|file|max:2048',
+            'photo.*' => 'image|file|max:2048', // Update validasi untuk menerima array file
         ]);
 
+        $fotoPaths = []; // Simpan path file foto untuk setiap foto yang diunggah
+
         if ($request->hasFile('photo')) {
-            $nama_photo = $request->file('photo')->store('photo', 'public');
-        } else {
-            $nama_photo = null;
+            foreach ($request->file('photo') as $file) {
+                $nama_photo = $file->store('photo', 'public');
+                $fotoPaths[] = $nama_photo;
+            }
         }
 
-        $foto = new Foto;
-        $foto->data_id = $request->get('data_id');
-        $foto->photo = $nama_photo;
-        $foto->save();
+        // Buat entri untuk setiap foto yang diunggah
+        foreach ($fotoPaths as $nama_photo) {
+            $foto = new Foto;
+            $foto->data_id = $request->get('data_id');
+            $foto->photo = $nama_photo;
+            $foto->save();
+        }
 
         return redirect()->route('foto.index')->with('success', 'Foto baru telah ditambahkan');
     }
@@ -135,4 +143,25 @@ class FotoController extends Controller
 
         return redirect()->route('foto.index')->with('success', 'Foto berhasil dihapus');
     }
+
+    public function filter(Request $request)
+    {
+        // Debugging: Cek nilai parameter kavling
+        $selectedKavlingId = $request->input('kavling');
+        dd($selectedKavlingId);
+        
+        // Lakukan operasi filter berdasarkan $selectedKavlingId
+        $fotos = Foto::when($selectedKavlingId, function ($query, $selectedKavlingId) {
+            return $query->where('data_id', $selectedKavlingId);
+        })->orderBy('id', 'asc')->paginate(10);
+    
+        // Debugging: Cek query yang dijalankan
+        dd($fotos->toSql());
+    
+        // Setelah melakukan operasi filter, ambil daftar kavling lagi untuk menampilkan di select option
+        $data = Data::pluck('kavling', 'id');
+    
+        return view('dashboard.foto.index', compact('fotos', 'data'));
+    }    
+
 }
