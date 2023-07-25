@@ -19,7 +19,6 @@ class Data extends Model
         'spk',
         'progres',
         'cicilan',
-        'photo',
     ];
 
     // Relasi ke model User

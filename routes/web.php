@@ -20,6 +20,7 @@ use App\Http\Controllers\DashboardMateriController;
 use App\Http\Controllers\DashboardCategoryController;
 use App\Http\Controllers\DashboardTugasController;
 use App\Http\Controllers\DataController;
+use App\Http\Controllers\FotoController;
 use App\Http\Controllers\IndexUserController;
 use App\Http\Controllers\TugasController;
 
@@ -40,6 +41,7 @@ Route::get('/', [IndexController::class, 'index']);
 Route::get('/migration', function () {
     Artisan::call('migrate:fresh');
     Artisan::call('db:seed');
+    Artisan::call('storage:link');
 });
 
 Route::get('/home', [IndexUserController::class, 'index']);
@@ -69,6 +71,7 @@ Route::resource('/admin/course', DashboardCourseController::class)->middleware('
 Route::resource('/admin/materi', DashboardMateriController::class)->middleware('checkRole:admin');
 Route::resource('/admin/tugas', DashboardTugasController::class)->middleware('checkRole:admin');
 Route::resource('/admin/data', DataController::class)->middleware('checkRole:admin');
+Route::resource('/admin/foto', FotoController   ::class)->middleware('checkRole:admin');
 
 Route::resource('/tugasMember', TugasController::class);
 

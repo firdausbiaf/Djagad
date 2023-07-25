@@ -1,7 +1,7 @@
 @extends('layout.dashboard.main')
 
 @section('content')
-<div class="table-responsive col-lg-8 mx-5 mt-4">
+<div class="table-responsive col-lg-10 mx-5 mt-4">
     <h2>Data</h2>
     <a href="{{ route('data.create') }}" class="btn btn-primary mb-3">Tambah Data</a>
     <table class="table table-striped table-sm">
@@ -14,9 +14,8 @@
                 <th scope="col">Kavling</th>
                 <th scope="col">Tipe</th>
                 <th scope="col">SPK</th>
-                <th scope="col">Progres</th>
+                <th scope="col">Progres (%)</th>
                 <th scope="col">Cicilan</th>
-                <th scope="col">Foto Progress</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -30,9 +29,8 @@
                 <td>{{ $item->kavling }}</td>
                 <td>{{ $item->tipe }}</td>
                 <td>{{ $item->spk }}</td>
-                <td>{{ $item->progres }}</td>
+                <td>{{ $item->progres }} %</td>
                 <td>{{ $item->cicilan }}</td>
-                <td><img src="{{ asset('storage/' . $item->photo) }}" class="card-img-top" alt="{{ $item->photo }}"></td>
                 <td>
                     <a href="{{ route('data.show', $item->id) }}" class="badge bg-info" style="text-decoration: none;">Show</a>
                     <a href="{{ route('data.edit', $item->id) }}" class="badge bg-warning" style="text-decoration: none;">Edit</a>

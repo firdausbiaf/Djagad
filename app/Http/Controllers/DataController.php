@@ -39,7 +39,7 @@ class DataController extends Controller
      */
     public function store(StoreDataRequest $request)
     {
-        $validatedData = $request->validate([
+        $request->validate([
             'user_id' => 'required|exists:users,id',
             'alamat' => 'required',
             'kavling' => 'required',
@@ -47,14 +47,8 @@ class DataController extends Controller
             'spk' => 'required',
             'progres' => 'required|integer',
             'cicilan' => 'required|integer',
-            'photo' => 'image|file|max:2048'
         ]);
 
-        if($request->hasfile('photo')){
-            $nama_photo = $request->file('photo')->store('photo', 'public');
-        } else {
-            $nama_photo = null;
-        }
         $data = new Data;
         $data->user_id = $request->get('user_id');
         $data->alamat = $request->get('alamat');
@@ -63,10 +57,8 @@ class DataController extends Controller
         $data->spk = $request->get('spk');
         $data->progres = $request->get('progres');
         $data->cicilan = $request->get('cicilan');
-        $data->photo = $nama_photo;
 
         $data->save();
-
         return redirect()->route('data.index')->with('success', 'Data baru telah ditambahkan');
     }
 
@@ -130,14 +122,7 @@ class DataController extends Controller
         $data->spk = $request->get('spk');
         $data->progres = $request->get('progres');
         $data->cicilan = $request->get('cicilan');
-
-        if ($data->photo && file_exists(storage_path('app/public/' . $data->photo))) {
-            \Storage::delete('public/', $data->photo);
-        }
-
-        $nama_photo = $request->file('photo')->store('photo', 'public');
-        $data->photo = $nama_photo;
-
+        
         $data->save();
 
         return redirect()->route('data.index')->with('success', 'Data berhasil diedit');

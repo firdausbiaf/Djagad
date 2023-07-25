@@ -60,7 +60,7 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label for="progres" class="form-label">Progres</label>
+            <label for="progres" class="form-label">Progres (%)</label>
             <input type="number" class="form-control @error('progres') is-invalid @enderror" id="progres" name="progres" value="{{ old('progres') }}" required>
             @error('progres')
             <div class="invalid-feedback">
@@ -76,16 +76,6 @@
                 {{ $message }}
             </div>
             @enderror
-        </div>
-        <div class="mb-3">
-          <label for="photo" class="form-label @error('photo') is-invalid @enderror">Foto Progress</label>
-          <img class="img-preview img-fluid mb-3 col-sm-5">
-          <input class="form-control" type="file" id="photo" name="photo" onchange="previewImage()">
-          @error('photo')
-          <div class="invalid-feedback">
-          {{ $message }}
-          </div>
-          @enderror
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
