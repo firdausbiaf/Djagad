@@ -4,7 +4,7 @@
 <div class="table-responsive col-lg-10 mx-5 mt-4">
     <div class="row mb-3">
         <div class="col-md-6">
-            <h2>Foto</h2>
+            <h2>Foto</h2><br>
             <a href="{{ route('foto.create') }}" class="btn btn-primary mb-3">Tambah Foto</a>
         </div>
         <div class="col-md-6 text-right">
@@ -19,7 +19,7 @@
                         @endforeach
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary mb-2 ml-2">Filter</button>
+                <button type="submit" class="btn btn-primary mb-2 ml-2">Filter</button><br>
             </form>
         </div>
     </div>
