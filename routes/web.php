@@ -71,10 +71,11 @@ Route::resource('/admin/course', DashboardCourseController::class)->middleware('
 Route::resource('/admin/materi', DashboardMateriController::class)->middleware('checkRole:admin');
 Route::resource('/admin/tugas', DashboardTugasController::class)->middleware('checkRole:admin');
 Route::resource('/admin/data', DataController::class)->middleware('checkRole:admin');
-Route::resource('/admin/foto', FotoController::class)->middleware('checkRole:admin');
-Route::get('/admin/foto/filter', [FotoController::class, 'filter'])->name('foto.filter');
+// Route::resource('/admin/foto', FotoController::class)->middleware('checkRole:admin');
 
-Route::resource('/tugasMember', TugasController::class);
+Route::get('/admin/foto', [FotoController::class, 'index'])->name('foto.index');
+Route::get('/admin/foto/filter', [FotoController::class, 'filter'])->name('foto.filter');
+Route::resource('/admin/foto', FotoController::class)->except(['index', 'filter']);
 
 
 // Route::get('/materi/{id}', [DashboardMateriController::class, 'indexMateri']);

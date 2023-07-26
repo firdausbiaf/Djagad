@@ -15,7 +15,7 @@
                     <select name="kavling" id="kavling" class="form-control">
                         <option value="">Semua Kavling</option>
                         @foreach ($data as $id => $kavling)
-                            <option value="{{ $id }}">{{ $kavling }}</option>
+                        <option value="{{ $id }}" @if($id == $selectedKavlingId) selected @endif>{{ $kavling }}</option>
                         @endforeach
                     </select>
                 </div>

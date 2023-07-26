@@ -16,11 +16,29 @@ class FotoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->input('search');
+        $selectedKavlingId = $request->input('kavling');
+
+        $query = Foto::select('*')->orderBy('id', 'asc');
+
+        // Perform the search based on 'search' parameter
+        // ... (same as before)
+
+        // Perform the filter based on 'kavling' parameter
+        if ($selectedKavlingId) {
+            $query->whereHas('data', function ($dataQuery) use ($selectedKavlingId) {
+                $dataQuery->where('id', $selectedKavlingId);
+            });
+        }
+
+        $fotos = $query->paginate(10);
+
+        // Get the data for the filter dropdown
         $data = Data::pluck('kavling', 'id');
-        $fotos = Foto::select('*')->orderBy('id', 'asc')->paginate(10);
-        return view('dashboard.foto.index', compact('fotos', 'data'));
+
+        return view('dashboard.foto.index', compact('fotos', 'data', 'search', 'selectedKavlingId'));
     }
 
     /**
@@ -144,24 +162,44 @@ class FotoController extends Controller
         return redirect()->route('foto.index')->with('success', 'Foto berhasil dihapus');
     }
 
+
     public function filter(Request $request)
     {
-        // Debugging: Cek nilai parameter kavling
         $selectedKavlingId = $request->input('kavling');
-        dd($selectedKavlingId);
-        
-        // Lakukan operasi filter berdasarkan $selectedKavlingId
-        $fotos = Foto::when($selectedKavlingId, function ($query, $selectedKavlingId) {
-            return $query->where('data_id', $selectedKavlingId);
-        })->orderBy('id', 'asc')->paginate(10);
-    
-        // Debugging: Cek query yang dijalankan
-        dd($fotos->toSql());
-    
-        // Setelah melakukan operasi filter, ambil daftar kavling lagi untuk menampilkan di select option
-        $data = Data::pluck('kavling', 'id');
-    
-        return view('dashboard.foto.index', compact('fotos', 'data'));
-    }    
 
+        $query = Foto::query();
+
+        if ($selectedKavlingId) {
+            $query->whereHas('data', function ($dataQuery) use ($selectedKavlingId) {
+                $dataQuery->where('id', $selectedKavlingId);
+            });
+        }
+
+        $fotos = $query->orderBy('id', 'asc')->paginate(10);
+
+        // Get the data for the filter dropdown
+        $data = Data::pluck('kavling', 'id');
+
+        return view('dashboard.foto.index', compact('fotos', 'data', 'selectedKavlingId'));
+    }
 }
+
+//         // Debugging: Cek nilai parameter kavling
+//         $selectedKavlingId = $request->input('kavling');
+//         dd($selectedKavlingId);
+        
+//         // Lakukan operasi filter berdasarkan $selectedKavlingId
+//         $fotos = Foto::when($selectedKavlingId, function ($query, $selectedKavlingId) {
+//             return $query->where('data_id', $selectedKavlingId);
+//         })->orderBy('id', 'asc')->paginate(10);
+    
+//         // Debugging: Cek query yang dijalankan
+//         dd($fotos->toSql());
+    
+//         // Setelah melakukan operasi filter, ambil daftar kavling lagi untuk menampilkan di select option
+//         $data = Data::pluck('kavling', 'id');
+    
+//         return view('dashboard.foto.index', compact('fotos', 'data'));
+//     }    
+
+// }
