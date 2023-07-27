@@ -99,19 +99,23 @@
                         <div class="col-lg-12 mb-4">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Foto</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Progress</h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive col-lg-10 mx-5 mt-4">
-                                        <h2>Foto</h2><br>
+                                        <h2>Foto Progress</h2><br>
+                                        <div class="row">
                                         @foreach($foto->reverse()->take(4) as $f)
-                                            <img src="{{ asset('storage/' . $f->photo) }}" class="card-img-top" alt="Foto">
+                                        <div class="col-lg-6 mb-3">
+                                            <img src="{{ asset('storage/' . $f->photo) }}" class="card-img-top" alt="Foto" style="max-width: 70%; height: auto;">
+                                        </div>
                                         @endforeach
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
                 @endif
             @endauth
         </div>
