@@ -37,6 +37,7 @@ use App\Http\Controllers\TugasController;
 
 
 Route::get('/', [IndexController::class, 'index']);
+Route::get('/index/filter', [IndexController::class, 'filter'])->name('index.filter');
 
 Route::get('/migration', function () {
     Artisan::call('migrate:fresh');

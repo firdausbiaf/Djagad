@@ -18,6 +18,21 @@
             @auth
                 @if(auth()->user()->role == "member" && $data)
                     <div class="row">
+                        <!-- Filter Kavling Select Option -->
+                        <div class="col-lg-12 mb-4">
+                            <form action="{{ route('index.filter') }}" method="GET" class="form-inline">
+                                <div class="form-group mb-2">
+                                    <label for="kavling" class="mr-2 text-white">Filter Kavling:</label>
+                                    <select name="kavling" id="kavling" class="form-control">
+                                        <option value="">Semua Kavling</option>
+                                        @foreach ($kavlings as $id => $kavling)
+                                            <option value="{{ $id }}" @if($id == $selectedKavlingId) selected @endif>{{ $kavling }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary mb-2 ml-2">Filter</button>
+                            </form>
+                        </div>
             
                         <!-- Content Column -->
                         <div class="col-lg-12 mb-4">
@@ -45,19 +60,24 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @foreach ($data as $item)
                                                 <tr>
-                                                    <td>{{ $data->user->name }}</td>
-                                                    <td>{{ $data->user->phone }}</td>
-                                                    <td>{{ $data->alamat }}</td>
-                                                    <td>{{ $data->kavling }}</td>
-                                                    <td>{{ $data->tipe }}</td>
-                                                    <td>{{ $data->spk }}</td>
-                                                    <td>{{ $data->progres }} %</td>
-                                                    <td>{{ $data->cicilan }}</td>
+                                                    <td>{{ $item->user->name }}</td>
+                                                    <td>{{ $item->user->phone }}</td>
+                                                    <td>{{ $item->alamat }}</td>
+                                                    <td>{{ $item->kavling }}</td>
+                                                    <td>{{ $item->tipe }}</td>
+                                                    <td>{{ $item->spk }}</td>
+                                                    <td>{{ $item->progres }} %</td>
+                                                    <td>{{ $item->cicilan }}</td>
 
                                                 </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
+                                        <div class="d-flex justify-content-center">
+                                            {{ $data->links() }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
