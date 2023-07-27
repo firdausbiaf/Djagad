@@ -16,53 +16,63 @@
             @endif
             
             @auth
-                @if(auth()->user()->role == "member" && $data)
-                    <div class="row">
-            
-                        <!-- Content Column -->
-                        <div class="col-lg-12 mb-4">
-        
-                            <!-- Project Card Example -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Data Pembeli</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive col-lg-10 mx-5 mt-4">
-                                        <h2>Data User</h2><br>
-                                        <table class="table table-striped table-sm">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">Nama User</th>
-                                                    <th scope="col">Telepon</th>
-                                                    <th scope="col">Alamat</th>
-                                                    <th scope="col">Kavling</th>
-                                                    <th scope="col">Tipe</th>
-                                                    <th scope="col">SPK</th>
-                                                    <th scope="col">Progres (%)</th>
-                                                    <th scope="col">Cicilan</th>
-                                                    <th scope="col">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>{{ $data->user->name }}</td>
-                                                    <td>{{ $data->user->phone }}</td>
-                                                    <td>{{ $data->alamat }}</td>
-                                                    <td>{{ $data->kavling }}</td>
-                                                    <td>{{ $data->tipe }}</td>
-                                                    <td>{{ $data->spk }}</td>
-                                                    <td>{{ $data->progres }} %</td>
-                                                    <td>{{ $data->cicilan }}</td>
-
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
+    @if(auth()->user()->role == "member" && $data)
+        <div class="row">
+            <!-- Content Column -->
+            <div class="col-lg-12 mb-4">
+                <!-- Project Card Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Data Pembeli</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <h2>Data User</h2><br>
+                            <table class="table table-striped table-sm">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Nama User</th>
+                                        <td>{{ $data->user->name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Telepon</th>
+                                        <td>{{ $data->user->phone }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Alamat</th>
+                                        <td>{{ $data->alamat }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Kavling</th>
+                                        <td>{{ $data->kavling }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Tipe</th>
+                                        <td>{{ $data->tipe }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">SPK</th>
+                                        <td>{{ $data->spk }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Progres (%)</th>
+                                        <td>{{ $data->progres }} %</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Cicilan</th>
+                                        <td>{{ $data->cicilan }}</td>
+                                    </tr>
+                                    {{-- <tr>
+                                        <th scope="row">Action</th>
+                                        <td>...</td>
+                                    </tr> --}}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
 
                     <!-- Foto Section -->
                     <div class="row">
