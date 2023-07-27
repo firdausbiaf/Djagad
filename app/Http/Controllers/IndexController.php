@@ -16,17 +16,14 @@ class IndexController extends Controller
 
     public function index()
     {        
-        if (Auth::user()) {
-            if (Auth::user()->role == "member") {
-                $data = Data::where('user_id', Auth::id())->paginate(10);
-                $foto = Foto::where('data_id', Auth::id())->get();
-                $kavlings = Data::where('user_id', Auth::id())->pluck('kavling', 'id');
+        if(Auth::user()){
+            if(Auth::user()->role=="member"){
+                $data = Data::where('user_id', Auth::id())->first();
+                $foto = Foto::where('data_id', $data->id)->get();
 
                 return view('index', [
                     'data' => $data,
                     'foto' => $foto,
-                    'kavlings' => $kavlings,
-                    'selectedKavlingId' => null,
                 ]);
             }
         }

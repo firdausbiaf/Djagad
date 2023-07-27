@@ -18,6 +18,7 @@
             @auth
                 @if(auth()->user()->role == "member" && $data)
                     <div class="row">
+<<<<<<< HEAD
                         <!-- Filter Kavling Select Option -->
                         <div class="col-lg-12 mb-4">
                             <form action="{{ route('index.filter') }}" method="GET" class="form-inline">
@@ -34,34 +35,23 @@
                             </form>
                         </div>
             
+=======
+>>>>>>> 1bd1d7073bc8ebe38c8cc2ffbe080a8cdaf32018
                         <!-- Content Column -->
                         <div class="col-lg-12 mb-4">
-        
                             <!-- Project Card Example -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Data Pembeli</h6>
                                 </div>
                                 <div class="card-body">
-                                    <div class="table-responsive col-lg-10 mx-5 mt-4">
+                                    <div class="table-responsive">
                                         <h2>Data User</h2><br>
                                         <table class="table table-striped table-sm">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">Nama User</th>
-                                                    <th scope="col">Telepon</th>
-                                                    <th scope="col">Alamat</th>
-                                                    <th scope="col">Kavling</th>
-                                                    <th scope="col">Tipe</th>
-                                                    <th scope="col">SPK</th>
-                                                    <th scope="col">Progres (%)</th>
-                                                    <th scope="col">Cicilan</th>
-                                                    <th scope="col">Action</th>
-                                                </tr>
-                                            </thead>
                                             <tbody>
                                                 @foreach ($data as $item)
                                                 <tr>
+<<<<<<< HEAD
                                                     <td>{{ $item->user->name }}</td>
                                                     <td>{{ $item->user->phone }}</td>
                                                     <td>{{ $item->alamat }}</td>
@@ -73,6 +63,43 @@
 
                                                 </tr>
                                                 @endforeach
+=======
+                                                    <th scope="row">Nama User</th>
+                                                    <td>{{ $data->user->name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Telepon</th>
+                                                    <td>{{ $data->user->phone }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Alamat</th>
+                                                    <td>{{ $data->alamat }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Kavling</th>
+                                                    <td>{{ $data->kavling }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Tipe</th>
+                                                    <td>{{ $data->tipe }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">SPK</th>
+                                                    <td>{{ $data->spk }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Progres (%)</th>
+                                                    <td>{{ $data->progres }} %</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Cicilan</th>
+                                                    <td>{{ $data->cicilan }}</td>
+                                                </tr>
+                                                {{-- <tr>
+                                                    <th scope="row">Action</th>
+                                                    <td>...</td>
+                                                </tr> --}}
+>>>>>>> 1bd1d7073bc8ebe38c8cc2ffbe080a8cdaf32018
                                             </tbody>
                                         </table>
                                         <div class="d-flex justify-content-center">
@@ -94,7 +121,7 @@
                                 <div class="card-body">
                                     <div class="table-responsive col-lg-10 mx-5 mt-4">
                                         <h2>Foto</h2><br>
-                                        @foreach($foto as $f)
+                                        @foreach($foto->reverse()->take(4) as $f)
                                             <img src="{{ asset('storage/' . $f->photo) }}" class="card-img-top" alt="Foto">
                                         @endforeach
                                     </div>
