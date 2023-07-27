@@ -18,6 +18,25 @@
             @auth
                 @if(auth()->user()->role == "member" && $data)
                     <div class="row">
+<<<<<<< HEAD
+                        <!-- Filter Kavling Select Option -->
+                        <div class="col-lg-12 mb-4">
+                            <form action="{{ route('index.filter') }}" method="GET" class="form-inline">
+                                <div class="form-group mb-2">
+                                    <label for="kavling" class="mr-2 text-white">Filter Kavling:</label>
+                                    <select name="kavling" id="kavling" class="form-control">
+                                        <option value="">Semua Kavling</option>
+                                        @foreach ($kavlings as $id => $kavling)
+                                            <option value="{{ $id }}" @if($id == $selectedKavlingId) selected @endif>{{ $kavling }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary mb-2 ml-2">Filter</button>
+                            </form>
+                        </div>
+            
+=======
+>>>>>>> 1bd1d7073bc8ebe38c8cc2ffbe080a8cdaf32018
                         <!-- Content Column -->
                         <div class="col-lg-12 mb-4">
                             <!-- Project Card Example -->
@@ -30,7 +49,21 @@
                                         <h2>Data User</h2><br>
                                         <table class="table table-striped table-sm">
                                             <tbody>
+                                                @foreach ($data as $item)
                                                 <tr>
+<<<<<<< HEAD
+                                                    <td>{{ $item->user->name }}</td>
+                                                    <td>{{ $item->user->phone }}</td>
+                                                    <td>{{ $item->alamat }}</td>
+                                                    <td>{{ $item->kavling }}</td>
+                                                    <td>{{ $item->tipe }}</td>
+                                                    <td>{{ $item->spk }}</td>
+                                                    <td>{{ $item->progres }} %</td>
+                                                    <td>{{ $item->cicilan }}</td>
+
+                                                </tr>
+                                                @endforeach
+=======
                                                     <th scope="row">Nama User</th>
                                                     <td>{{ $data->user->name }}</td>
                                                 </tr>
@@ -66,8 +99,12 @@
                                                     <th scope="row">Action</th>
                                                     <td>...</td>
                                                 </tr> --}}
+>>>>>>> 1bd1d7073bc8ebe38c8cc2ffbe080a8cdaf32018
                                             </tbody>
                                         </table>
+                                        <div class="d-flex justify-content-center">
+                                            {{ $data->links() }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
