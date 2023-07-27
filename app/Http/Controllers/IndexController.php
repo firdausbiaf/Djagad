@@ -19,7 +19,7 @@ class IndexController extends Controller
         if(Auth::user()){
             if(Auth::user()->role=="member"){
                 $data = Data::where('user_id', Auth::id())->first();
-                $foto = Foto::where('data_id', Auth::id())->get();
+                $foto = Foto::where('data_id', $data->id)->get();
 
                 return view('index', [
                     'data' => $data,

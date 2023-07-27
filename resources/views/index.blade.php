@@ -52,7 +52,7 @@
                                                     <td>{{ $data->kavling }}</td>
                                                     <td>{{ $data->tipe }}</td>
                                                     <td>{{ $data->spk }}</td>
-                                                    <td>{{ $data->progres }} %</td>
+                                                    <td>{{ $data->progres }}%</td>
                                                     <td>{{ $data->cicilan }}</td>
 
                                                 </tr>
@@ -74,7 +74,7 @@
                                 <div class="card-body">
                                     <div class="table-responsive col-lg-10 mx-5 mt-4">
                                         <h2>Foto</h2><br>
-                                        @foreach($foto as $f)
+                                        @foreach($foto->reverse()->take(4) as $f)
                                             <img src="{{ asset('storage/' . $f->photo) }}" class="card-img-top" alt="Foto">
                                         @endforeach
                                     </div>
