@@ -18,7 +18,6 @@
             @auth
                 @if(auth()->user()->role == "member" && $data)
                     <div class="row">
-<<<<<<< HEAD
                         <!-- Filter Kavling Select Option -->
                         <div class="col-lg-12 mb-4">
                             <form action="{{ route('index.filter') }}" method="GET" class="form-inline">
@@ -35,8 +34,6 @@
                             </form>
                         </div>
             
-=======
->>>>>>> 1bd1d7073bc8ebe38c8cc2ffbe080a8cdaf32018
                         <!-- Content Column -->
                         <div class="col-lg-12 mb-4">
                             <!-- Project Card Example -->
@@ -51,19 +48,6 @@
                                             <tbody>
                                                 @foreach ($data as $item)
                                                 <tr>
-<<<<<<< HEAD
-                                                    <td>{{ $item->user->name }}</td>
-                                                    <td>{{ $item->user->phone }}</td>
-                                                    <td>{{ $item->alamat }}</td>
-                                                    <td>{{ $item->kavling }}</td>
-                                                    <td>{{ $item->tipe }}</td>
-                                                    <td>{{ $item->spk }}</td>
-                                                    <td>{{ $item->progres }} %</td>
-                                                    <td>{{ $item->cicilan }}</td>
-
-                                                </tr>
-                                                @endforeach
-=======
                                                     <th scope="row">Nama User</th>
                                                     <td>{{ $data->user->name }}</td>
                                                 </tr>
@@ -99,7 +83,6 @@
                                                     <th scope="row">Action</th>
                                                     <td>...</td>
                                                 </tr> --}}
->>>>>>> 1bd1d7073bc8ebe38c8cc2ffbe080a8cdaf32018
                                             </tbody>
                                         </table>
                                         <div class="d-flex justify-content-center">
