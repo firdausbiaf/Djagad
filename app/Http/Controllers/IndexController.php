@@ -15,21 +15,18 @@ class IndexController extends Controller
 {
 
     public function index()
-    {        
+    {
+        if (Auth::user() && Auth::user()->role == "member") {
+            $data = Data::where('user_id', Auth::id())->paginate(10);
+            $kavlings = Data::where('user_id', Auth::id())->pluck('kavling', 'id');
+            $foto = Foto::whereIn('data_id', $data->pluck('id'))->latest()->get();
 
-        if (Auth::user()) {
-            if (Auth::user()->role == "member") {
-                $data = Data::where('user_id', Auth::id())->paginate(10);
-                $foto = Foto::where('data_id', Auth::id())->get();
-                $kavlings = Data::where('user_id', Auth::id())->pluck('kavling', 'id');
-
-                return view('index', [
-                    'data' => $data,
-                    'foto' => $foto,
-                    'kavlings' => $kavlings,
-                    'selectedKavlingId' => null,
-                ]);
-            }
+            return view('index', [
+                'data' => $data,
+                'kavlings' => $kavlings,
+                'selectedKavlingId' => null,
+                'foto' => $foto,
+            ]);
         }
 
         return view('index');
