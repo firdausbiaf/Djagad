@@ -3,7 +3,7 @@
 @section('content')
 
 <!-- Carousel Start -->
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col">
             <h1 class="display-3 text-white">Djagad Land Group</h1>
@@ -109,7 +109,7 @@
                                     <h6 class="m-0 font-weight-bold text-primary">Progress</h6>
                                 </div>
                                 <div class="card-body">
-                                    <div class="table-responsive col-lg-10 mx-5 mt-4">
+                                    <div class="table-responsive col-md-10 mx-5 mt-4">
                                         <h2>Foto Progress</h2><br>
                                         <!-- Nav tabs for foto -->
                                         {{-- <ul class="nav nav-tabs" id="fotoTab" role="tablist">
