@@ -3,7 +3,7 @@
 @section('content')
 
 <!-- Carousel Start -->
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col">
             <h1 class="display-3 text-white">Djagad Land Group</h1>
@@ -54,32 +54,50 @@
                                                             <td>{{ $item->alamat }}</td>
                                                         </tr>
                                                         <tr>
+                                                            <th scope="row">Kavling</th>
+                                                            <td>{{ $item->kavling }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">Lokasi</th>
+                                                            <td>{{ $item->lokasi }}</td>
+                                                        </tr>
+                                                        <tr>
                                                             <th scope="row">Tipe</th>
                                                             <td>{{ $item->tipe }}</td>
                                                         </tr>
                                                         <tr>
+                                                            <th scope="row">Harga Deal</th>
+                                                            <td>{{ $item->harga_deal }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">Cicilan Ke</th>
+                                                            <td>{{ $item->cicilan }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">Uang Masuk</th>
+                                                            <td>{{ $item->uang_masuk }}</td>
+                                                        </tr>
+                                                        {{-- <tr>
                                                             <th scope="row">SPK</th>
                                                             <td>{{ $item->spk }}</td>
-                                                        </tr>
+                                                        </tr> --}}
                                                         <tr>
                                                             <th scope="row">Progres (%)</th>
                                                             <td>{{ $item->progres }} %</td>
                                                         </tr>
-                                                        <tr>
-                                                            <th scope="row">Cicilan</th>
-                                                            <td>{{ $item->cicilan }}</td>
-                                                        </tr>
+                            
                                                     </table>
-                                                    <div class="card-body">
-                                                        <h4 class="small font-weight-bold">Progress Pembangunan : <span class="float-right">{{$item->progres}}%</span></h4>
-                                                        <div class="progress mb-4">
-                                                            <div class="progress-bar bg-danger" role="progressbar" style="width: {{$item->progres}}%" aria-valuenow="{{$item->progres}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                        <h4 class="small font-weight-bold">Cicilan : <span class="float-right">Rp.{{$item->cicilan}}</span></h4>
-                                                        <div class="progress mb-4">
-                                                            <div class="progress-bar bg-warning" role="progressbar" style="width: {{$item->cicilan}}%" aria-valuenow="{{$item->cicilan}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
+                                                    <h4 class="medium font-weight-bold"> Progress Pembangunan <span class="float-right">{{ $item->progres }}%</span></h4>
+                                                    <div class="progress mb-4">
+                                                        <div class="progress-bar" role="progressbar" style="width: {{ $item->progres }}%" aria-valuenow="{{ $item->progres }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                     </div>
+                                                    <h4 class="medium font-weight-bold">Progress Cicilan ({{ $item->uang_masuk }} / {{ $item->harga_deal }})</h4>
+                                                            @php
+                                                                $progressCicilan = ($item->uang_masuk / $item->harga_deal) * 100;
+                                                            @endphp
+                                                            <div class="progress mb-4">
+                                                                <div class="progress-bar" id="cicilan-progress" role="progressbar" style="width: {{ $progressCicilan }}%" aria-valuenow="{{ $progressCicilan }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                            </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -101,7 +119,7 @@
                                     <h6 class="m-0 font-weight-bold text-primary">Progress</h6>
                                 </div>
                                 <div class="card-body">
-                                    <div class="table-responsive col-lg-10 mx-5 mt-4">
+                                    <div class="table-responsive col-md-10 mx-5 mt-4">
                                         <h2>Foto Progress</h2><br>
                                         <!-- Nav tabs for foto -->
                                         {{-- <ul class="nav nav-tabs" id="fotoTab" role="tablist">
@@ -141,6 +159,7 @@
 </div>
 
 <script>
+    
     $(document).ready(function() {
         // Ambil elemen tab pertama untuk kavling dan foto
         const firstKavlingTab = $('#kavlingTab .nav-link:first');

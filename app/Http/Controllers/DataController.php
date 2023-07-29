@@ -43,20 +43,28 @@ class DataController extends Controller
             'user_id' => 'required|exists:users,id',
             'alamat' => 'required',
             'kavling' => 'required',
+            'lokasi' => 'required',
             'tipe' => 'required|integer',
             'spk' => 'required',
-            'progres' => 'required|integer',
+            'harga_deal' => 'required|integer',
+            'uang_masuk' => 'required|integer',
             'cicilan' => 'required|integer',
+            'progres' => 'required|integer',
+            
         ]);
 
         $data = new Data;
         $data->user_id = $request->get('user_id');
         $data->alamat = $request->get('alamat');
         $data->kavling = $request->get('kavling');
+        $data->lokasi = $request->get('lokasi');
         $data->tipe = $request->get('tipe');
         $data->spk = $request->get('spk');
-        $data->progres = $request->get('progres');
+        $data->harga_deal = $request->get('harga_deal');
+        $data->uang_masuk = $request->get('uang_masuk');
         $data->cicilan = $request->get('cicilan');
+        $data->progres = $request->get('progres');
+        
 
         $data->save();
         return redirect()->route('data.index')->with('success', 'Data baru telah ditambahkan');
@@ -107,10 +115,13 @@ class DataController extends Controller
             'user_id' => 'required|exists:users,id',
             'alamat' => 'required',
             'kavling' => 'required',
+            'lokasi' => 'required',
             'tipe' => 'required|integer',
             'spk' => 'required',
-            'progres' => 'required|integer',
+            'harga_deal' => 'required|integer',
+            'uang_masuk' => 'required|integer',
             'cicilan' => 'required|integer',
+            'progres' => 'required|integer',
             'photo' => 'image|file|max:2048'
         ]);
 
@@ -118,8 +129,11 @@ class DataController extends Controller
         $data->user_id = $request->get('user_id');
         $data->alamat = $request->get('alamat');
         $data->kavling = $request->get('kavling');
+        $data->lokasi = $request->get('lokasi');
         $data->tipe = $request->get('tipe');
+        $data->harga_deal = $request->get('harga_deal');
         $data->spk = $request->get('spk');
+        $data->uang_masuk = $request->get('uang_masuk');
         $data->progres = $request->get('progres');
         $data->cicilan = $request->get('cicilan');
         

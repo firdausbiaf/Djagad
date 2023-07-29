@@ -15,10 +15,13 @@ class Data extends Model
         'user_id',
         'alamat',
         'kavling',
+        'lokasi',
         'tipe',
         'spk',
-        'progres',
+        'harga_deal',
         'cicilan',
+        'uang_masuk',
+        'progres',
     ];
 
     // Relasi ke model User

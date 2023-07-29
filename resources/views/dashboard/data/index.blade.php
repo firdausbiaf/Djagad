@@ -12,10 +12,13 @@
                 <th scope="col">Telepon</th>
                 <th scope="col">Alamat</th>
                 <th scope="col">Kavling</th>
+                <th scope="col">Lokasi</th>
                 <th scope="col">Tipe</th>
                 <th scope="col">SPK</th>
+                <th scope="col">Harga Deal</th>
+                <th scope="col">Cicilan Ke</th>
+                <th scope="col">Uang Masuk</th>
                 <th scope="col">Progres (%)</th>
-                <th scope="col">Cicilan</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -27,10 +30,13 @@
                 <td>{{ $item->user->phone }}</td>
                 <td>{{ $item->alamat }}</td>
                 <td>{{ $item->kavling }}</td>
+                <td>{{ $item->lokasi }}</td>
                 <td>{{ $item->tipe }}</td>
                 <td>{{ $item->spk }}</td>
-                <td>{{ $item->progres }} %</td>
+                <td>{{ $item->harga_deal }}</td>
                 <td>{{ $item->cicilan }}</td>
+                <td>{{ $item->uang_masuk }}</td>
+                <td>{{ $item->progres }} %</td>
                 <td>
                     <a href="{{ route('data.show', $item->id) }}" class="badge bg-info" style="text-decoration: none;">Show</a>
                     <a href="{{ route('data.edit', $item->id) }}" class="badge bg-warning" style="text-decoration: none;">Edit</a>
