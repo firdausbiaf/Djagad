@@ -92,10 +92,13 @@
 <div class="progress mb-4">
     <div class="progress-bar" role="progressbar" style="width: {{ $item->progres }}%" aria-valuenow="{{ $item->progres }}" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
-<h4 class="medium font-weight-bold">Progress Cicilan</h4>
-<div class="progress mb-4">
-    <div class="progress-bar" id="cicilan-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-</div>
+<h4 class="medium font-weight-bold">Progress Cicilan ({{ $item->uang_masuk }} / {{ $item->harga_deal }})</h4>
+        @php
+            $progressCicilan = ($item->uang_masuk / $item->harga_deal) * 100;
+        @endphp
+        <div class="progress mb-4">
+            <div class="progress-bar" id="cicilan-progress" role="progressbar" style="width: {{ $progressCicilan }}%" aria-valuenow="{{ $progressCicilan }}" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
                                                 </div>
                                             </div>
                                         </div>
