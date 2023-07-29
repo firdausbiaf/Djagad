@@ -27,7 +27,7 @@ class DataController extends Controller
      */
     public function create()
     {
-        $users = User::where('role', '!=', 'admin')->select('id', 'name')->get();
+        $users = User::whereNotIn('role', ['admin', 'petugas'])->select('id', 'name')->get();
         return view('dashboard.data.create', compact('users'));
     }
 
@@ -94,7 +94,7 @@ class DataController extends Controller
         $data = Data::findOrFail($id);
 
         // Get users with roles other than "admin"
-        $users = User::where('role', '!=', 'admin')->select('id', 'name')->get();
+        $users = User::whereNotIn('role', ['admin', 'petugas'])->select('id', 'name')->get();
 
         return view('dashboard.data.edit', compact('data', 'users'));
     }

@@ -11,7 +11,7 @@
             <select class="form-select @error('user_id') is-invalid @enderror" id="user_id" name="user_id">
                 <option value="">Pilih Nama Member</option>
                 @foreach ($users as $user)
-                    @if ($user->role != 'admin')
+                    @if ($user->role != 'admin','petugas')
                         <option value="{{ $user->id }}" {{ old('user_id', $data->user_id) == $user->id ? 'selected' : '' }}>
                             {{ $user->name }}
                         </option>
