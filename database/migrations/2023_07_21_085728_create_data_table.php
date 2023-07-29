@@ -18,10 +18,12 @@ class CreateDataTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('alamat');
             $table->string('kavling');
+            $table->string('lokasi');
             $table->unsignedBigInteger('tipe');
             $table->string('spk');
-            $table->unsignedBigInteger('progres');
+            $table->unsignedBigInteger('harga_deal');
             $table->unsignedBigInteger('cicilan');
+            $table->unsignedBigInteger('progres');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

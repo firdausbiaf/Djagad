@@ -54,22 +54,44 @@
                                                             <td>{{ $item->alamat }}</td>
                                                         </tr>
                                                         <tr>
+                                                            <th scope="row">Kavling</th>
+                                                            <td>{{ $item->kavling }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">Lokasi</th>
+                                                            <td>{{ $item->lokasi }}</td>
+                                                        </tr>
+                                                        <tr>
                                                             <th scope="row">Tipe</th>
                                                             <td>{{ $item->tipe }}</td>
                                                         </tr>
                                                         <tr>
+                                                            <th scope="row">Harga Deal</th>
+                                                            <td>{{ $item->harga_deal }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">Cicilan Ke</th>
+                                                            <td>{{ $item->cicilan }}</td>
+                                                        </tr>
+                                                        {{-- <tr>
                                                             <th scope="row">SPK</th>
                                                             <td>{{ $item->spk }}</td>
-                                                        </tr>
+                                                        </tr> --}}
                                                         <tr>
                                                             <th scope="row">Progres (%)</th>
                                                             <td>{{ $item->progres }} %</td>
                                                         </tr>
-                                                        <tr>
-                                                            <th scope="row">Cicilan</th>
-                                                            <td>{{ $item->cicilan }}</td>
-                                                        </tr>
+                            
                                                     </table>
+
+                                                    <h4 class="medium font-weight-bold"> Progress Pembangunan <span class="float-right">{{ $item->progres }}%</span></h4>
+<div class="progress mb-4">
+    <div class="progress-bar" role="progressbar" style="width: {{ $item->progres }}%" aria-valuenow="{{ $item->progres }}" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<h4 class="medium font-weight-bold">Progress Cicilan</h4>
+<div class="progress mb-4">
+    <div class="progress-bar" id="cicilan-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -127,6 +149,7 @@
 </div>
 
 <script>
+    
     $(document).ready(function() {
         // Ambil elemen tab pertama untuk kavling dan foto
         const firstKavlingTab = $('#kavlingTab .nav-link:first');
