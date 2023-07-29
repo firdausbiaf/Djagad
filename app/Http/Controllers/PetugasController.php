@@ -46,7 +46,7 @@ class PetugasController extends Controller
             'photo' => 'image|file|max:2048'
         ]);
 
-        $validatedData['password'] = bcrypt($validatedData['petugas1']);
+        $validatedData['password'] = bcrypt($validatedData['password']);
         $validatedData['role'] = 'petugas';
         $validatedData['verify'] = 1;
 
