@@ -23,6 +23,7 @@ class CreateDataTable extends Migration
             $table->string('spk');
             $table->unsignedBigInteger('harga_deal');
             $table->unsignedBigInteger('cicilan');
+            $table->unsignedBigInteger('uang_masuk');
             $table->unsignedBigInteger('progres');
             $table->timestamps();
 

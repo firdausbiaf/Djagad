@@ -73,6 +73,10 @@
                                                             <th scope="row">Cicilan Ke</th>
                                                             <td>{{ $item->cicilan }}</td>
                                                         </tr>
+                                                        <tr>
+                                                            <th scope="row">Uang Masuk</th>
+                                                            <td>{{ $item->uang_masuk }}</td>
+                                                        </tr>
                                                         {{-- <tr>
                                                             <th scope="row">SPK</th>
                                                             <td>{{ $item->spk }}</td>

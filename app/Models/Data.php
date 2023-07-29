@@ -20,6 +20,7 @@ class Data extends Model
         'spk',
         'harga_deal',
         'cicilan',
+        'uang_masuk',
         'progres',
     ];
 

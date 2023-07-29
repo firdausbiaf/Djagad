@@ -17,6 +17,7 @@
                 <th scope="col">SPK</th>
                 <th scope="col">Harga Deal</th>
                 <th scope="col">Cicilan Ke</th>
+                <th scope="col">Uang Masuk</th>
                 <th scope="col">Progres (%)</th>
                 <th scope="col">Action</th>
             </tr>
@@ -34,6 +35,7 @@
                 <td>{{ $item->spk }}</td>
                 <td>{{ $item->harga_deal }}</td>
                 <td>{{ $item->cicilan }}</td>
+                <td>{{ $item->uang_masuk }}</td>
                 <td>{{ $item->progres }} %</td>
                 <td>
                     <a href="{{ route('data.show', $item->id) }}" class="badge bg-info" style="text-decoration: none;">Show</a>

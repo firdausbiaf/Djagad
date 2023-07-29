@@ -87,6 +87,15 @@
             @enderror
         </div>
         <div class="mb-3">
+            <label for="uang_masuk" class="form-label">Uang Masuk</label>
+            <input type="number" class="form-control @error('cicilan') is-invalid @enderror" id="uang_masuk" name="uang_masuk" value="{{ old('uang_masuk') }}" required>
+            @error('uang_masuk')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="mb-3">
             <label for="progres" class="form-label">Progres (%)</label>
             <input type="number" class="form-control @error('progres') is-invalid @enderror" id="progres" name="progres" value="{{ old('progres') }}" required>
             @error('progres')

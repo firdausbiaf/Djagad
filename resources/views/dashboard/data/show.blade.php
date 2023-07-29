@@ -19,6 +19,7 @@
                     <li class="list-group-item"><b>SPK : </b>{{ $data->spk }}</li>
                     <li class="list-group-item"><b>Harga Deal : </b>{{ $data->harga_deal }}</li>
                     <li class="list-group-item"><b>Cicilan Ke: </b>{{ $data->cicilan }}</li>
+                    <li class="list-group-item"><b>Uang Masuk </b>{{ $data->uang_masuk }}</li>
                     <li class="list-group-item"><b>Progres : </b>{{ $data->progres }} %</li>
                 </ul>
             </div>

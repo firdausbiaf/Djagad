@@ -47,6 +47,7 @@ class DataController extends Controller
             'tipe' => 'required|integer',
             'spk' => 'required',
             'harga_deal' => 'required|integer',
+            'uang_masuk' => 'required|integer',
             'cicilan' => 'required|integer',
             'progres' => 'required|integer',
             
@@ -60,6 +61,7 @@ class DataController extends Controller
         $data->tipe = $request->get('tipe');
         $data->spk = $request->get('spk');
         $data->harga_deal = $request->get('harga_deal');
+        $data->uang_masuk = $request->get('uang_masuk');
         $data->cicilan = $request->get('cicilan');
         $data->progres = $request->get('progres');
         
@@ -117,6 +119,7 @@ class DataController extends Controller
             'tipe' => 'required|integer',
             'spk' => 'required',
             'harga_deal' => 'required|integer',
+            'uang_masuk' => 'required|integer',
             'cicilan' => 'required|integer',
             'progres' => 'required|integer',
             'photo' => 'image|file|max:2048'
@@ -130,6 +133,7 @@ class DataController extends Controller
         $data->tipe = $request->get('tipe');
         $data->harga_deal = $request->get('harga_deal');
         $data->spk = $request->get('spk');
+        $data->uang_masuk = $request->get('uang_masuk');
         $data->progres = $request->get('progres');
         $data->cicilan = $request->get('cicilan');
         
