@@ -6,54 +6,75 @@
           <span class="menu-title">Dashboard</span>
         </a>
       </li>
-      <li class="nav-item nav-category">User</li>
-      {{-- <li class="nav-item">
-        <a class="nav-link" href="/admin/member">
-          <i class="menu-icon mdi mdi-account"></i>
-          <span class="menu-title">Member</span>
-        </a>
-      </li> --}}
-      <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="collapse" href="#member" aria-expanded="false" aria-controls="member">
-          <i class="menu-icon mdi mdi-account"></i>
-          <span class="menu-title">Member</span>
-          <i class="menu-arrow"></i>
-        </a>
-        <div class="collapse" id="member">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="/admin/member">Manage Member</a></li>
-          </ul>
-        </div>
-        <div class="collapse" id="member">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="/admin/member/create">Add Member</a></li>
-          </ul>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="collapse" href="#admin" aria-expanded="false" aria-controls="admin">
-          <i class="menu-icon mdi mdi-account-circle-outline"></i>
-          <span class="menu-title">Admin</span>
-          <i class="menu-arrow"></i>
-        </a>
-        <div class="collapse" id="admin">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="/admin/user">Manage Admin</a></li>
-          </ul>
-        </div>
-        <div class="collapse" id="admin">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="/admin/user/create">Add Admin</a></li>
-          </ul>
-        </div>
-      </li>
-      <li class="nav-item nav-category">Data</li>
-      <li class="nav-item">
-        <a class="nav-link" href="/admin/data">
-          <i class="menu-icon mdi mdi-layers-outline"></i>
-          <span class="menu-title">Data</span>
-        </a>
-      </li>
+      @auth
+        @if(auth()->user()->role == "admin")
+          <li class="nav-item nav-category">User</li>
+          {{-- <li class="nav-item">
+            <a class="nav-link" href="/admin/member">
+              <i class="menu-icon mdi mdi-account"></i>
+              <span class="menu-title">Member</span>
+            </a>
+          </li> --}}
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#member" aria-expanded="false" aria-controls="member">
+              <i class="menu-icon mdi mdi-account"></i>
+              <span class="menu-title">Member</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="member">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/admin/member">Manage Member</a></li>
+              </ul>
+            </div>
+            <div class="collapse" id="member">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/admin/member/create">Add Member</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#admin" aria-expanded="false" aria-controls="admin">
+              <i class="menu-icon mdi mdi-account-circle-outline"></i>
+              <span class="menu-title">Admin</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="admin">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/admin/user">Manage Admin</a></li>
+              </ul>
+            </div>
+            <div class="collapse" id="admin">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/admin/user/create">Add Admin</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#petugas" aria-expanded="false" aria-controls="petugas">
+              <i class="menu-icon mdi mdi-account"></i>
+              <span class="menu-title">Petugas</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="petugas">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/admin/petugas">Manage Petugas</a></li>
+              </ul>
+            </div>
+            <div class="collapse" id="petugas">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/admin/petugas/create">Add Petugas</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item nav-category">Data</li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/data">
+              <i class="menu-icon mdi mdi-layers-outline"></i>
+              <span class="menu-title">Data</span>
+            </a>
+          </li>
+        @endif
+      @endauth
       <li class="nav-item nav-category">Foto</li>
       <li class="nav-item">
         <a class="nav-link" href="/admin/foto">

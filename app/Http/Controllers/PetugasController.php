@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Petugas;
+use App\Http\Requests\StorePetugasRequest;
+use App\Http\Requests\UpdatePetugasRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
-class DashboardAdminController extends Controller
+class PetugasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +17,7 @@ class DashboardAdminController extends Controller
     public function index()
     {
         $user = User::paginate(5);
-        return view('dashboard.admin.index', compact('user'));
+        return view('dashboard.petugas.index', compact('user'));
     }
 
     /**
@@ -26,16 +27,16 @@ class DashboardAdminController extends Controller
      */
     public function create()
     {
-        return view('dashboard.admin.create');
+        return view('dashboard.petugas.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StorePetugasRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePetugasRequest $request)
     {
         $validatedData = $request->validate([
             'name' => 'required|unique:users',
@@ -45,8 +46,8 @@ class DashboardAdminController extends Controller
             'photo' => 'image|file|max:2048'
         ]);
 
-        $validatedData['password'] = bcrypt($validatedData['password']);
-        $validatedData['role'] = 'admin';
+        $validatedData['password'] = bcrypt($validatedData['petugas1']);
+        $validatedData['role'] = 'petugas';
         $validatedData['verify'] = 1;
 
         if($request->file('photo')){
@@ -55,43 +56,43 @@ class DashboardAdminController extends Controller
         
         User::create($validatedData);
         
-        return redirect('/admin/user')->with('success', 'Admin baru telah ditambahkan');
+        return redirect('/admin/petugas')->with('success', 'Petugas baru telah ditambahkan');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Petugas  $petugas
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $user = User::where('id', $id)->first();
-        return view('dashboard.admin.show', ['user' => $user]);
+        return view('dashboard.petugas.show', ['user' => $user]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Petugas  $petugas
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $user = User::where('id', $id)->first();
-        return view('dashboard.admin.edit', compact('user'));
+        return view('dashboard.petugas.edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\UpdatePetugasRequest  $request
+     * @param  \App\Models\Petugas  $petugas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdatePetugasRequest $request, $id)
     {
-         $request->validate([
+        $request->validate([
             'name' => 'required',
             'email' => 'required',
             'phone' => 'required|numeric',
@@ -113,13 +114,13 @@ class DashboardAdminController extends Controller
         
         $user->save();
 
-        return redirect('/admin/user')->with('success', 'Admin berhasil diedit'); 
+        return redirect('/admin/petugas')->with('success', 'Petugas berhasil diedit');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Petugas  $petugas
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -129,6 +130,6 @@ class DashboardAdminController extends Controller
             Storage::delete($user->photo);
         }
         $user->delete();
-        return redirect('/admin/user')->with('success', 'Akun telah dihapus');
+        return redirect('/admin/petugas')->with('success', 'Akun telah dihapus');
     }
 }

@@ -22,6 +22,7 @@ use App\Http\Controllers\DashboardTugasController;
 use App\Http\Controllers\DataController;
 use App\Http\Controllers\FotoController;
 use App\Http\Controllers\IndexUserController;
+use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\TugasController;
 
 /*
@@ -47,7 +48,7 @@ Route::get('/migration', function () {
 
 Route::get('/home', [IndexUserController::class, 'index']);
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('checkRole:admin');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('checkRole');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 
@@ -65,6 +66,7 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 Route::resource('/admin/member', DashboardUserController::class)->middleware('checkRole:admin');
 Route::resource('/admin/user', DashboardAdminController::class)->middleware('checkRole:admin');
+Route::resource('/admin/petugas', PetugasController::class)->middleware('checkRole:admin');
 
 Route::resource('/admin/kelas', DashboardCategoryController::class)->middleware('checkRole:admin');
 

@@ -17,7 +17,7 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->role == 'admin') {
+        if ($request->user() && in_array($request->user()->role, ['admin', 'petugas'])) {
             return $next($request);
         }
         return redirect('/');

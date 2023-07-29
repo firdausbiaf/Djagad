@@ -26,6 +26,15 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password')
         ]);
 
+        User::create([
+            'name' => 'Petugas1',
+            'email' => 'petugas1@gmail.com',
+            'phone' => '087655456783',
+            'role' => 'petugas',
+            'verify' => '1',
+            'password' => bcrypt('petugas1')
+        ]);
+
 
 
         Category::create([

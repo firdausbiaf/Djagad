@@ -3,13 +3,13 @@
    
   <div class="col-lg-8 mx-5 mt-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Edit Admin</h1>
+        <h1 class="h2">Edit Petugas</h1>
       </div>
-      <form method="post" action="/admin/user/{{ $user->id }}" class="mb-5" enctype="multipart/form-data">
+      <form method="post" action="/admin/petugas/{{ $user->id }}" class="mb-5" enctype="multipart/form-data">
         @method('put')
         @csrf
         <div class="mb-3">
-            <label for="name" class="form-label">Nama Admin</label>
+            <label for="name" class="form-label">Nama Petugas</label>
             <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name', $user->name) }}">
               @error('name')
               <div class="invalid-feedback">

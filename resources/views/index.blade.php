@@ -70,6 +70,16 @@
                                                             <td>{{ $item->cicilan }}</td>
                                                         </tr>
                                                     </table>
+                                                    <div class="card-body">
+                                                        <h4 class="small font-weight-bold">Progress Pembangunan : <span class="float-right">{{$item->progres}}%</span></h4>
+                                                        <div class="progress mb-4">
+                                                            <div class="progress-bar bg-danger" role="progressbar" style="width: {{$item->progres}}%" aria-valuenow="{{$item->progres}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
+                                                        <h4 class="small font-weight-bold">Cicilan : <span class="float-right">Rp.{{$item->cicilan}}</span></h4>
+                                                        <div class="progress mb-4">
+                                                            <div class="progress-bar bg-warning" role="progressbar" style="width: {{$item->cicilan}}%" aria-valuenow="{{$item->cicilan}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -78,7 +88,11 @@
                             </div>
                         </div>
                     </div>
+                    `<div class="row">
 
+                    <div class="col-lg-6 mb-4">
+                    </div>
+                </div>
                     <!-- Foto Section -->
                     <div class="row">
                         <div class="col-lg-12 mb-4">
@@ -103,7 +117,7 @@
                                             @foreach ($data as $item)
                                                 <div class="tab-pane fade" id="foto-content-{{ $item->id }}" role="tabpanel" aria-labelledby="foto-tab-{{ $item->id }}">
                                                     @php
-                                                        $itemFoto = $foto->where('data_id', $item->id)->reverse()->take(4);
+                                                        $itemFoto = $foto->where('data_id', $item->id)->sortByDesc('created_at')->take(4);
                                                     @endphp
                                                     <div class="row">
                                                         @foreach($itemFoto as $f)
@@ -131,14 +145,17 @@
         // Ambil elemen tab pertama untuk kavling dan foto
         const firstKavlingTab = $('#kavlingTab .nav-link:first');
         const firstFotoTab = $('#fotoTab .nav-link:first');
+        const firstProgresTab = $('#progresTab .nav-link:first')
 
         // Tambahkan kelas 'active' pada tab pertama secara manual saat memuat halaman
         firstKavlingTab.addClass('active');
         firstFotoTab.addClass('active');
+        firstProgresTab.addClass('active');
 
         // Tampilkan konten tab pertama saat halaman dimuat
         $('#kavlingTabContent .tab-pane:first').addClass('show active');
         $('#fotoTabContent .tab-pane:first').addClass('show active');
+        $('#progresTabContent .tab-pane:first').addClass('show active');
 
         // Fungsi untuk menampilkan foto berdasarkan kavling yang dipilih
         function showFotoByKavling(kavlingId) {
@@ -152,28 +169,46 @@
         // Saat halaman dimuat, tampilkan foto berdasarkan tab pertama yang aktif
         showFotoByKavling(firstKavlingTab.attr('href').replace('#content-', ''));
 
+        // Fungsi untuk menampilkan progress berdasarkan kavling yang dipilih
+        function showProgresByKavling(kavlingId) {
+            // Ambil progress value berdasarkan kavlingId yang dipilih
+            const progress = $('#content-' + kavlingId + ' .progress-value').text();
+
+            // Update progress value on the progress bar
+            $('#progress-bar-' + kavlingId).css('width', progress + '%');
+            $('#progress-bar-' + kavlingId).attr('aria-valuenow', progress);
+        }
+
+        // Saat halaman dimuat, tampilkan progress berdasarkan tab pertama yang aktif
+        const firstKavlingTabId = firstKavlingTab.attr('href').replace('#content-', '');
+        showProgresByKavling(firstKavlingTabId);
+
         // Tangani peristiwa klik pada tab kavling
-        $('#kavlingTab .nav-link').on('click', function(e) {
+        $('#kavlingTab .nav-link, #fotoTab .nav-link, #progresTab .nav-link').on('click', function(e) {
             e.preventDefault();
 
             // Hilangkan kelas 'active' dari semua tab kavling
-            $('#kavlingTab .nav-link').removeClass('active');
+            $('#kavlingTab .nav-link, #fotoTab .nav-link, #progresTab .nav-link').removeClass('active');
 
             // Tambahkan kelas 'active' pada tab kavling yang diklik
             $(this).addClass('active');
 
             // Ambil ID konten tab kavling yang sesuai dari atribut href
-            const targetKavlingContentId = $(this).attr('href');
+            const targetContentId = $(this).attr('href');
 
             // Sembunyikan semua konten tab kavling
             $('#kavlingTabContent .tab-pane').removeClass('show active');
 
             // Tampilkan konten tab kavling yang sesuai
-            $(targetKavlingContentId).addClass('show active');
+            $('#kavlingTabContent .tab-pane, #fotoTabContent .tab-pane, #progresTabContent .tab-pane').removeClass('show active');
 
-            // Ambil kavlingId dari atribut href dan tampilkan foto sesuai kavling yang dipilih
-            const kavlingId = targetKavlingContentId.replace('#content-', '');
+            // Tampilkan konten tab yang sesuai
+            $(targetContentId).addClass('show active');
+
+            // Ambil kavlingId dari atribut href dan tampilkan foto serta progres sesuai tab yang dipilih
+            const kavlingId = targetContentId.replace('#content-', '');
             showFotoByKavling(kavlingId);
+            showProgresByKavling(kavlingId);
         });
     });
 </script>

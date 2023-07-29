@@ -26,42 +26,41 @@
       </thead>
       <tbody>
         @foreach ($user as $u)
-        @if($u->role == 'admin')
-          @continue
-        @endif
-        <tr>
-          <td>{{ $u->id }}</td>
-          <td>{{ $u->name }}</td>
-          <td>{{ $u->email }}</td>
-          <td>{{ $u->phone }}</td>
-          <td>       
-              @if( $u->verify  == 0)
-              <form action="/verify" method="get" class="d-inline">
-              @csrf
-              <input type="hidden" name="id" value="{{ $u->id }}">
-              <button type="submit" class="badge bg-warning border-0" >Verify</button>
-              </form>
+          @if($u->role == 'member')
+          <tr>
+            <td>{{ $u->id }}</td>
+            <td>{{ $u->name }}</td>
+            <td>{{ $u->email }}</td>
+            <td>{{ $u->phone }}</td>
+            <td>       
+                @if( $u->verify  == 0)
+                <form action="/verify" method="get" class="d-inline">
+                @csrf
+                <input type="hidden" name="id" value="{{ $u->id }}">
+                <button type="submit" class="badge bg-warning border-0" >Verify</button>
+                </form>
 
-              @else
-              <form action="/block" method="get" class="d-inline">
-              @csrf
-              <input type="hidden" name="id" value="{{ $u->id }}">
-              <button type="submit" class="badge bg-success border-0" >Verified</button>
-              </form>
+                @else
+                <form action="/block" method="get" class="d-inline">
+                @csrf
+                <input type="hidden" name="id" value="{{ $u->id }}">
+                <button type="submit" class="badge bg-success border-0" >Verified</button>
+                </form>
 
-              @endif
-            
-          </td>
-          <td>
-            <a href="/admin/member/{{ $u->id }}" class="badge bg-info" style="text-decoration: none;">Show</a>
-            <a href="/admin/member/{{ $u->id }}/edit" class="badge bg-warning" style="text-decoration: none;">Edit</a>
-            <form action="/admin/member/{{ $u->id }}" method="post" class="d-inline">
-              @method('delete')
-              @csrf
-              <button class="badge bg-danger border-0" onclick="return confirm('Apakah anda yakin?')" >Delete</button>
-            </form>
-          </td>
-        </tr>
+                @endif
+              
+            </td>
+            <td>
+              <a href="/admin/member/{{ $u->id }}" class="badge bg-info" style="text-decoration: none;">Show</a>
+              <a href="/admin/member/{{ $u->id }}/edit" class="badge bg-warning" style="text-decoration: none;">Edit</a>
+              <form action="/admin/member/{{ $u->id }}" method="post" class="d-inline">
+                @method('delete')
+                @csrf
+                <button class="badge bg-danger border-0" onclick="return confirm('Apakah anda yakin?')" >Delete</button>
+              </form>
+            </td>
+          </tr>
+          @endif
         @endforeach    
       </tbody>
     </table>
