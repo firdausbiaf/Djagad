@@ -29,6 +29,7 @@
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Kavling</th>
+                <th scope="col">Lokasi</th>
                 <th scope="col">Foto</th>
                 <th scope="col">Action</th>
             </tr>
@@ -38,6 +39,7 @@
             <tr>
                 <td>{{ $foto->id }}</td>
                 <td>{{ $foto->data->kavling }}</td>
+                <td>{{ $foto->data->lokasi }}</td>
                 <td>
                     @if($foto->photo)
                     <img src="{{ asset('storage/' . $foto->photo) }}" class="card-img-top" alt="Foto">
