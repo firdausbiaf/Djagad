@@ -17,29 +17,50 @@ class FotoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
-        $search = $request->input('search');
-        $selectedKavlingId = $request->input('kavling');
+{
+    $search = $request->input('search');
+    $selectedLokasi = $request->input('lokasi');
+    $selectedKavling = $request->input('kavling');
 
-        $query = Foto::select('*')->orderBy('id', 'asc');
+    // Query dasar untuk data foto
+    $query = Foto::query();
 
-        // Perform the search based on 'search' parameter
-        // ... (same as before)
-
-        // Perform the filter based on 'kavling' parameter
-        if ($selectedKavlingId) {
-            $query->whereHas('data', function ($dataQuery) use ($selectedKavlingId) {
-                $dataQuery->where('id', $selectedKavlingId);
-            });
-        }
-
-        $fotos = $query->paginate(10);
-
-        // Get the data for the filter dropdown
-        $data = Data::pluck('kavling', 'id');
-
-        return view('dashboard.foto.index', compact('fotos', 'data', 'search', 'selectedKavlingId'));
+    // Perform the search based on 'search' parameter (mirip seperti sebelumnya)
+    if ($search) {
+        $query->where(function ($innerQuery) use ($search) {
+            $innerQuery->where('id', 'like', '%' . $search . '%')
+                ->orWhereHas('data', function ($dataQuery) use ($search) {
+                    $dataQuery->where('kavling', 'like', '%' . $search . '%');
+                });
+        });
     }
+
+    // Perform the filter based on 'lokasi' parameter
+    if ($selectedLokasi) {
+        $query->whereHas('data', function ($dataQuery) use ($selectedLokasi) {
+            $dataQuery->where('lokasi', $selectedLokasi);
+        });
+    }
+
+    // Perform the filter based on 'kavling' parameter
+    if ($selectedKavling) {
+        $query->whereHas('data', function ($dataQuery) use ($selectedKavling) {
+            $dataQuery->where('kavling', $selectedKavling);
+        });
+    }
+
+    // Get the data for the filter dropdown
+    $lokasiOptions = Data::pluck('lokasi')->unique();
+    $kavlingOptions = Data::when($selectedLokasi, function ($query, $selectedLokasi) {
+        return $query->where('lokasi', $selectedLokasi)->pluck('kavling');
+    })->pluck('kavling');
+
+    // Get the paginated results
+    $fotos = $query->orderBy('id', 'asc')->paginate(10);
+
+    return view('dashboard.foto.index', compact('fotos', 'lokasiOptions', 'kavlingOptions', 'selectedLokasi', 'selectedKavling', 'search'));
+}
+
 
     /**
      * Show the form for creating a new resource.
@@ -47,12 +68,22 @@ class FotoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        // Ambil daftar kavling dari model Data
-        $data = Data::pluck('kavling', 'id');
+{
+    // Ambil daftar lokasi dari model Data
+    $lokasiOptions = Data::pluck('lokasi')->unique();
 
-        return view('dashboard.foto.create', compact('data'));
+    // Inisialisasi array untuk menyimpan pilihan kavling berdasarkan lokasi
+    $kavlingOptions = [];
+
+    // Loop melalui setiap lokasi dan ambil pilihan kavling yang sesuai
+    foreach ($lokasiOptions as $lokasi) {
+        $kavlingOptions[$lokasi] = Data::where('lokasi', $lokasi)->pluck('kavling');
     }
+
+    return view('dashboard.foto.create', compact('lokasiOptions', 'kavlingOptions'));
+}
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -60,32 +91,41 @@ class FotoController extends Controller
      * @param  \App\Http\Requests\StoreFotoRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreFotoRequest $request)
-    {
-        $request->validate([
-            'data_id' => 'required|exists:data,id',
-            'photo.*' => 'image|file|max:2048', // Update validasi untuk menerima array file
-        ]);
-
-        $fotoPaths = []; // Simpan path file foto untuk setiap foto yang diunggah
-
-        if ($request->hasFile('photo')) {
-            foreach ($request->file('photo') as $file) {
-                $nama_photo = $file->store('photo', 'public');
-                $fotoPaths[] = $nama_photo;
-            }
-        }
-
-        // Buat entri untuk setiap foto yang diunggah
-        foreach ($fotoPaths as $nama_photo) {
-            $foto = new Foto;
-            $foto->data_id = $request->get('data_id');
-            $foto->photo = $nama_photo;
-            $foto->save();
-        }
-
-        return redirect()->route('foto.index')->with('success', 'Foto baru telah ditambahkan');
-    }
+    
+     public function store(StoreFotoRequest $request)
+     {
+         // Validasi form menggunakan StoreFotoRequest
+         // Anda tidak perlu lagi melakukan validasi di sini karena sudah dilakukan di StoreFotoRequest
+ 
+         // Ambil data_id berdasarkan lokasi dan kavling
+         $data = Data::where('lokasi', $request->input('lokasi'))
+                     ->where('kavling', $request->input('kavling'))
+                     ->first();
+ 
+         if (!$data) {
+             return redirect()->route('foto.create')->with('error', 'Data kavling tidak ditemukan.');
+         }
+ 
+         $fotoPaths = []; // Simpan path file foto untuk setiap foto yang diunggah
+ 
+         if ($request->hasFile('photo')) {
+             foreach ($request->file('photo') as $file) {
+                 $nama_photo = $file->store('photo', 'public');
+                 $fotoPaths[] = $nama_photo;
+             }
+         }
+ 
+         // Buat entri untuk setiap foto yang diunggah
+         foreach ($fotoPaths as $nama_photo) {
+             $foto = new Foto;
+             $foto->data_id = $data->id;
+             $foto->photo = $nama_photo;
+             $foto->save();
+         }
+ 
+         return redirect()->route('foto.index')->with('success', 'Foto baru telah ditambahkan');
+     }
+    
 
     /**
      * Display the specified resource.
@@ -108,10 +148,18 @@ class FotoController extends Controller
     public function edit($id)
     {
         $foto = Foto::findOrFail($id);
-        // Ambil daftar kavling dari model Data
-        $data = Data::pluck('kavling', 'id');
+        // Ambil daftar lokasi dari model Data
+        $lokasiOptions = Data::pluck('lokasi')->unique();
 
-        return view('dashboard.foto.edit', compact('foto', 'data'));
+        // Inisialisasi array untuk menyimpan pilihan kavling berdasarkan lokasi
+        $kavlingOptions = [];
+
+        // Loop melalui setiap lokasi dan ambil pilihan kavling yang sesuai
+        foreach ($lokasiOptions as $lokasi) {
+            $kavlingOptions[$lokasi] = Data::where('lokasi', $lokasi)->pluck('kavling');
+        }
+
+        return view('dashboard.foto.edit', compact('foto', 'lokasiOptions', 'kavlingOptions'));
     }
 
     /**
@@ -124,12 +172,23 @@ class FotoController extends Controller
     public function update(UpdateFotoRequest $request, $id)
     {
         $request->validate([
-            'data_id' => 'required|exists:data,id',
+            'lokasi' => 'required',
+            'kavling' => 'required',
             'photo' => 'image|file|max:2048',
         ]);
 
         $foto = Foto::findOrFail($id);
-        $foto->data_id = $request->get('data_id');
+
+        // Ambil data_id berdasarkan lokasi dan kavling
+        $data = Data::where('lokasi', $request->input('lokasi'))
+                    ->where('kavling', $request->input('kavling'))
+                    ->first();
+
+        if (!$data) {
+            return redirect()->route('foto.edit', $foto->id)->with('error', 'Data kavling tidak ditemukan.');
+        }
+
+        $foto->data_id = $data->id;
 
         if ($request->hasFile('photo')) {
             // Hapus foto lama jika ada
@@ -144,6 +203,7 @@ class FotoController extends Controller
 
         return redirect()->route('foto.index')->with('success', 'Foto berhasil diupdate');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -182,24 +242,12 @@ class FotoController extends Controller
 
         return view('dashboard.foto.index', compact('fotos', 'data', 'selectedKavlingId'));
     }
+
+    public function getKavlingsByLocation(Request $request)
+    {
+        $lokasi = $request->input('lokasi');
+        $kavlings = Data::where('lokasi', $lokasi)->pluck('kavling', 'kavling');
+
+        return Response::json($kavlings);
+    }
 }
-
-//         // Debugging: Cek nilai parameter kavling
-//         $selectedKavlingId = $request->input('kavling');
-//         dd($selectedKavlingId);
-        
-//         // Lakukan operasi filter berdasarkan $selectedKavlingId
-//         $fotos = Foto::when($selectedKavlingId, function ($query, $selectedKavlingId) {
-//             return $query->where('data_id', $selectedKavlingId);
-//         })->orderBy('id', 'asc')->paginate(10);
-    
-//         // Debugging: Cek query yang dijalankan
-//         dd($fotos->toSql());
-    
-//         // Setelah melakukan operasi filter, ambil daftar kavling lagi untuk menampilkan di select option
-//         $data = Data::pluck('kavling', 'id');
-    
-//         return view('dashboard.foto.index', compact('fotos', 'data'));
-//     }    
-
-// }

@@ -96,8 +96,12 @@ class DataController extends Controller
         // Get users with roles other than "admin"
         $users = User::whereNotIn('role', ['admin', 'petugas'])->select('id', 'name')->get();
 
-        return view('dashboard.data.edit', compact('data', 'users'));
+        // Enum values for 'lokasi'
+        $lokasiOptions = ['DJAGAD LAND BATU', 'DJAGAD LAND SINGHASARI', 'DPARK CITY'];
+
+        return view('dashboard.data.edit', compact('data', 'users', 'lokasiOptions'));
     }
+
 
     /**
      * Update the specified resource in storage.

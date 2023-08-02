@@ -11,7 +11,7 @@
             <select class="form-select @error('user_id') is-invalid @enderror" id="user_id" name="user_id">
                 <option value="">Pilih Nama Member</option>
                 @foreach ($users as $user)
-                    @if ($user->role != 'admin','petugas')
+                    @if ($user->role != 'admin' && $user->role != 'petugas')
                         <option value="{{ $user->id }}" {{ old('user_id', $data->user_id) == $user->id ? 'selected' : '' }}>
                             {{ $user->name }}
                         </option>
@@ -34,6 +34,20 @@
             @enderror
         </div>
         <div class="mb-3">
+            <label for="lokasi" class="form-label">Lokasi</label>
+            <select class="form-select @error('lokasi') is-invalid @enderror" id="lokasi" name="lokasi" required>
+                <option value="">Pilih Lokasi</option>
+                @foreach ($lokasiOptions as $option)
+                <option value="{{ $option }}" {{ old('lokasi', $data->lokasi) == $option ? 'selected' : '' }}>{{ $option }}</option>
+                @endforeach
+            </select>
+            @error('lokasi')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="mb-3">
             <label for="kavling" class="form-label">Kavling</label>
             <input type="text" class="form-control @error('kavling') is-invalid @enderror" id="kavling" name="kavling" value="{{ old('kavling', $data->kavling) }}" required>
             @error('kavling')
@@ -42,15 +56,7 @@
             </div>
             @enderror
         </div>
-        <div class="mb-3">
-            <label for="lokasi" class="form-label">Lokasi</label>
-            <input type="text" class="form-control @error('kavling') is-invalid @enderror" id="lokasi" name="lokasi" value="{{ old('lokasi', $data->lokasi) }}" required>
-            @error('lokasi')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-            @enderror
-        </div>
+        
         <div class="mb-3">
             <label for="tipe" class="form-label">Tipe</label>
             <input type="number" class="form-control @error('tipe') is-invalid @enderror" id="tipe" name="tipe" value="{{ old('tipe', $data->tipe) }}" required>
