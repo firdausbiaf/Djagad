@@ -18,7 +18,7 @@ class CreateDataTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('alamat');
             $table->string('kavling');
-            $table->string('lokasi');
+            $table->enum('lokasi',['DJAGAD LAND BATU','DJAGAD LAND SINGHASARI','DPARK CITY'])->default('DJAGAD LAND BATU');
             $table->unsignedBigInteger('tipe');
             $table->string('spk');
             $table->unsignedBigInteger('harga_deal');

@@ -33,6 +33,20 @@
             @enderror
         </div>
         <div class="mb-3">
+            <label for="lokasi" class="form-label">Lokasi</label>
+            <select class="form-select @error('lokasi') is-invalid @enderror" id="lokasi" name="lokasi" required>
+                <option value="">Pilih Lokasi</option>
+                <option value="DJAGAD LAND BATU" {{ old('lokasi') == 'DJAGAD LAND BATU' ? 'selected' : '' }}>DJAGAD LAND BATU</option>
+                <option value="DJAGAD LAND SINGHASARI" {{ old('lokasi') == 'DJAGAD LAND SINGHASARI' ? 'selected' : '' }}>DJAGAD LAND SINGHASARI</option>
+                <option value="DPARK CITY" {{ old('lokasi') == 'DPARK CITY' ? 'selected' : '' }}>DPARK CITY</option>
+            </select>
+            @error('lokasi')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="mb-3">
             <label for="kavling" class="form-label">Kavling</label>
             <input type="text" class="form-control @error('kavling') is-invalid @enderror" id="kavling" name="kavling" value="{{ old('kavling') }}" required>
             @error('kavling')
@@ -41,15 +55,7 @@
             </div>
             @enderror
         </div>
-        <div class="mb-3">
-            <label for="lokasi" class="form-label">Lokasi</label>
-            <input type="text" class="form-control @error('kavling') is-invalid @enderror" id="lokasi" name="lokasi" value="{{ old('lokasi') }}" required>
-            @error('lokasi')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-            @enderror
-        </div>
+        
         <div class="mb-3">
             <label for="tipe" class="form-label">Tipe</label>
             <input type="number" class="form-control @error('tipe') is-invalid @enderror" id="tipe" name="tipe" value="{{ old('tipe') }}" required>

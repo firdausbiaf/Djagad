@@ -8,14 +8,23 @@
             <a href="{{ route('foto.create') }}" class="btn btn-primary mb-3">Tambah Foto</a>
         </div>
         <div class="col-md-6 text-right">
-            <!-- Filter Kavling Select Option -->
-            <form action="{{ route('foto.filter') }}" method="GET" class="form-inline">
+            <!-- Filter Lokasi Select Option -->
+            <form action="{{ route('foto.index') }}" method="GET" class="form-inline">
                 <div class="form-group mb-2">
+                    <label for="lokasi" class="mr-2">Filter Lokasi:</label>
+                    <select name="lokasi" id="lokasi" class="form-control">
+                        <option value="">Semua Lokasi</option>
+                        @foreach ($lokasiOptions as $lokasi)
+                        <option value="{{ $lokasi }}" @if($lokasi == $selectedLokasi) selected @endif>{{ $lokasi }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group mb-2 ml-2">
                     <label for="kavling" class="mr-2">Filter Kavling:</label>
                     <select name="kavling" id="kavling" class="form-control">
                         <option value="">Semua Kavling</option>
-                        @foreach ($data as $id => $kavling)
-                        <option value="{{ $id }}" @if($id == $selectedKavlingId) selected @endif>{{ $kavling }}</option>
+                        @foreach ($kavlingOptions as $kavling)
+                        <option value="{{ $kavling }}" @if($kavling == $selectedKavling) selected @endif>{{ $kavling }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -28,8 +37,8 @@
         <thead>
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Kavling</th>
                 <th scope="col">Lokasi</th>
+                <th scope="col">Kavling</th>
                 <th scope="col">Foto</th>
                 <th scope="col">Action</th>
             </tr>
@@ -38,8 +47,8 @@
             @foreach ($fotos as $foto)
             <tr>
                 <td>{{ $foto->id }}</td>
-                <td>{{ $foto->data->kavling }}</td>
                 <td>{{ $foto->data->lokasi }}</td>
+                <td>{{ $foto->data->kavling}}</td>
                 <td>
                     @if($foto->photo)
                     <img src="{{ asset('storage/' . $foto->photo) }}" class="card-img-top" alt="Foto">
@@ -65,3 +74,34 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    // Fungsi untuk mengambil kavling berdasarkan lokasi menggunakan AJAX
+    function getKavlingsByLocation() {
+        const lokasiSelect = document.getElementById('lokasi');
+        const kavlingSelect = document.getElementById('kavling');
+
+        if (!lokasiSelect.value) {
+            kavlingSelect.innerHTML = '<option value="">Semua Kavling</option>';
+            return;
+        }
+
+        fetch(`/get-kavlings?lokasi=${lokasiSelect.value}`)
+            .then((response) => response.json())
+            .then((data) => {
+                kavlingSelect.innerHTML = '<option value="">Semua Kavling</option>';
+                Object.entries(data).forEach(([kavling]) => {
+                    kavlingSelect.innerHTML += `<option value="${kavling}">${kavling}</option>`;
+                });
+            })
+            .catch((error) => {
+                console.error('Error fetching kavlings:', error);
+            });
+    }
+
+    // Panggil fungsi getKavlingsByLocation saat lokasi berubah
+    const lokasiSelect = document.getElementById('lokasi');
+    lokasiSelect.addEventListener('change', getKavlingsByLocation);
+</script>
+@endpush
