@@ -80,12 +80,9 @@ Route::resource('/admin/data', DataController::class)->middleware('checkRole:adm
 Route::get('/admin/foto', [FotoController::class, 'index'])->name('foto.index');
 Route::get('/admin/foto/filter', [FotoController::class, 'filter'])->name('foto.filter');
 Route::resource('/admin/foto', FotoController::class)->except(['index', 'filter']);
-<<<<<<< HEAD
 Route::resource('/admin/legalitas', LegalitasController::class)->middleware('checkRole:admin');
-=======
 Route::get('/get-kavlings', [FotoController::class, 'getKavlingsByLocation'])->name('get-kavlings');
 
->>>>>>> 2427632f6903aadc2dbaebbfaf62e49b6b494143
 
 // Route::get('/materi/{id}', [DashboardMateriController::class, 'indexMateri']);
 
