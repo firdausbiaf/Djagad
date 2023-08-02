@@ -73,6 +73,13 @@
               <span class="menu-title">Data</span>
             </a>
           </li>
+          <li class="nav-item nav-category">Legalitas</li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/legalitas">
+              <i class="menu-icon mdi mdi-layers-outline"></i>
+              <span class="menu-title">Legalitas</span>
+            </a>
+          </li>
         @endif
       @endauth
       <li class="nav-item nav-category">Foto</li>
