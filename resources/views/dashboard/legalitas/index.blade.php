@@ -29,17 +29,17 @@
                 <td>{{ $legal->data->kavling }}</td>
                 <td>       
                     @if( $legal->uang_masuk  == 0)
-                    <form action="/verify" method="get" class="d-inline">
+                    <form action="/uang_masuk_out" method="get" class="d-inline">
                     @csrf
-                    <input type="hidden" name="id" value="{{ $u->id }}">
-                    <button type="submit" class="badge bg-warning border-0" >OUT</button>
+                    <input type="hidden" name="id" value="{{ $legal->id }}">
+                    <button type="submit" class="badge bg-warning border-0" ><span>&#10005;</span></button>
                     </form>
 
                     @else
-                    <form action="/block" method="get" class="d-inline">
+                    <form action="/uang_masuk_in" method="get" class="d-inline">
                     @csrf
-                    <input type="hidden" name="id" value="{{ $u->id }}">
-                    <button type="submit" class="badge bg-success border-0" >IN</button>
+                    <input type="hidden" name="id" value="{{ $legal->id }}">
+                    <button type="submit" class="badge bg-success border-0" ><span>&#10003;</span></button>
                     </form>
 
                     @endif          
@@ -47,17 +47,17 @@
                 <td>{{ $legal->tgl_masuk }}</td>
                 <td>       
                     @if( $legal->uang_keluar == 0)
-                    <form action="/verify" method="get" class="d-inline">
+                    <form action="/uang_keluar_out" method="get" class="d-inline">
                     @csrf
-                    <input type="hidden" name="id" value="{{ $u->id }}">
-                    <button type="submit" class="badge bg-warning border-0" >OUT</button>
+                    <input type="hidden" name="id" value="{{ $legal->id }}">
+                    <button type="submit" class="badge bg-warning border-0" ><span>&#10005;</span></button>
                     </form>
 
                     @else
-                    <form action="/block" method="get" class="d-inline">
+                    <form action="/uang_keluar_in" method="get" class="d-inline">
                     @csrf
-                    <input type="hidden" name="id" value="{{ $u->id }}">
-                    <button type="submit" class="badge bg-success border-0" >IN</button>
+                    <input type="hidden" name="id" value="{{ $legal->id }}">
+                    <button type="submit" class="badge bg-success border-0" ><span>&#10003;</span></button>
                     </form>
 
                     @endif          

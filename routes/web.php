@@ -61,6 +61,14 @@ Route::get('/verify', [LoginController::class, 'verify']);
 
 Route::get('/block', [LoginController::class, 'block']);
 
+Route::get('/uang_masuk_in', [LegalitasController::class, 'uang_masuk_in']);
+
+Route::get('/uang_masuk_out', [LegalitasController::class, 'uang_masuk_out']);
+
+Route::get('/uang_keluar_in', [LegalitasController::class, 'uang_keluar_in']);
+
+Route::get('/uang_keluar_out', [LegalitasController::class, 'uang_keluar_out']);
+
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 
 Route::post('/register', [RegisterController::class, 'store']);
