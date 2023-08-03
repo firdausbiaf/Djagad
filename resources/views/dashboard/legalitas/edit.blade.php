@@ -12,7 +12,7 @@
         @csrf
         <div class="mb-3">
             <label for="nomor" class="form-label">Nomor</label>
-            <input type="text" class="form-control @error('kavling') is-invalid @enderror" id="nomor" name="nomor" value="{{ old('nomor', $legalitas->nomor) }}" required>
+            <input type="text" class="form-control @error('nomor') is-invalid @enderror" id="nomor" name="nomor" value="{{ old('nomor', $legalitas->nomor) }}" required>
             @error('nomor')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -24,7 +24,7 @@
             <select class="form-select @error('data_id') is-invalid @enderror" name="data_id" id="data_id" required>
                 <option value="">Pilih Kavling</option>
                 @foreach ($data as $id => $kavling)
-                    <option value="{{ $id }}" {{ old('data_id') == $id ? 'selected' : '' }}>
+                    <option value="{{ $id }}" {{ (old('data_id', $legalitas->data_id) == $id) ? 'selected' : '' }}>
                         {{ $kavling }}
                     </option>
                 @endforeach
