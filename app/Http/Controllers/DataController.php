@@ -6,6 +6,13 @@ use App\Models\Data;
 use App\Http\Requests\StoreDataRequest;
 use App\Http\Requests\UpdateDataRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
+// use App\Http\Controllers\DataImport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\DataImport;
+
+
+
 
 class DataController extends Controller
 {
@@ -50,7 +57,7 @@ class DataController extends Controller
             'uang_masuk' => 'required|integer',
             'cicilan' => 'required|integer',
             'progres' => 'required|integer',
-            
+
         ]);
 
         $data = new Data;
@@ -64,7 +71,7 @@ class DataController extends Controller
         $data->uang_masuk = $request->get('uang_masuk');
         $data->cicilan = $request->get('cicilan');
         $data->progres = $request->get('progres');
-        
+
 
         $data->save();
         return redirect()->route('data.index')->with('success', 'Data baru telah ditambahkan');
@@ -136,7 +143,7 @@ class DataController extends Controller
         $data->uang_masuk = $request->get('uang_masuk');
         $data->progres = $request->get('progres');
         $data->cicilan = $request->get('cicilan');
-        
+
         $data->save();
 
         return redirect()->route('data.index')->with('success', 'Data berhasil diedit');
@@ -154,5 +161,24 @@ class DataController extends Controller
         $data->delete();
 
         return redirect()->route('data.index')->with('success', 'Data berhasil dihapus');
+    }
+
+    public function importExcel(Request $request)
+    {
+        $data = $request->file('file');
+        $namafile = $data->getClientOriginalName();
+        $data->move('data', $namafile);
+
+        Excel::import(new DataImport, \public_path('/data/' . $namafile));
+        return \redirect()->back();
+
+        // $request->validate([
+        //     'file' => 'required|mimes:xlsx,csv,ods'
+        // ]);
+
+        // // Lakukan import data dari file Excel
+        // $data = Excel::import(new DataImport, $request->file('file'));
+
+        // return redirect()->route('data.index')->with('success', 'Data berhasil diimpor dari Excel.');
     }
 }
