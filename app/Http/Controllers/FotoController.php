@@ -17,49 +17,30 @@ class FotoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-{
-    $search = $request->input('search');
-    $selectedLokasi = $request->input('lokasi');
-    $selectedKavling = $request->input('kavling');
-
-    // Query dasar untuk data foto
-    $query = Foto::query();
-
-    // Perform the search based on 'search' parameter (mirip seperti sebelumnya)
-    if ($search) {
-        $query->where(function ($innerQuery) use ($search) {
-            $innerQuery->where('id', 'like', '%' . $search . '%')
-                ->orWhereHas('data', function ($dataQuery) use ($search) {
-                    $dataQuery->where('kavling', 'like', '%' . $search . '%');
-                });
-        });
+    {
+        // Ambil semua data lokasi untuk membuat tab-tab
+        $lokasiOptions = Data::pluck('lokasi')->unique();
+        
+        // Inisialisasi array untuk menyimpan foto-foto berdasarkan lokasi dan kavling
+        $fotosByLokasi = [];
+        
+        foreach ($lokasiOptions as $lokasi) {
+            // Ambil daftar kavling berdasarkan lokasi
+            $kavlingOptions = Data::where('lokasi', $lokasi)->pluck('kavling')->toArray();
+        
+            // Ambil data foto berdasarkan lokasi dan kavling yang sesuai
+            $fotos = Foto::whereHas('data', function ($dataQuery) use ($lokasi) {
+                $dataQuery->where('lokasi', $lokasi);
+            })->orderBy('id', 'asc')->get();
+        
+            $fotosByLokasi[$lokasi] = [
+                'kavlingOptions' => $kavlingOptions,
+                'fotos' => $fotos,
+            ];
+        }
+        
+        return view('dashboard.foto.index', compact('fotosByLokasi'));
     }
-
-    // Perform the filter based on 'lokasi' parameter
-    if ($selectedLokasi) {
-        $query->whereHas('data', function ($dataQuery) use ($selectedLokasi) {
-            $dataQuery->where('lokasi', $selectedLokasi);
-        });
-    }
-
-    // Perform the filter based on 'kavling' parameter
-    if ($selectedKavling) {
-        $query->whereHas('data', function ($dataQuery) use ($selectedKavling) {
-            $dataQuery->where('kavling', $selectedKavling);
-        });
-    }
-
-    // Get the data for the filter dropdown
-    $lokasiOptions = Data::pluck('lokasi')->unique();
-    $kavlingOptions = Data::when($selectedLokasi, function ($query, $selectedLokasi) {
-        return $query->where('lokasi', $selectedLokasi)->pluck('kavling');
-    })->pluck('kavling');
-
-    // Get the paginated results
-    $fotos = $query->orderBy('id', 'asc')->paginate(10);
-
-    return view('dashboard.foto.index', compact('fotos', 'lokasiOptions', 'kavlingOptions', 'selectedLokasi', 'selectedKavling', 'search'));
-}
 
 
     /**
@@ -246,8 +227,10 @@ class FotoController extends Controller
     public function getKavlingsByLocation(Request $request)
     {
         $lokasi = $request->input('lokasi');
-        $kavlings = Data::where('lokasi', $lokasi)->pluck('kavling', 'kavling');
-
-        return Response::json($kavlings);
+        $kavlings = Data::where('lokasi', $lokasi)->pluck('kavling');
+        
+        // Perbaiki cara mengirimkan data kavling dalam format JSON
+        return response()->json($kavlings);
     }
+    
 }

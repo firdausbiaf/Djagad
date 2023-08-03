@@ -28,6 +28,21 @@
 
 {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> --}}
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> 
+
+      <!-- Tambahkan kode jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Tambahkan kode Bootstrap JS -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Tautkan File Bootstrap CSS (Pastikan sesuaikan jalur file jika diperlukan) -->
+    <link href="{{ asset('path/to/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Tautkan File jQuery (Pastikan sesuaikan jalur file jika diperlukan) -->
+    <script src="{{ asset('path/to/jquery.min.js') }}"></script>
+
+    <!-- Tautkan File Bootstrap JS (Pastikan sesuaikan jalur file jika diperlukan) -->
+    <script src="{{ asset('path/to/bootstrap.min.js') }}"></script>
+
 </head>
 <body>
   <div class="container-scroller">
@@ -258,6 +273,7 @@
   <script src="{{ asset('js/dashboard.js') }}"></script>
   <script src="{{ asset('js/Chart.roundedBarCharts.js') }}"></script>
   <!-- End custom js for this page--/>
+
 </body>
 
 </html>
