@@ -11,6 +11,8 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item"><b>No. : </b>{{ $legalitas->id }}</li>
                     <li class="list-group-item"><b>Nomor : </b>{{ $legalitas->nomor }}</li>
+                    <li class="list-group-item"><b>Tanggal Masuk : </b>{{ $legalitas->tgl_masuk }}</li>
+                    <li class="list-group-item"><b>Tanggal Keluar : </b>{{ $legalitas->tgl_keluar }}</li>
                     <li class="list-group-item"><b>Uang Masuk : </b>{{ $legalitas->uang_masuk }}</li>
                 </ul>
             </div>

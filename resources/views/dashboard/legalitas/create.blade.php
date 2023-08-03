@@ -1,8 +1,21 @@
 @extends('layout.dashboard.main')
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.12.0/css/bootstrap-datepicker.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.12.0/js/bootstrap-datepicker.min.js"></script>
+
 @section('content')
 <div class="col-lg-8 mx-5 mt-4">
     <h2>Tambah Data Legalitas Baru</h2>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form action="{{ route('legalitas.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
@@ -31,9 +44,9 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label for="tanggal_masuk" class="form-label">Tanggal Masuk</label>
-            <input type="text" class="form-control datepicker @error('tanggal_masuk') is-invalid @enderror" name="tanggal_masuk" id="tanggal_masuk" required>
-            @error('tanggal_masuk')
+            <label for="tgl_masuk" class="form-label">Tanggal Masuk</label>
+            <input type="date" class="form-control datepicker @error('tgl_masuk') is-invalid @enderror" name="tgl_masuk" id="tgl_masuk" required>
+            @error('tgl_masuk')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
@@ -41,9 +54,9 @@
         </div>
 
         <div class="mb-3">
-            <label for="tanggal_keluar" class="form-label">Tanggal Keluar</label>
-            <input type="text" class="form-control datepicker @error('tanggal_keluar') is-invalid @enderror" name="tanggal_keluar" id="tanggal_keluar" required>
-            @error('tanggal_keluar')
+            <label for="tgl_keluar" class="form-label">Tanggal Keluar</label>
+            <input type="date" class="form-control datepicker @error('tgl_keluar') is-invalid @enderror" name="tgl_keluar" id="tgl_keluar" required>
+            @error('tgl_keluar')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
@@ -54,21 +67,9 @@
 </div>
 
 <script>
-    // Assuming you have already added the necessary Bootstrap and Bootstrap Datepicker JS files
-
-    // Initialize the datepicker for the entry date field
+    // Initialize the datepickers
     $(document).ready(function() {
-        $('#tanggal_masuk').datepicker({
-            format: 'yyyy-mm-dd', // Customize the date format if needed
-            autoclose: true,
-            todayHighlight: true,
-            // You can add more options here based on your requirements
-        });
-    });
-
-    // Initialize the datepicker for the exit date field
-    $(document).ready(function() {
-        $('#tanggal_keluar').datepicker({
+        $('.datepicker').datepicker({
             format: 'yyyy-mm-dd', // Customize the date format if needed
             autoclose: true,
             todayHighlight: true,

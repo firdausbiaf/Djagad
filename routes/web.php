@@ -61,6 +61,14 @@ Route::get('/verify', [LoginController::class, 'verify']);
 
 Route::get('/block', [LoginController::class, 'block']);
 
+Route::get('/uang_masuk_in', [LegalitasController::class, 'uang_masuk_in']);
+
+Route::get('/uang_masuk_out', [LegalitasController::class, 'uang_masuk_out']);
+
+Route::get('/uang_keluar_in', [LegalitasController::class, 'uang_keluar_in']);
+
+Route::get('/uang_keluar_out', [LegalitasController::class, 'uang_keluar_out']);
+
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 
 Route::post('/register', [RegisterController::class, 'store']);
@@ -80,9 +88,13 @@ Route::resource('/admin/data', DataController::class)->middleware('checkRole:adm
 Route::get('/admin/foto', [FotoController::class, 'index'])->name('foto.index');
 Route::get('/admin/foto/filter', [FotoController::class, 'filter'])->name('foto.filter');
 Route::resource('/admin/foto', FotoController::class)->except(['index', 'filter']);
+
+Route::post('/importexcel', [DataController::class, 'importExcel'])->name('import.excel');
+
 Route::resource('/admin/legalitas', LegalitasController::class)->middleware('checkRole:admin');
 Route::get('/get-kavlings', [FotoController::class, 'getKavlingsByLocation'])->name('get-kavlings');
 Route::get('/api/getKavlingsByLocation', [FotoController::class, 'getKavlingsByLocation']);
+
 
 
 

@@ -10,7 +10,7 @@ class Legalitas extends Model
     use HasFactory;
 
     protected $table = 'legalitas';
-    protected $primaryKey='id';
+
     protected $fillable = [
         'data_id',
         'nomor',
