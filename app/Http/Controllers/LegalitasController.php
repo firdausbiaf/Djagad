@@ -87,7 +87,7 @@ class LegalitasController extends Controller
     public function edit($id)
     {
         $legalitas = Legalitas::where('id', $id)->first();
-        $data = Data::pluck('kavling', 'id');
+        $data = Data::pluck('kavling');
         return view('dashboard.legalitas.edit', compact('legalitas', 'data'));
     }
 

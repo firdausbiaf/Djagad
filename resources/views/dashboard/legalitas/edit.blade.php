@@ -37,7 +37,7 @@
         </div>
         <div class="mb-3">
             <label for="tgl_masuk" class="form-label">Tanggal Masuk</label>
-            <input type="date" class="form-control datepicker @error('tgl_masuk') is-invalid @enderror" name="tgl_masuk" id="tgl_masuk" required>
+            <input type="date" class="form-control datepicker @error('tgl_masuk') is-invalid @enderror" name="tgl_masuk" id="tgl_masuk" value="{{ old('tgl_masuk', $legalitas->tgl_masuk) }}" required>
             @error('tgl_masuk')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -47,7 +47,7 @@
 
         <div class="mb-3">
             <label for="tgl_keluar" class="form-label">Tanggal Keluar</label>
-            <input type="date" class="form-control datepicker @error('tgl_keluar') is-invalid @enderror" name="tgl_keluar" id="tgl_keluar" required>
+            <input type="date" class="form-control datepicker @error('tgl_keluar') is-invalid @enderror" name="tgl_keluar" id="tgl_keluar" value="{{ old('tgl_keluar', $legalitas->tgl_keluar) }}" required>
             @error('tgl_keluar')
             <div class="invalid-feedback">
                 {{ $message }}

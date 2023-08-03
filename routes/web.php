@@ -93,7 +93,6 @@ Route::post('/importexcel', [DataController::class, 'importExcel'])->name('impor
 
 Route::resource('/admin/legalitas', LegalitasController::class)->middleware('checkRole:admin');
 Route::get('/get-kavlings', [FotoController::class, 'getKavlingsByLocation'])->name('get-kavlings');
-Route::get('/legalitas/{id}/edit', 'LegalitasController@edit')->name('legalitas.edit');
 
 
 
