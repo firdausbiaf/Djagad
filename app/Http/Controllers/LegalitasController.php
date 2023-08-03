@@ -45,22 +45,25 @@ class LegalitasController extends Controller
         $request->validate([
             'data_id' => 'required',
             'nomor' => 'required',
-            'uang_masuk' => 'required|integer',
+            // 'uang_masuk' => 'required|integer',
             'tgl_masuk' => 'required|date',
-            'uang_keluar' => 'required|integer',
+            // 'uang_keluar' => 'required|integer',
             'tgl_keluar' => 'required|date',
         ]);
 
         $legalitas = new Legalitas();
         $legalitas->data_id = $request->get('data_id');
         $legalitas->nomor = $request->get('nomor');
-        $legalitas->uang_masuk = $request->get('uang_masuk');
+        // $legalitas->uang_masuk = $request->get('uang_masuk');
         $legalitas->tgl_masuk = $request->get('tgl_masuk');
-        $legalitas->uang_keluar = $request->get('uang_keluar');
+        // $legalitas->uang_keluar = $request->get('uang_keluar');
         $legalitas->tgl_keluar = $request->get('tgl_keluar');
 
-        $legalitas->save();
-        return redirect()->route('legalitas.index')->with('success', 'Data legalitas baru telah ditambahkan');
+        if ($legalitas->save()) {
+            return redirect()->route('legalitas.index')->with('success', 'Data legalitas baru telah ditambahkan');
+        } else {
+            return redirect()->back()->with('error', 'Gagal menyimpan data legalitas. Silakan coba lagi.');
+        }
     }
 
     /**
@@ -84,7 +87,8 @@ class LegalitasController extends Controller
     public function edit($id)
     {
         $legalitas = Legalitas::where('id', $id)->first();
-        return view('dashboard.legalitas.edit', compact('legalitas'));
+        $data = Data::pluck('kavling', 'id');
+        return view('dashboard.legalitas.edit', compact('legalitas', 'data'));
     }
 
     /**
@@ -99,23 +103,23 @@ class LegalitasController extends Controller
         $request->validate([
             'data_id' => 'required',
             'nomor' => 'required',
-            'uang_masuk' => 'required|integer',
+            // 'uang_masuk' => 'required|integer',
             'tgl_masuk' => 'required|date',
-            'uang_keluar' => 'required|integer',
+            // 'uang_keluar' => 'required|integer',
             'tgl_keluar' => 'required|date',
         ]);
 
         $legalitas = Legalitas::where('id', $id)->first();
         $legalitas->data_id = $request->get('data_id');
         $legalitas->nomor = $request->get('nomor');
-        $legalitas->uang_masuk = $request->get('uang_masuk');
+        // $legalitas->uang_masuk = $request->get('uang_masuk');
         $legalitas->tgl_masuk = $request->get('tgl_masuk');
-        $legalitas->uang_keluar = $request->get('uang_keluar');
+        // $legalitas->uang_keluar = $request->get('uang_keluar');
         $legalitas->tgl_keluar = $request->get('tgl_keluar');
-        
+
         $legalitas->save();
 
-        return redirect()->route('legalitas.index')->with('success', 'Data legalitas berhasil diedit'); 
+        return redirect()->route('legalitas.index')->with('success', 'Data legalitas berhasil diedit');
     }
 
     /**
@@ -132,10 +136,11 @@ class LegalitasController extends Controller
         return redirect()->route('legalitas.index')->with('success', 'Data legalitas berhasil dihapus');
     }
 
-    public function uang_masuk_in(Request $request, Legalitas $legalitas){
-      
+    public function uang_masuk_in(Request $request, Legalitas $legalitas)
+    {
+
         $legalitas = Legalitas::findOrFail($request->id);
-        if($legalitas){
+        if ($legalitas) {
             $legalitas->uang_masuk = '0';
             $legalitas->save();
         }
@@ -143,20 +148,22 @@ class LegalitasController extends Controller
         return redirect('/admin/legalitas');
     }
 
-    public function uang_masuk_out(Request $request){
-       
+    public function uang_masuk_out(Request $request)
+    {
+
         $legalitas = Legalitas::findOrFail($request->id);
-        if($legalitas){
+        if ($legalitas) {
             $legalitas->uang_masuk = '1';
             $legalitas->save();
         }
 
         return redirect('/admin/legalitas');
     }
-    public function uang_keluar_in(Request $request, Legalitas $legalitas){
-      
+    public function uang_keluar_in(Request $request, Legalitas $legalitas)
+    {
+
         $legalitas = Legalitas::findOrFail($request->id);
-        if($legalitas){
+        if ($legalitas) {
             $legalitas->uang_keluar = '0';
             $legalitas->save();
         }
@@ -164,10 +171,11 @@ class LegalitasController extends Controller
         return redirect('/admin/legalitas');
     }
 
-    public function uang_keluar_out(Request $request){
-       
+    public function uang_keluar_out(Request $request)
+    {
+
         $legalitas = Legalitas::findOrFail($request->id);
-        if($legalitas){
+        if ($legalitas) {
             $legalitas->uang_keluar = '1';
             $legalitas->save();
         }

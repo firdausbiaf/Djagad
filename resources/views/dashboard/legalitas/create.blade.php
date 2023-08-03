@@ -7,6 +7,15 @@
 @section('content')
 <div class="col-lg-8 mx-5 mt-4">
     <h2>Tambah Data Legalitas Baru</h2>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form action="{{ route('legalitas.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
