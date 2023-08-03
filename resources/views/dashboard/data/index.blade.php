@@ -41,8 +41,8 @@
                 <th scope="col">Nama User</th>
                 <th scope="col">Telepon</th>
                 <th scope="col">Alamat</th>
-                <th scope="col">Kavling</th>
                 <th scope="col">Lokasi</th>
+                <th scope="col">Kavling</th>
                 <th scope="col">Tipe</th>
                 <th scope="col">SPK</th>
                 <th scope="col">Harga Deal</th>
@@ -59,8 +59,8 @@
                 <td>{{ $item->user->name }}</td>
                 <td>{{ $item->user->phone }}</td>
                 <td>{{ $item->alamat }}</td>
-                <td>{{ $item->kavling }}</td>
                 <td>{{ $item->lokasi }}</td>
+                <td>{{ $item->kavling }}</td>
                 <td>{{ $item->tipe }}</td>
                 <td>{{ $item->spk }}</td>
                 <td>{{ $item->harga_deal }}</td>

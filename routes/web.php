@@ -22,6 +22,7 @@ use App\Http\Controllers\DashboardTugasController;
 use App\Http\Controllers\DataController;
 use App\Http\Controllers\FotoController;
 use App\Http\Controllers\IndexUserController;
+use App\Http\Controllers\LegalitasController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\TugasController;
 
@@ -79,7 +80,12 @@ Route::resource('/admin/data', DataController::class)->middleware('checkRole:adm
 Route::get('/admin/foto', [FotoController::class, 'index'])->name('foto.index');
 Route::get('/admin/foto/filter', [FotoController::class, 'filter'])->name('foto.filter');
 Route::resource('/admin/foto', FotoController::class)->except(['index', 'filter']);
+
 Route::post('/importexcel', [DataController::class, 'importExcel'])->name('import.excel');
+
+Route::resource('/admin/legalitas', LegalitasController::class)->middleware('checkRole:admin');
+Route::get('/get-kavlings', [FotoController::class, 'getKavlingsByLocation'])->name('get-kavlings');
+
 
 
 // Route::get('/materi/{id}', [DashboardMateriController::class, 'indexMateri']);

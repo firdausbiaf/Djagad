@@ -6,16 +6,25 @@
     <form action="{{ route('foto.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
-            <label for="data_id" class="form-label">Kavling</label>
-            <select class="form-select @error('data_id') is-invalid @enderror" name="data_id" id="data_id" required>
-                <option value="">Pilih Kavling</option>
-                @foreach ($data as $id => $kavling)
-                    <option value="{{ $id }}" {{ old('data_id') == $id ? 'selected' : '' }}>
-                        {{ $kavling }}
-                    </option>
+            <label for="lokasi" class="form-label">Lokasi</label>
+            <select class="form-select @error('lokasi') is-invalid @enderror" name="lokasi" id="lokasi" required>
+                <option value="">Pilih Lokasi</option>
+                @foreach ($lokasiOptions as $lokasi)
+                    <option value="{{ $lokasi }}">{{ $lokasi }}</option>
                 @endforeach
             </select>
-            @error('data_id')
+            @error('lokasi')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label for="kavling" class="form-label">Kavling</label>
+            <select class="form-select @error('kavling') is-invalid @enderror" name="kavling" id="kavling" required>
+                <option value="">Pilih Kavling</option>
+            </select>
+            @error('kavling')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
@@ -31,12 +40,35 @@
                     {{ $message }}
                 </div>
             @enderror
+
+            <!-- Tambahkan elemen img-preview di sini -->
+            <img class="img-preview mt-2" style="max-width: 200px; max-height: 200px;" src="" alt="Preview">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
 
 <script>
+    const kavlingOptions = {!! json_encode($kavlingOptions) !!};
+
+    document.getElementById('lokasi').addEventListener('change', function() {
+        const selectedLokasi = this.value;
+        const kavlingSelect = document.getElementById('kavling');
+
+        // Kosongkan pilihan kavling terlebih dahulu
+        kavlingSelect.innerHTML = '<option value="">Pilih Kavling</option>';
+
+        // Tambahkan pilihan kavling sesuai dengan lokasi yang dipilih
+        if (selectedLokasi in kavlingOptions) {
+            kavlingOptions[selectedLokasi].forEach(function(kavling) {
+                const option = document.createElement('option');
+                option.value = kavling;
+                option.text = kavling;
+                kavlingSelect.appendChild(option);
+            });
+        }
+    });
+
     function previewImage() {
         const preview = document.querySelector('.img-preview');
         const fileInput = document.querySelector('#photo');
