@@ -19,6 +19,7 @@
                 <th scope="col">Tanggal Masuk</th>
                 <th scope="col">Uang Keluar</th>
                 <th scope="col">Tanggal Keluar</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
