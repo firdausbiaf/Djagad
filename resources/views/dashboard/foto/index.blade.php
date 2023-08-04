@@ -1,10 +1,6 @@
 @extends('layout.dashboard.main')
 
 @section('content')
-<script>
-    const kavlingDataURL = '/api/getKavlingsByLocation';
-</script>
-
 <div class="table-responsive col-lg-10 mx-5 mt-4">
     <div class="row mb-3">
         <div class="col-md-6">
@@ -13,36 +9,19 @@
         </div>
     </div>
 
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-        @foreach ($fotosByLokasi as $lokasi => $data)
+    <!-- Nav tabs for lokasi -->
+    <ul class="nav nav-tabs" id="lokasiTab" role="tablist">
+        @foreach ($lokasiList as $lokasi)
             <li class="nav-item" role="presentation">
-                <a class="nav-link @if($loop->first) active @endif" id="{{ $lokasi }}-tab" data-toggle="tab" href="#lokasi-{{ $lokasi }}" role="tab" aria-controls="lokasi-{{ $lokasi }}" aria-selected="true">{{ $lokasi }}</a>
+                <a class="nav-link @if($loop->first) active @endif" id="{{ $lokasi }}-tab" data-lokasi="{{ $lokasi }}" data-toggle="tab" href="#lokasi-{{ $lokasi }}" role="tab" aria-controls="lokasi-{{ $lokasi }}" aria-selected="@if($loop->first) true @else false @endif">{{ $lokasi }}</a>
             </li>
         @endforeach
     </ul>
 
-    <div class="tab-content" id="myTabContent">
-        @foreach ($fotosByLokasi as $lokasi => $data)
-            <div class="tab-pane fade @if($loop->first) show active @endif" id="lokasi-{{ $lokasi }}" role="tabpanel" aria-labelledby="{{ $lokasi }}-tab">
-                <div class="row mb-3">
-                    <div class="col-md-6 text-right">
-                        <!-- Filter Kavling Select Option -->
-                        <form action="{{ route('foto.filter') }}" method="GET" class="form-inline">
-                            <div class="form-group mb-2">
-                                <label for="kavling-{{ $lokasi }}" class="mr-2">Filter Kavling:</label>
-                                <select name="kavling" id="kavling-{{ $lokasi }}" class="form-control">
-                                    <option value="">Semua Kavling</option>
-                                    @foreach ($data['kavlingOptions'] as $kavling)
-                                        <option value="{{ $kavling }}">{{ $kavling }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <input type="hidden" name="lokasi" value="{{ $lokasi }}">
-                            <button type="submit" class="btn btn-primary mb-2 ml-2">Filter</button><br>
-                        </form>
-                    </div>
-                </div>
-
+    <!-- Tab panes for lokasi -->
+    <div class="tab-content" id="lokasiTabContent">
+        @foreach ($lokasiList as $lokasi)
+            <div class="tab-pane fade @if($loop->first) show active @endif" id="lokasi-{{ $lokasi }}" role="tabpanel" data-lokasi="{{ $lokasi }}">
                 <table class="table table-striped table-sm">
                     <thead>
                         <tr>
@@ -53,11 +32,12 @@
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
-                    <tbody id="table-data-{{ $lokasi }}">
-                        @foreach ($data['fotos'] as $foto)
-                            <tr>
+                    <tbody>
+                        <!-- Tampilkan data foto sesuai dengan lokasi -->
+                        @foreach ($fotosByLokasi[$lokasi] as $foto)
+                            <tr class="table-row" data-lokasi="{{ $lokasi }}">
                                 <td>{{ $foto->id }}</td>
-                                <td>{{ $lokasi }}</td>
+                                <td>{{ $foto->data->lokasi }}</td>
                                 <td>{{ $foto->data->kavling }}</td>
                                 <td>
                                     @if ($foto->photo)
@@ -77,6 +57,11 @@
                                 </td>
                             </tr>
                         @endforeach
+                        @if(count($fotosByLokasi[$lokasi]) === 0)
+                            <tr>
+                                <td colspan="5">Tidak ada data foto untuk lokasi {{ $lokasi }}</td>
+                            </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>
@@ -85,91 +70,33 @@
 </div>
 @endsection
 
-@push('scripts')
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+@section('scripts')
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 <script>
-    $(document).ready(function() {
-        // Fungsi untuk menampilkan foto berdasarkan kavling yang dipilih
-        function showFotoByKavling(kavlingId, lokasi) {
-            // Dapatkan konten HTML dari tabel berdasarkan lokasi
-            const tableData = $('#table-data-' + lokasi);
+$(document).ready(function() {
+    // Sembunyikan semua baris tabel dengan class .table-row kecuali yang pertama
+    $('.tab-pane').not(':first').removeClass('show active').hide();
 
-            // Sembunyikan semua baris di tabel
-            tableData.find('tr').hide();
+    // Saat halaman pertama kali dimuat, tampilkan data dari tab yang aktif saat itu
+    const activeTab = $('#lokasiTab .nav-link.active');
+    const lokasiId = activeTab.data('lokasi');
+    $(`.tab-pane[data-lokasi="${lokasiId}"]`).addClass('show active').show();
 
-            // Tampilkan foto yang sesuai dengan kavlingId yang dipilih
-            tableData.find('tr[data-kavling="' + kavlingId + '"]').show();
-        }
+    // Tangani peristiwa klik pada tab lokasi
+    $('#lokasiTab .nav-link').on('click', function(e) {
+        e.preventDefault();
 
-        // Fungsi untuk mengambil data kavling berdasarkan lokasi
-        function getKavlingsByLocation(locationId) {
-            // Dapatkan data kavling berdasarkan lokasi dari server
-            $.ajax({
-                url: kavlingDataURL + '?lokasi=' + locationId,
-                method: 'GET',
-                success: function(response) {
-                    // Kosongkan pilihan kavling yang ada saat ini
-                    $('#kavling-' + locationId).empty();
+        // Dapatkan lokasi yang dipilih dari data-lokasi atribut
+        const lokasiId = $(this).data('lokasi');
 
-                    // Tambahkan pilihan kavling yang sesuai
-                    response.forEach(function(kavling) {
-                        $('#kavling-' + locationId).append(
-                            $('<option></option>').val(kavling).html(kavling)
-                        );
-                    });
+        // Sembunyikan semua baris tabel dengan class .table-row
+        $('.tab-pane').removeClass('show active').hide();
 
-                    // Setelah data kavling diperbarui, panggil fungsi untuk menampilkan foto berdasarkan kavling yang dipilih
-                    const kavlingId = $('#kavling-' + locationId).val();
-                    showFotoByKavling(kavlingId, locationId);
-                },
-                error: function(error) {
-                    console.error('Error fetching data:', error);
-                }
-            });
-        }
-
-        // Saat halaman dimuat, tampilkan foto dan data kavling berdasarkan tab pertama yang aktif
-        const firstLokasiTab = $('#myTab .nav-link.active');
-        const firstLokasiId = firstLokasiTab.attr('id').replace('-tab', '');
-        const firstKavlingId = $('#kavling-' + firstLokasiId + ' option:selected').val();
-        showFotoByKavling(firstKavlingId, firstLokasiId);
-        getKavlingsByLocation(firstLokasiId);
-
-        // Tangani peristiwa klik pada tab lokasi
-        $('#myTab .nav-link').on('click', function(e) {
-            e.preventDefault();
-
-            // Hapus kelas 'active' dari semua tab lokasi
-            $('#myTab .nav-link').removeClass('active');
-
-            // Tambahkan kelas 'active' pada tab lokasi yang diklik
-            $(this).addClass('active');
-
-            // Ambil lokasiId dari atribut id
-            const lokasiId = $(this).attr('id').replace('-tab', '');
-
-            // Ambil kavlingId yang saat ini terpilih pada dropdown
-            const kavlingId = $('#kavling-' + lokasiId + ' option:selected').val();
-
-            // Tampilkan foto dan data kavling berdasarkan tab dan dropdown yang dipilih
-            showFotoByKavling(kavlingId, lokasiId);
-            getKavlingsByLocation(lokasiId);
-        });
-
-        // Tangani peristiwa klik pada dropdown kavling
-        $('select[id^="kavling-"]').on('change', function() {
-            // Ambil kavlingId yang dipilih pada dropdown
-            const kavlingId = $(this).val();
-
-            // Ambil lokasiId dari atribut id dropdown
-            const lokasiId = $(this).attr('id').replace('-kavling', '');
-
-            // Tampilkan foto berdasarkan kavling yang dipilih
-            showFotoByKavling(kavlingId, lokasiId);
-        });
+        // Tampilkan baris tabel yang sesuai dengan lokasiId yang dipilih pada tab yang aktif
+        $(`.tab-pane[data-lokasi="${lokasiId}"]`).addClass('show active').show();
     });
+});
 </script>
-@include('layout.bar.scripts')
-@endpush
+@endsection
