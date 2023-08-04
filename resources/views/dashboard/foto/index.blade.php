@@ -22,6 +22,17 @@
     <div class="tab-content" id="lokasiTabContent">
         @foreach ($lokasiList as $lokasi)
             <div class="tab-pane fade @if($loop->first) show active @endif" id="lokasi-{{ $lokasi }}" role="tabpanel" data-lokasi="{{ $lokasi }}">
+                <!-- Tambahkan elemen select untuk filter kavling -->
+                <div class="mb-3">
+                    <label for="kavlingSelect-{{ $lokasi }}" class="form-label">Filter Kavling</label>
+                    <select class="form-select kavling-filter" data-lokasi="{{ $lokasi }}">
+                        <option value="">Semua Kavling</option>
+                        @foreach ($fotosByLokasi[$lokasi] as $foto)
+                            <option value="{{ $foto->data->kavling }}">{{ $foto->data->kavling }}</option>
+                        @endforeach
+                    </select>                    
+                </div>
+                
                 <table class="table table-striped table-sm">
                     <thead>
                         <tr>
@@ -35,7 +46,7 @@
                     <tbody>
                         <!-- Tampilkan data foto sesuai dengan lokasi -->
                         @foreach ($fotosByLokasi[$lokasi] as $foto)
-                            <tr class="table-row" data-lokasi="{{ $lokasi }}">
+                            <tr class="table-row" data-lokasi="{{ $lokasi }}" data-kavling="{{ $foto->data->kavling }}">
                                 <td>{{ $foto->id }}</td>
                                 <td>{{ $foto->data->lokasi }}</td>
                                 <td>{{ $foto->data->kavling }}</td>
@@ -84,7 +95,12 @@ $(document).ready(function() {
     const lokasiId = activeTab.data('lokasi');
     $(`.tab-pane[data-lokasi="${lokasiId}"]`).addClass('show active').show();
 
-    // Tangani peristiwa klik pada tab lokasi
+    // Perbarui pilihan kavling pada elemen select ketika tab pertama kali dimuat
+    const initialActiveTab = $('#lokasiTab .nav-link.active');
+    const initialLokasiId = initialActiveTab.data('lokasi');
+    updateKavlingOptions(initialLokasiId);
+
+    // Tangani peristiwa klik pada tab kavling
     $('#lokasiTab .nav-link').on('click', function(e) {
         e.preventDefault();
 
@@ -96,7 +112,55 @@ $(document).ready(function() {
 
         // Tampilkan baris tabel yang sesuai dengan lokasiId yang dipilih pada tab yang aktif
         $(`.tab-pane[data-lokasi="${lokasiId}"]`).addClass('show active').show();
+
+        // Perbarui pilihan kavling pada elemen select berdasarkan lokasi yang dipilih
+        updateKavlingOptions(lokasiId);
     });
+
+    // Tangani peristiwa perubahan pada elemen select kavling
+    $('select.kavling-filter').on('change', function() {
+        const lokasiId = $(this).data('lokasi');
+        const kavlingFilter = $(this).val();
+        
+        // Perbarui tampilan tabel berdasarkan filter kavling yang dipilih
+        updateTable(lokasiId, kavlingFilter);
+    });
+
+    // Fungsi untuk memperbarui pilihan kavling pada elemen select berdasarkan lokasi yang dipilih
+    function updateKavlingOptions(lokasiId) {
+        const kavlingSelect = $(`.kavling-filter[data-lokasi="${lokasiId}"]`);
+        const tableRows = $(`.tab-pane[data-lokasi="${lokasiId}"] .table-row`);
+
+        // Simpan pilihan kavling yang unik dalam Set
+        const uniqueKavlings = new Set();
+
+        // Tambahkan kavling yang sesuai dengan data lokasi pada tab aktif ke dalam Set
+        tableRows.each(function() {
+            const kavling = $(this).data('kavling').trim(); // Hapus spasi di awal dan akhir
+            uniqueKavlings.add(kavling);
+        });
+
+        // Perbarui pilihan kavling pada elemen select
+        kavlingSelect.empty();
+        kavlingSelect.append($('<option></option>').attr('value', '').text('Semua Kavling'));
+        uniqueKavlings.forEach(function(kavling) {
+            kavlingSelect.append($('<option></option>').attr('value', kavling).text(kavling));
+        });
+    }
+
+    // Fungsi untuk memperbarui tampilan tabel berdasarkan filter kavling yang dipilih
+    function updateTable(lokasiId, kavlingFilter) {
+        const tableRows = $(`.tab-pane[data-lokasi="${lokasiId}"] .table-row`);
+
+        tableRows.each(function() {
+            const kavling = $(this).data('kavling');
+            if (!kavlingFilter || kavlingFilter === kavling || kavlingFilter === 'Semua Kavling') {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    }
 });
 </script>
 @endsection
