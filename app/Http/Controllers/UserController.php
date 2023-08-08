@@ -1,19 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-use App\Models\Category;
-use App\Models\Course;
 use App\Models\Data;
 use App\Models\Foto;
-use App\Models\Transaksi;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
-class IndexController extends Controller
+
+class UserController extends Controller
 {
-
     public function index()
     {
         if (Auth::user() && Auth::user()->role == "member") {
@@ -21,7 +16,7 @@ class IndexController extends Controller
             $kavlings = Data::where('user_id', Auth::id())->pluck('kavling', 'id');
             $foto = Foto::whereIn('data_id', $data->pluck('id'))->latest()->get();
 
-            return view('index', [
+            return view('user', [
                 'data' => $data,
                 'kavlings' => $kavlings,
                 'selectedKavlingId' => null,
@@ -48,7 +43,7 @@ class IndexController extends Controller
                 $foto = Foto::where('data_id', Auth::id())->get();
                 $kavlings = Data::where('user_id', Auth::id())->pluck('kavling', 'id');
 
-                return view('index', [
+                return view('user', [
                     'data' => $data,
                     'foto' => $foto,
                     'kavlings' => $kavlings,
@@ -59,5 +54,4 @@ class IndexController extends Controller
 
         return view('user');
     }
-
 }

@@ -25,6 +25,7 @@ use App\Http\Controllers\IndexUserController;
 use App\Http\Controllers\LegalitasController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\TugasController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,7 @@ use App\Http\Controllers\TugasController;
 
 
 Route::get('/', [IndexController::class, 'index']);
+Route::get('/user', [UserController::class, 'index']);
 Route::get('/index/filter', [IndexController::class, 'filter'])->name('index.filter');
 
 Route::get('/migration', function () {
