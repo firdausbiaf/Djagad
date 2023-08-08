@@ -31,8 +31,8 @@
                       
                     </div>
                     <div class="d-none d-md-block">
-                      <p class="statistics-title">Transaction</p>
-                      <h4 class="rate-percentage">{{ $transaksi->count() }} Transactions</h4>
+                      <p class="statistics-title">Legalitas</p>
+                      <h4 class="rate-percentage">{{ $legalitas->count() }} Data</h4>
                       
                     </div>
                   </div>

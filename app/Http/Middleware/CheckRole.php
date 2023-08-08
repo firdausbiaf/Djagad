@@ -20,6 +20,6 @@ class CheckRole
         if ($request->user() && in_array($request->user()->role, ['admin', 'petugas'])) {
             return $next($request);
         }
-        return redirect('/');
+        return redirect('/user');
     }
 }

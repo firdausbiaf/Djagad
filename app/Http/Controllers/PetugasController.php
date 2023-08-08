@@ -16,7 +16,7 @@ class PetugasController extends Controller
      */
     public function index()
     {
-        $user = User::paginate(5);
+        $user = User::paginate(10);
         return view('dashboard.petugas.index', compact('user'));
     }
 
