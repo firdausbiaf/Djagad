@@ -206,14 +206,6 @@
       padding: 50px 0;
   }
 
-  /* .banner-sec {
-      background: url(https://1.bp.blogspot.com/-oRSFgCF-MMs/YL7113c3_NI/AAAAAAAAIic/nfoDS2NdvGoNMMTo0yD1bAP3WORIt-eYgCLcBGAsYHQ/s1920/background-hitam-polos.jpg)  no-repeat left bottom;
-      background-size: cover;
-      min-height: 500px;
-      border-radius: 0 10px 10px 0;
-      padding: 0;
-  } */
-
   .container {
       background: #fff;
       border-radius: 10px;

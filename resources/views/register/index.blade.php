@@ -151,7 +151,7 @@
                   <div class="form-group">
                     <button class="btn btn-primary btn-block" type="submit">Register</button>
                 </div>
-                <a class="forgot" href="/login">Have any account?</a></form>
+                <a class="forgot" href="/">Have any account?</a></form>
               </form>
 
                     </form>
