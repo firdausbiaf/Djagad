@@ -39,7 +39,7 @@ use App\Http\Controllers\UserController;
 */
 
 
-Route::get('/', [IndexController::class, 'index']);
+Route::get('/', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::get('/user', [UserController::class, 'index']);
 Route::get('/index/filter', [IndexController::class, 'filter'])->name('index.filter');
 
@@ -53,7 +53,7 @@ Route::get('/home', [IndexUserController::class, 'index']);
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('checkRole');
 
-Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+// Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 
 Route::post('/login', [LoginController::class, 'authenticate']);
 
