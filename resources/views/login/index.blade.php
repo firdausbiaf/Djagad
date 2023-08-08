@@ -47,6 +47,7 @@
                                     </div>
                                     <style>
   /* ... Your existing styles ... */
+  
   .carousel-item.active img {
     width: 100%;
     height: 500px; /* Set the desired height */
@@ -295,28 +296,33 @@
 
   /* Additional CSS to place the form on the right and the image on the left */
   @media (min-width: 768px) {
-      .row {
-          display: flex;
-          flex-wrap: wrap-reverse;
-      }
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+    }
 
-      .col-md-4 {
-          flex: 0 0 33.33333%;
-          max-width: 33.33333%;
-      }
+    .col-md-8 {
+        flex: 0 0 66.66667%;
+        max-width: 66.66667%;
+    }
 
-      .col-md-8 {
+    .col-md-4 {
+        flex: 0 0 33.33333%;
+        max-width: 33.33333%;
+    }
+
+      /* .col-md-8 {
           flex: 0 0 66.66667%;
           max-width: 66.66667%;
-      }
+      } */
 
       .banner-sec {
-          border-radius: 10px 0 0 10px;
-      }
+        border-radius: 0 10px 10px 0;
+    }
 
-      .login-sec {
-          border-radius: 0 10px 10px 0;
-      }
+    .login-sec {
+        border-radius: 10px 0 0 10px;
+    }
 
       /* ... Your existing styles ... */
 
@@ -333,6 +339,12 @@
     max-width: 400px;
     width: 100%;
     text-align: center;
+}
+
+.carousel-item.active img {
+  width: 100%;
+  height: 100vh; /* Set the desired height */
+  object-fit: cover; /* This ensures the image maintains its aspect ratio */
 }
   }
 </style>
