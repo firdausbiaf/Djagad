@@ -11,7 +11,16 @@
     });
   </script>
   @endif
+
+ <!-- register.index.blade.php -->
+ @if (session('success'))
+ <div class="alert alert-success">
+     {{ session('success') }}
+ </div>
+ @endif
+
 <form action="/register" method="post">
+    @csrf
 
     <section class="login-block">
         <div class="container">
