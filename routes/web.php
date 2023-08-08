@@ -70,8 +70,8 @@ Route::get('/uang_keluar_in', [LegalitasController::class, 'uang_keluar_in']);
 Route::get('/uang_keluar_out', [LegalitasController::class, 'uang_keluar_out']);
 
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
-
 Route::post('/register', [RegisterController::class, 'store']);
+
 
 Route::resource('/admin/member', DashboardUserController::class)->middleware('checkRole:admin');
 Route::resource('/admin/user', DashboardAdminController::class)->middleware('checkRole:admin');
