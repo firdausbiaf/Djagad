@@ -2,15 +2,16 @@
 @section('content')
 
 <div class="login-dark" style="height: 0vh;">
-  @if (session()->has('loginError'))
-  <script>
-    $(document).ready(function(){
-      $(".modal-title").text("Login Gagal!");
-      $(".modal-body p").text("{{ session('loginError') }}");
-      $("#myModal").modal('show');
-    });
-  </script>
-  @endif
+    @if (session()->has('loginError'))
+    <script>
+        $(document).ready(function(){
+            $("#myModal .modal-title").text("Login Gagal!");
+            $("#myModal .modal-body p").text("{{ session('loginError') }}");
+            $("#myModal").modal('show');
+        });
+    </script>
+    @endif
+    
 
  <!-- register.index.blade.php -->
  @if (session('success'))
@@ -176,20 +177,20 @@
   Launch demo modal
 </button> --}}
     <!-- Modal -->
-    <div id="myModal" class="modal fade ">
-        <div class="modal-dialog">
-            <div class="modal-content ">
-                <div class="modal-header bg-warning">
-                    <h5 class="modal-title"></h5>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <p></p>
-
-                </div>
+<div id="myModal" class="modal fade ">
+    <div class="modal-dialog">
+        <div class="modal-content ">
+            <div class="modal-header bg-warning">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p></p>
             </div>
         </div>
     </div>
+</div>
+
 
     {{-- <div id="myModalSuccess" class="modal fade ">
         <div class="modal-dialog modal-dialog-centered">
@@ -341,5 +342,23 @@
       .login-sec {
           border-radius: 0 10px 10px 0;
       }
+
+      /* ... Your existing styles ... */
+
+/* Center the modal dialog */
+.modal-dialog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+/* Center the modal content */
+.modal-content {
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
   }
 </style>

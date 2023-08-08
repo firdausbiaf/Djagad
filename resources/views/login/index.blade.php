@@ -161,7 +161,7 @@
 </button> --}}
     <!-- Modal -->
     <div id="myModal" class="modal fade ">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content ">
                 <div class="modal-header bg-warning">
                     <h5 class="modal-title"></h5>
@@ -317,5 +317,22 @@
       .login-sec {
           border-radius: 0 10px 10px 0;
       }
+
+      /* ... Your existing styles ... */
+
+/* Center the modal dialog */
+.modal-dialog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+/* Center the modal content */
+.modal-content {
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
   }
 </style>
