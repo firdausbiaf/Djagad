@@ -13,7 +13,7 @@
         <thead>
             <tr>
                 <th scope="col">No.</th>
-                <th scope="col">Nomor</th>
+                <th scope="col">Nomor Legalitas</th>
                 <th scope="col">Kavling</th>
                 <th scope="col">Uang Masuk</th>
                 <th scope="col">Tanggal Masuk</th>
@@ -23,9 +23,15 @@
             </tr>
         </thead>
         <tbody>
+            @php
+                $count = 1; 
+            @endphp
             @foreach ($legalitas as $legal)
             <tr>
-                <td>{{ $legal->id }}</td>
+                <td>{{ $count }}</td> <!-- Display the incrementing number -->
+                @php
+                    $count++; // Increment the counter
+                @endphp
                 <td>{{ $legal->nomor }}</td>
                 <td>{{ $legal->data->kavling }}</td>
                 <td>       

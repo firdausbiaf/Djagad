@@ -16,7 +16,7 @@
       @endif
       <thead>
         <tr>
-          <th scope="col">ID</th>
+          <th scope="col">No.</th>
           <th scope="col">Name</th>
           <th scope="col">Email</th>
           <th scope="col">Phone</th>
@@ -24,10 +24,16 @@
         </tr>
       </thead>
       <tbody>
+        @php
+          $count = 1; 
+        @endphp
         @foreach ($user as $u)
           @if($u->role == 'petugas')
           <tr>
-            <td>{{ $u->id }}</td>
+            <td>{{ $count }}</td> <!-- Display the incrementing number -->
+                @php
+                    $count++; // Increment the counter
+                @endphp
             <td>{{ $u->name }}</td>
             <td>{{ $u->email }}</td>
             <td>{{ $u->phone }}</td>
