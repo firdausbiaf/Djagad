@@ -25,6 +25,7 @@ use App\Http\Controllers\IndexUserController;
 use App\Http\Controllers\LegalitasController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\TugasController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +39,8 @@ use App\Http\Controllers\TugasController;
 */
 
 
-Route::get('/', [IndexController::class, 'index']);
+Route::get('/', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::get('/user', [UserController::class, 'index']);
 Route::get('/index/filter', [IndexController::class, 'filter'])->name('index.filter');
 
 Route::get('/migration', function () {
@@ -51,7 +53,7 @@ Route::get('/home', [IndexUserController::class, 'index']);
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('checkRole');
 
-Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+// Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 
 Route::post('/login', [LoginController::class, 'authenticate']);
 
@@ -70,8 +72,8 @@ Route::get('/uang_keluar_in', [LegalitasController::class, 'uang_keluar_in']);
 Route::get('/uang_keluar_out', [LegalitasController::class, 'uang_keluar_out']);
 
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
-
 Route::post('/register', [RegisterController::class, 'store']);
+
 
 Route::resource('/admin/member', DashboardUserController::class)->middleware('checkRole:admin');
 Route::resource('/admin/user', DashboardAdminController::class)->middleware('checkRole:admin');
