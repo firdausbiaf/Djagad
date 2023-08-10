@@ -21,7 +21,7 @@ class DashboardUserController extends Controller
         //             ->paginate(7)
         //             ->orderByDesc('id')->get();
         $user = User::select("*")
-                    ->orderBy("id", "desc")->paginate(7);
+                    ->orderBy("id", "desc")->paginate(15);
         return view('dashboard.member.index', compact('user'));
     }
 
