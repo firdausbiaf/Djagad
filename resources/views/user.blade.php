@@ -17,11 +17,11 @@
                             <div class="container-fluid pt-2 px-2">
                                 <div class="row g-4">
                                     {{-- Tabel Data Member --}}
-                                    <div class="col-sm-12 col-xl-5">
-                                        <div class="bg-light  rounded p-4">
+                                    <div class="col-sm-12 col-xl-7">
+                                        <div class="bg-light rounded p-4">
                                             {{-- <div class="d-flex align-items-center justify-content-between mb-4"> --}}
-                                            <div class="row">
-                                                <h6 class="mb-0">Kavling</h6>
+                                            <div class="row" style="max-height: 800px; overflow: auto;">
+                                                <h6 class="mb-2">Kavling</h6>
                                                 <!-- Nav tabs for kavling -->
                                                 <ul class="nav nav-tabs" id="kavlingTab" role="tablist">
                                                     @foreach ($data as $item)
@@ -37,10 +37,10 @@
                                                         <div class="tab-pane fade @if($loop->first) show active @endif" id="content-{{ $item->id }}" role="tabpanel" aria-labelledby="kavling-tab-{{ $item->id }}">
                                                             <div class="card shadow mb-4">
                                                                 <div class="card-header py-3">
-                                                                    <h6 class="m-0 font-weight-bold text-primary">Data Pembeli Kavling {{ $item->kavling }}</h6>
+                                                                    <h6 class="m-1 font-weight-bold text-primary">Data Pembeli Kavling {{ $item->kavling }}</h6>
                                                                 </div>
                                                                 <div class="card-body">
-                                                                    <div class="table-responsive col-lg-10 mx-4 mt-4">
+                                                                    <div class="table-responsive col-lg-11 mx-4 mt-4">
                                                                         <table class="table table-striped table-sm">
                                                                             <tr>
                                                                                 <th scope="row">Nama User</th>
@@ -88,11 +88,11 @@
                                                                             </tr>
                                                 
                                                                         </table>
-                                                                        <h4 class="medium font-weight-bold"> Progress Pembangunan <span class="float-right">{{ $item->progres }}%</span></h4>
+                                                                        <h6 class="medium font-weight-bold"> Progress Pembangunan <span class="float-right">{{ $item->progres }}%</span></h6>
                                                                         <div class="progress mb-4">
                                                                             <div class="progress-bar" role="progressbar" style="width: {{ $item->progres }}%" aria-valuenow="{{ $item->progres }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                         </div>
-                                                                        <h4 class="medium font-weight-bold">Progress Cicilan ({{ $item->uang_masuk }} / {{ $item->harga_deal }})</h4>
+                                                                        <h6 class="medium font-weight-bold">Progress Cicilan ({{ $item->uang_masuk }} / {{ $item->harga_deal }})</h6>
                                                                                 @php
                                                                                     $progressCicilan = ($item->uang_masuk / $item->harga_deal) * 100;
                                                                                 @endphp
@@ -110,35 +110,69 @@
                                     </div> 
                                     
                                     {{-- Foto --}}
-                                    <div class="col-sm-12 col-xl-7">
-                                        <div class="bg-light  rounded p-4">
-                                            {{-- <div class="d-flex align-items-center justify-content-between mb-4"> --}}
-                                            <div class="row">
-                                                <h6 class="mb-0 text-white">P</h6>
-                                                <h6 class="mb-0 text-white">P</h6>
-                                                {{-- <h6 class="mb-0">Foto Progress</h6> --}}
-                                                <div class="card shadow mb-4">
-                                                    <div class="card-header py-3">
-                                                        <h6 class="m-0 font-weight-bold text-primary">Progress</h6>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <div class="table-responsive col-md-10 mx-5 mt-4">
-                                                            <h2>Progress Pembangunan</h2><br>
-                                                            <div class="tab-content mt-4" id="fotoTabContent">
-                                                                @foreach ($data as $item)
-                                                                    <div class="tab-pane fade" id="foto-content-{{ $item->id }}" role="tabpanel" aria-labelledby="foto-tab-{{ $item->id }}">
-                                                                        @php
-                                                                            $itemFoto = $foto->where('data_id', $item->id)->sortByDesc('created_at')->take(4);
-                                                                        @endphp
-                                                                        <div class="row">
-                                                                            @foreach($itemFoto as $f)
-                                                                                <div class="col-lg-6 mb-3">
-                                                                                    <img src="{{ asset('storage/' . $f->photo) }}" class="card-img-top" alt="Foto" style="width: 100%; height: 200px; object-fit: cover;">
-                                                                                </div>
-                                                                            @endforeach
+                                    <div class="col-sm-12 col-xl-5">
+                                        <div class="row mb-3" style="max-height: 400px; overflow: auto;">
+                                            <div class="bg-light  rounded p-4">
+                                                {{-- <div class="d-flex align-items-center justify-content-between mb-4"> --}}
+                                                <div class="row">
+                                                    {{-- <h6 class="mb-0">Foto Progress</h6> --}}
+                                                    <div class="card shadow mb-4">
+                                                        <div class="card-header py-3">
+                                                            <h6 class="m-0 font-weight-bold text-primary">Progress</h6>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class="table-responsive col-md-10 mx-4 mt-1">
+                                                                <h6>Progress Pembangunan</h6><br>
+                                                                <div class="tab-content mt-1" id="fotoTabContent">
+                                                                    @foreach ($data as $item)
+                                                                        <div class="tab-pane fade" id="foto-content-{{ $item->id }}" role="tabpanel" aria-labelledby="foto-tab-{{ $item->id }}">
+                                                                            @php
+                                                                                $itemFoto = $foto->where('data_id', $item->id)->sortByDesc('created_at')->take(4);
+                                                                            @endphp
+                                                                            <div class="row">
+                                                                                @foreach($itemFoto as $f)
+                                                                                    <div class="col-lg-6 mb-3">
+                                                                                        <img src="{{ asset('storage/' . $f->photo) }}" class="card-img-top" alt="Foto" style="width: 100%; height: 200px; object-fit: cover;">
+                                                                                    </div>
+                                                                                @endforeach
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                @endforeach
+                                                                    @endforeach
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3" style="max-height: 400px; overflow: auto;">
+                                            <div class="bg-light  rounded p-4">
+                                                {{-- <div class="d-flex align-items-center justify-content-between mb-4"> --}}
+                                                <div class="row">
+                                                    {{-- <h6 class="mb-0">Foto Progress</h6> --}}
+                                                    <div class="card shadow mb-4">
+                                                        <div class="card-header py-3">
+                                                            <h6 class="m-0 font-weight-bold text-primary">Progress</h6>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class="table-responsive col-md-10 mx-5 mt-2">
+                                                                <h6>Progress Pembangunan</h6><br>
+                                                                <div class="tab-content mt-1" id="fotoTabContent">
+                                                                    @foreach ($data as $item)
+                                                                        <div class="tab-pane fade" id="foto-content-{{ $item->id }}" role="tabpanel" aria-labelledby="foto-tab-{{ $item->id }}">
+                                                                            @php
+                                                                                $itemFoto = $foto->where('data_id', $item->id)->sortByDesc('created_at')->take(4);
+                                                                            @endphp
+                                                                            <div class="row">
+                                                                                @foreach($itemFoto as $f)
+                                                                                    <div class="col-lg-6 mb-3">
+                                                                                        <img src="{{ asset('storage/' . $f->photo) }}" class="card-img-top" alt="Foto" style="width: 100%; height: 200px; object-fit: cover;">
+                                                                                    </div>
+                                                                                @endforeach
+                                                                            </div>
+                                                                        </div>
+                                                                    @endforeach
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -230,5 +264,5 @@
     });
 </script>
 
-@include('layout.bar.scripts')
+@include('layout.dashboard.footer')
 @endsection
