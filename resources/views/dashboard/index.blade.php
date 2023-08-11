@@ -77,7 +77,7 @@
                 
                 // Data untuk grafik data
                 var dataData = {
-                  labels: ['Data User', 'Legalitas'],
+                  labels: {!! json_encode(['Data User', 'Legalitas']) !!},
                   datasets: [{
                     label: 'Total Data',
                     data: [{{ $data->count() }}, {{ $legalitas->count() }}],

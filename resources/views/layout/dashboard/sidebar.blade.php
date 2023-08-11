@@ -89,6 +89,13 @@
           <span class="menu-title">Foto</span>
         </a>
       </li>
+      <li class="nav-item nav-category">Promo</li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/promo">
+              <i class="menu-icon mdi mdi-layers-outline"></i>
+              <span class="menu-title">Promo</span>
+            </a>
+          </li>
       {{-- <li class="nav-item">
         <a class="nav-link" href="/admin/kelas">
           <i class="menu-icon mdi mdi-layers-outline"></i>
