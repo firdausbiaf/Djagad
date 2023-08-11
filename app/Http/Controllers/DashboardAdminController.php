@@ -15,7 +15,7 @@ class DashboardAdminController extends Controller
      */
     public function index()
     {
-        $user = User::paginate(5);
+        $user = User::paginate(15);
         return view('dashboard.admin.index', compact('user'));
     }
 

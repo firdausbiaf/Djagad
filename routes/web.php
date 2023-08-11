@@ -26,6 +26,7 @@ use App\Http\Controllers\LegalitasController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\TugasController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PromoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,6 +86,7 @@ Route::resource('/admin/course', DashboardCourseController::class)->middleware('
 Route::resource('/admin/materi', DashboardMateriController::class)->middleware('checkRole:admin');
 Route::resource('/admin/tugas', DashboardTugasController::class)->middleware('checkRole:admin');
 Route::resource('/admin/data', DataController::class)->middleware('checkRole:admin');
+Route::resource('/admin/promo', PromoController::class)->middleware('checkRole:admin');
 // Route::resource('/admin/foto', FotoController::class)->middleware('checkRole:admin');
 
 Route::get('/admin/foto', [FotoController::class, 'index'])->name('foto.index');

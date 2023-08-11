@@ -3,11 +3,11 @@
 @section('content')
 <div class="table-responsive col-lg-10 mx-5 mt-4">
     <h2>Data User</h2><br>
-    <a href="{{ route('data.create') }}" class="btn btn-primary mb-3">Tambah Data</a>
+    <a href="{{ route('data.create') }}" class="btn btn-primary mx-2">Tambah Data</a>
     <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Import
-  </button>
+    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Import
+    </button>
   
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -34,10 +34,11 @@
     </form>
     </div>
   </div>
+  <div class="table-responsive">
     <table class="table table-striped table-sm">
         <thead>
             <tr>
-                <th scope="col">ID</th>
+                <th scope="col">No.</th>
                 <th scope="col">Nama User</th>
                 <th scope="col">Telepon</th>
                 <th scope="col">Alamat</th>
@@ -53,9 +54,15 @@
             </tr>
         </thead>
         <tbody>
+            @php
+              $count = 1; 
+            @endphp
             @foreach ($data as $item)
             <tr>
-                <td>{{ $item->id }}</td>
+                <td>{{ $count }}</td> <!-- Display the incrementing number -->
+                @php
+                    $count++; // Increment the counter
+                @endphp
                 <td>{{ $item->user->name }}</td>
                 <td>{{ $item->user->phone }}</td>
                 <td>{{ $item->alamat }}</td>
@@ -80,8 +87,9 @@
             @endforeach
         </tbody>
     </table>
-    <div class="d-flex justify-content-center">
-        {{ $data->links() }}
-    </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    {{ $data->links() }}
+  </div>
 </div>
 @endsection
