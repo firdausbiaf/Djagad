@@ -41,7 +41,7 @@
                                                 </ul>
 
                                                 <!-- Tab panes for kavling -->
-                                                <div class="tab-content mt-4" id="kavlingTabContent">
+                                                <div class="tab-content mt-4" id="kavlingTabContent" style="max-height: 600px;">
                                                     @foreach ($data as $item)
                                                         <div class="tab-pane fade @if($loop->first) show active @endif" id="content-{{ $item->id }}" role="tabpanel" aria-labelledby="kavling-tab-{{ $item->id }}">
                                                             <div class="card shadow mb-4 rounded-card">
@@ -122,7 +122,7 @@
                                     <div class="col-sm-12 col-xl-5">
 
                                         {{-- Progress --}}
-                                        <div class="row mb-3" style="max-height: 400px; overflow: auto;">
+                                        <div class="row mb-3" style="max-height: 360px; overflow: auto;">
                                             <div class="bg-light rounded-card p-4">
                                                 {{-- <div class="d-flex align-items-center justify-content-between mb-4"> --}}
                                                 <div class="row">
@@ -139,12 +139,24 @@
                                                                             @php
                                                                                 $itemFoto = $foto->where('data_id', $item->id)->sortByDesc('created_at')->take(4);
                                                                             @endphp
-                                                                            <div class="row">
-                                                                                @foreach($itemFoto as $f)
-                                                                                    <div class="col-lg-6 mb-3">
-                                                                                        <img src="{{ asset('storage/' . $f->photo) }}" class="card-img-top" alt="Foto" style="width: 100%; height: 200px; object-fit: cover;">
-                                                                                    </div>
-                                                                                @endforeach
+                                                                            <div id="fotoCarousel-{{ $item->id }}" class="carousel slide" data-bs-ride="carousel">
+                                                                                <div class="carousel-inner">
+                                                                                    @foreach($itemFoto as $index => $f)
+                                                                                        <div class="carousel-item @if ($index === 0) active @endif">
+                                                                                            <div class="d-flex justify-content-center align-items-center" style="height: 190px;">
+                                                                                                <img src="{{ asset('storage/' . $f->photo) }}" class="d-block" alt="Foto" style="max-height: 100%; object-fit: cover;">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    @endforeach
+                                                                                </div>
+                                                                                <button class="carousel-control-prev custom-carousel-prev" type="button" data-bs-target="#fotoCarousel-{{ $item->id }}" data-bs-slide="prev">
+                                                                                    <span class="carousel-control-prev-icon custom-carousel-prev-icon" aria-hidden="true"></span>
+                                                                                    <span class="visually-hidden">Previous</span>
+                                                                                </button>
+                                                                                <button class="carousel-control-next custom-carousel-next" type="button" data-bs-target="#fotoCarousel-{{ $item->id }}" data-bs-slide="next">
+                                                                                    <span class="carousel-control-next-icon custom-carousel-next-icon" aria-hidden="true"></span>
+                                                                                    <span class="visually-hidden">Next</span>
+                                                                                </button>
                                                                             </div>
                                                                         </div>
                                                                     @endforeach
@@ -157,7 +169,7 @@
                                         </div>
 
                                         {{-- Promo --}}
-                                        <div class="row mb-3" style="max-height: 400px; overflow: auto;">
+                                        <div class="row mb-3" style="max-height: 360px; overflow: hidden;">
                                             <div class="bg-light rounded p-4">
                                                 <div class="row">
                                                     <div class="card shadow mb-4">
@@ -166,16 +178,32 @@
                                                         </div>
                                                         <div class="card-body">
                                                             <div class="table-responsive col-md-10 mx-4 mt-1">
-                                                                <div class="tab-content mt-1" id="fotoTabContent">
-                                                                        @foreach ($promo as $pro)
-                                                                                <div class="card">
-                                                                                        @if ($pro->gambar)
-                                                                                            <img src="{{ asset('storage/' . $pro->gambar) }}" class="card-img-top" alt="Promo Gambar" style="width: 100%; height: 100%; object-fit: cover;">
-                                                                                        @else
-                                                                                            <p>Tidak ada gambar</p>
-                                                                                        @endif
+                                                                <div id="promoCarousel" class="carousel slide" data-bs-ride="carousel">
+                                                                    <div class="carousel-inner">
+                                                                        @php
+                                                                            $latestPromo = $promo->sortByDesc('created_at')->take(4);
+                                                                        @endphp
+                                        
+                                                                        @foreach ($latestPromo as $index => $pro)
+                                                                            <div class="carousel-item @if ($index === 0) active @endif">
+                                                                                @if ($pro->gambar)
+                                                                                <div class="d-flex justify-content-center align-items-center" style="height: 200px;">
+                                                                                    <img src="{{ asset('storage/' . $pro->gambar) }}" class="d-block" alt="Promo Gambar" style="max-height: 100%; object-fit: cover;">
                                                                                 </div>
+                                                                                @else
+                                                                                    <p>Tidak ada gambar</p>
+                                                                                @endif
+                                                                            </div>
                                                                         @endforeach
+                                                                    </div>
+                                                                    <button class="carousel-control-prev custom-carousel-prev" type="button" data-bs-target="#promoCarousel" data-bs-slide="prev">
+                                                                        <span class="carousel-control-prev-icon custom-carousel-prev-icon" aria-hidden="true"></span>
+                                                                        <span class="visually-hidden">Previous</span>
+                                                                    </button>
+                                                                    <button class="carousel-control-next custom-carousel-next" type="button" data-bs-target="#promoCarousel" data-bs-slide="next">
+                                                                        <span class="carousel-control-next-icon custom-carousel-next-icon" aria-hidden="true"></span>
+                                                                        <span class="visually-hidden">Next</span>
+                                                                    </button>                                                                                                                                                                                                         
                                                                 </div>
                                                             </div>
                                                         </div>
