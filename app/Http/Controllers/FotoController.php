@@ -149,7 +149,7 @@ class FotoController extends Controller
         $request->validate([
             'lokasi' => 'required',
             'kavling' => 'required',
-            'photo' => 'image|file|max:2048',
+            'photo' => 'image|file|max:10240',
         ]);
 
         $foto = Foto::findOrFail($id);

@@ -75,6 +75,9 @@
                         @endif
                     </tbody>
                 </table>
+                {{-- <div class="d-flex justify-content-center">
+                    {{ $promos->links() }}
+                </div> --}}
             </div>
         @endforeach
     </div>

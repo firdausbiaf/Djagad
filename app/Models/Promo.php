@@ -11,7 +11,6 @@ class Promo extends Model
     protected $table = 'promos';
 
     protected $fillable = [
-        'promo_id',
         'keterangan',
         'gambar',
     ];

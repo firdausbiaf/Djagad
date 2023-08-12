@@ -16,6 +16,7 @@
 
                             <div class="container-fluid pt-2 px-2">
                                 <div class="row g-4">
+                                    
                                     {{-- Tabel Data Member --}}
                                     <div class="col-sm-12 col-xl-7">
                                         <div class="bg-light rounded p-4">
@@ -111,6 +112,8 @@
                                     
                                     {{-- Foto --}}
                                     <div class="col-sm-12 col-xl-5">
+
+                                        {{-- Progress --}}
                                         <div class="row mb-3" style="max-height: 400px; overflow: auto;">
                                             <div class="bg-light  rounded p-4">
                                                 {{-- <div class="d-flex align-items-center justify-content-between mb-4"> --}}
@@ -145,33 +148,33 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        {{-- Promo --}}
                                         <div class="row mb-3" style="max-height: 400px; overflow: auto;">
-                                            <div class="bg-light  rounded p-4">
-                                                {{-- <div class="d-flex align-items-center justify-content-between mb-4"> --}}
+                                            <div class="bg-light rounded p-4">
                                                 <div class="row">
-                                                    {{-- <h6 class="mb-0">Foto Progress</h6> --}}
                                                     <div class="card shadow mb-4">
                                                         <div class="card-header py-3">
-                                                            <h6 class="m-0 font-weight-bold text-primary">Progress</h6>
+                                                            <h6 class="m-0 font-weight-bold text-primary">Promo</h6>
                                                         </div>
                                                         <div class="card-body">
-                                                            <div class="table-responsive col-md-10 mx-5 mt-2">
-                                                                <h6>Progress Pembangunan</h6><br>
+                                                            <div class="table-responsive col-md-10 mx-4 mt-1">
                                                                 <div class="tab-content mt-1" id="fotoTabContent">
-                                                                    @foreach ($data as $item)
-                                                                        <div class="tab-pane fade" id="foto-content-{{ $item->id }}" role="tabpanel" aria-labelledby="foto-tab-{{ $item->id }}">
-                                                                            @php
-                                                                                $itemFoto = $foto->where('data_id', $item->id)->sortByDesc('created_at')->take(4);
-                                                                            @endphp
-                                                                            <div class="row">
-                                                                                @foreach($itemFoto as $f)
-                                                                                    <div class="col-lg-6 mb-3">
-                                                                                        <img src="{{ asset('storage/' . $f->photo) }}" class="card-img-top" alt="Foto" style="width: 100%; height: 200px; object-fit: cover;">
+                                                                    <div class="row">
+                                                                        @foreach ($promo as $pro)
+                                                                            <div class="col-lg-3 mb-3">
+                                                                                <div class="card">
+                                                                                    <div class="card-body">
+                                                                                        @if ($pro->gambar)
+                                                                                            <img src="{{ asset('storage/' . $pro->gambar) }}" class="card-img-top" alt="Promo Gambar" style="width: 100%; height: 100%; object-fit: contain;">
+                                                                                        @else
+                                                                                            <p>Tidak ada gambar</p>
+                                                                                        @endif
                                                                                     </div>
-                                                                                @endforeach
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
-                                                                    @endforeach
+                                                                        @endforeach
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>

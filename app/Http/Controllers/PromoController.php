@@ -6,6 +6,7 @@ use App\Models\Promo;
 use App\Http\Requests\StorePromoRequest;
 use App\Http\Requests\UpdatePromoRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PromoController extends Controller
 {
@@ -14,10 +15,10 @@ class PromoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $promo = Promo::all();
-        return view('promo.index', compact('promo'));
+        $promos = Promo::paginate(10);
+        return view('dashboard.promo.index', compact('promos'));
     }
 
     /**
@@ -27,7 +28,7 @@ class PromoController extends Controller
      */
     public function create()
     {
-        return view('promos.create');
+        return view('dashboard.promo.create');
     }
 
     /**
@@ -38,19 +39,19 @@ class PromoController extends Controller
      */
     public function store(StorePromoRequest $request)
     {
-        $data = $request->validated();
+        $request->validate([
+            'gambar' => 'required|image|max:10240',
+            'keterangan' => 'required',
+        ]);
 
-        if ($request->hasFile('foto')) {
-            $file = $request->file('foto');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $path = public_path('storage/promos');
-            $file->move($path, $filename);
-            $data['foto'] = 'promos/' . $filename;
-        }
+        $gambarPath = $request->file('gambar')->store('promos', 'public');
 
-        Promo::create($data);
+        Promo::create([
+            'gambar' => $gambarPath,
+            'keterangan' => $request->keterangan,
+        ]);
 
-        return redirect()->route('promos.index')->with('success', 'Promo created successfully.');
+        return redirect()->route('promo.index')->with('success', 'Promo baru telah ditambahkan');
     }
 
     /**
@@ -59,9 +60,10 @@ class PromoController extends Controller
      * @param  \App\Models\Promo  $promo
      * @return \Illuminate\Http\Response
      */
-    public function show(Promo $promo)
+    public function show($id)
     {
-        return view('promos.show', compact('promo'));
+        $promo = Promo::findOrFail($id);
+        return view('dashboard.promo.show', compact('promo'));
     }
 
     /**
@@ -70,9 +72,10 @@ class PromoController extends Controller
      * @param  \App\Models\Promo  $promo
      * @return \Illuminate\Http\Response
      */
-    public function edit(Promo $promo)
+    public function edit($id)
     {
-        return view('promos.edit', compact('promo'));
+        $promo = Promo::findOrFail($id);
+        return view('dashboard.promo.edit', compact('promo'));
     }
 
     /**
@@ -82,21 +85,24 @@ class PromoController extends Controller
      * @param  \App\Models\Promo  $promo
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePromoRequest $request, Promo $promo)
+    public function update(UpdatePromoRequest $request, $id)
     {
-        $data = $request->validated();
+        $request->validate([
+            'gambar' => 'image|max:10240',
+            'keterangan' => 'required',
+        ]);
 
-        if ($request->hasFile('foto')) {
-            $file = $request->file('foto');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $path = public_path('storage/promos');
-            $file->move($path, $filename);
-            $data['foto'] = 'promos/' . $filename;
+        $promo = Promo::findOrFail($id);
+
+        if ($request->hasFile('gambar')) {
+            $gambarPath = $request->file('gambar')->store('promos', 'public');
+            $promo->gambar = $gambarPath;
         }
 
-        $promo->update($data);
+        $promo->keterangan = $request->keterangan;
+        $promo->save();
 
-        return redirect()->route('promos.index')->with('success', 'Promo updated successfully.');
+        return redirect()->route('promo.index')->with('success', 'Promo berhasil diupdate');
     }
 
     /**
@@ -105,10 +111,16 @@ class PromoController extends Controller
      * @param  \App\Models\Promo  $promo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Promo $promo)
+    public function destroy($id)
     {
+        $promo = Promo::findOrFail($id);
+
+        if ($promo->gambar && Storage::exists('public/' . $promo->gambar)) {
+            Storage::delete('public/' . $promo->gambar);
+        }
+
         $promo->delete();
 
-        return redirect()->route('promos.index')->with('success', 'Promo deleted successfully.');
+        return redirect()->route('promo.index')->with('success', 'Promo berhasil dihapus');
     }
 }
