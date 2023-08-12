@@ -170,7 +170,7 @@
 
                                         {{-- Promo --}}
                                         <div class="row mb-3" style="max-height: 360px; overflow: hidden;">
-                                            <div class="bg-light rounded p-4">
+                                            <div class="bg-light rounded-card p-4">
                                                 <div class="row">
                                                     <div class="card shadow mb-4">
                                                         <div class="card-header py-3">
