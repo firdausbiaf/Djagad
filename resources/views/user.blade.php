@@ -162,26 +162,20 @@
                                                 <div class="row">
                                                     <div class="card shadow mb-4">
                                                         <div class="card-header py-3">
-                                                            <h6 class="m-0 font-weight-bold text-primary">Promo</h6>
+                                                            <h6 class="m-0 font-weight-bold text-primary">PROMO</h6>
                                                         </div>
                                                         <div class="card-body">
                                                             <div class="table-responsive col-md-10 mx-4 mt-1">
                                                                 <div class="tab-content mt-1" id="fotoTabContent">
-                                                                    <div class="row">
                                                                         @foreach ($promo as $pro)
-                                                                            <div class="col-lg-3 mb-3">
                                                                                 <div class="card">
-                                                                                    <div class="card-body">
                                                                                         @if ($pro->gambar)
-                                                                                            <img src="{{ asset('storage/' . $pro->gambar) }}" class="card-img-top" alt="Promo Gambar" style="width: 100%; height: 100%; object-fit: contain;">
+                                                                                            <img src="{{ asset('storage/' . $pro->gambar) }}" class="card-img-top" alt="Promo Gambar" style="width: 100%; height: 100%; object-fit: cover;">
                                                                                         @else
                                                                                             <p>Tidak ada gambar</p>
                                                                                         @endif
-                                                                                    </div>
                                                                                 </div>
-                                                                            </div>
                                                                         @endforeach
-                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
