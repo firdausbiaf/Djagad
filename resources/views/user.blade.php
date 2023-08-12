@@ -2,12 +2,20 @@
 
 @section('content')
 
+<style>
+    .card {
+        border-radius: 15px;
+    }
+</style>
+
 <!-- Carousel Start -->
 <div class="container-fluid">
     <div class="row">
         <div class="col">
-            <h1 class="display-3 text-white">Djagad Land Group</h1>
-            <h3 class="text-white text-uppercase mb-3">Pilihan Investasi Terbaik</h3>
+            <center><br>
+                <h3 class="display-4 text-white">Djagad Land Group</h3>
+                <h4 class="text-white text-uppercase mb-3">Pilihan Investasi Terbaik</h4><br>
+            </center>
             @auth
                 @if(auth()->user()->role == "member" && $data)
                     <div class="row">
@@ -19,10 +27,10 @@
                                     
                                     {{-- Tabel Data Member --}}
                                     <div class="col-sm-12 col-xl-7">
-                                        <div class="bg-light rounded p-4">
+                                        <div class="bg-light rounded-card p-4">
                                             {{-- <div class="d-flex align-items-center justify-content-between mb-4"> --}}
                                             <div class="row" style="max-height: 800px; overflow: auto;">
-                                                <h6 class="mb-2">Kavling</h6>
+                                                <h6 class="mb-2">KAVLING</h6>
                                                 <!-- Nav tabs for kavling -->
                                                 <ul class="nav nav-tabs" id="kavlingTab" role="tablist">
                                                     @foreach ($data as $item)
@@ -36,7 +44,7 @@
                                                 <div class="tab-content mt-4" id="kavlingTabContent">
                                                     @foreach ($data as $item)
                                                         <div class="tab-pane fade @if($loop->first) show active @endif" id="content-{{ $item->id }}" role="tabpanel" aria-labelledby="kavling-tab-{{ $item->id }}">
-                                                            <div class="card shadow mb-4">
+                                                            <div class="card shadow mb-4 rounded-card">
                                                                 <div class="card-header py-3">
                                                                     <h6 class="m-1 font-weight-bold text-primary">Data Pembeli Kavling {{ $item->kavling }}</h6>
                                                                 </div>
@@ -115,17 +123,16 @@
 
                                         {{-- Progress --}}
                                         <div class="row mb-3" style="max-height: 400px; overflow: auto;">
-                                            <div class="bg-light  rounded p-4">
+                                            <div class="bg-light rounded-card p-4">
                                                 {{-- <div class="d-flex align-items-center justify-content-between mb-4"> --}}
                                                 <div class="row">
                                                     {{-- <h6 class="mb-0">Foto Progress</h6> --}}
                                                     <div class="card shadow mb-4">
                                                         <div class="card-header py-3">
-                                                            <h6 class="m-0 font-weight-bold text-primary">Progress</h6>
+                                                            <h6 class="m-0 font-weight-bold text-primary">PROGRESS PEMBANGUNAN</h6>
                                                         </div>
                                                         <div class="card-body">
                                                             <div class="table-responsive col-md-10 mx-4 mt-1">
-                                                                <h6>Progress Pembangunan</h6><br>
                                                                 <div class="tab-content mt-1" id="fotoTabContent">
                                                                     @foreach ($data as $item)
                                                                         <div class="tab-pane fade" id="foto-content-{{ $item->id }}" role="tabpanel" aria-labelledby="foto-tab-{{ $item->id }}">

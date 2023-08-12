@@ -40,6 +40,9 @@
                 <div class="col-sm-6">
                   <canvas id="dataChart" width="300" height="150"></canvas>
                 </div>
+                <div class="col-sm-12 mt-3">
+                  <canvas id="legalChart" width="650" height="350" style="margin-top: 20px;"></canvas>
+                </div>
               </div>
               <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
               <script>
@@ -65,10 +68,16 @@
                       y: {
                         beginAtZero: true
                       }
+                    },
+                    plugins: {
+                      legend: {
+                        display: true,
+                        position: 'right' // Anda dapat mengatur posisi legenda sesuai keinginan
+                      }
                     }
                   }
                 };
-                
+
                 // Buat grafik persons
                 var personChart = new Chart(personCtx, personConfig);
                 
@@ -94,12 +103,104 @@
                       y: {
                         beginAtZero: true
                       }
+                    },
+                    plugins: {
+                      legend: {
+                        display: true,
+                        position: 'right' // Anda dapat mengatur posisi legenda sesuai keinginan
+                      }
                     }
                   }
                 };
-                
+
                 // Buat grafik data
                 var dataChart = new Chart(dataCtx, dataConfig);
+
+                // Ambil referensi ke elemen canvas untuk grafik legalitas
+                var legalCtx = document.getElementById('legalChart').getContext('2d');
+
+                // Ambil data tgl_masuk dan tgl_keluar dari PHP dan konversi menjadi array JavaScript
+                var tglmasukData = @json($tglmasukCounts);
+                var tglkeluarData = @json($tglkeluarCounts);
+
+                // Buat objek untuk menyimpan data berdasarkan bulan
+                var dataByMonth = {};
+
+                var monthNames = [
+                    'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+                    'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+                ];
+
+                monthNames.forEach(function(monthName, index) {
+                  dataByMonth[monthName] = {
+                    tglMasuk: 0,
+                    tglKeluar: 0
+                  };
+
+                  tglmasukData.forEach(function(item) {
+                    if (item.month === index + 1) {
+                      dataByMonth[monthName].tglMasuk = item.count_tgl_masuk;
+                    }
+                  });
+
+                  tglkeluarData.forEach(function(item) {
+                    if (item.month === index + 1) {
+                      dataByMonth[monthName].tglKeluar = item.count_tgl_keluar;
+                    }
+                  });
+                });
+
+                // Ekstrak data untuk label bulan dan data tgl_masuk dan tgl_keluar
+                var labels = Object.keys(dataByMonth);
+                var dataTglMasuk = [];
+                var dataTglKeluar = [];
+
+                labels.forEach(function(monthName) {
+                  var monthData = dataByMonth[monthName];
+
+                  dataTglMasuk.push(monthData.tglMasuk);
+                  dataTglKeluar.push(monthData.tglKeluar);
+                });
+
+                // Data untuk grafik legalitas
+                var legalData = {
+                  labels: labels,
+                  datasets: [{
+                    label: 'Total Legalitas Tanggal Masuk',
+                    data: dataTglMasuk,
+                    borderColor: 'blue', // Ubah warna garis
+                    fill: false
+                  }, {
+                    label: 'Total Legalitas Tanggal Keluar',
+                    data: dataTglKeluar,
+                    borderColor: 'purple', // Ubah warna garis
+                    fill: false
+                  }]
+                };
+
+                // Konfigurasi grafik legalitas
+                var legalConfig = {
+                  type: 'line',
+                  data: legalData,
+                  options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                      y: {
+                        beginAtZero: true
+                      }
+                    },
+                    plugins: {
+                      legend: {
+                        display: true,
+                        position: 'top'
+                      }
+                    }
+                  }
+                };
+
+                // Buat grafik legalitas
+                var legalChart = new Chart(legalCtx, legalConfig);
               </script>
             </div>
           </div>
