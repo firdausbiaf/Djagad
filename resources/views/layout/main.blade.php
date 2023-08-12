@@ -47,15 +47,15 @@
       /* Warna garis panah carousel sebelumnya dan sesudahnya */
       .custom-carousel-prev-icon,
       .custom-carousel-next-icon {
-          background-color: #ff0000; /* Ganti dengan warna yang Anda inginkan */
-          border-color: #ff0000; /* Ganti dengan warna yang Anda inginkan */
+          background-color: #507cad7e; Ganti dengan warna yang Anda inginkan
+          border-color: #507cad7e; /* Ganti dengan warna yang Anda inginkan */
       }
   
       /* Warna garis panah carousel saat dihover */
       .custom-carousel-prev:hover .custom-carousel-prev-icon,
       .custom-carousel-next:hover .custom-carousel-next-icon {
-          background-color: #ff5555; /* Ganti dengan warna yang Anda inginkan */
-          border-color: #ff5555; /* Ganti dengan warna yang Anda inginkan */
+          background-color: #507cad7e; /* Ganti dengan warna yang Anda inginkan */
+          border-color: #507cad7e; /* Ganti dengan warna yang Anda inginkan */
       }
   </style>
   
