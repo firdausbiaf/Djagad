@@ -37,12 +37,12 @@
 
             <ul class="navbar-nav ms-auto">
                 @auth
-                @if(auth()->user()->role == 'member')
+                <!-- @if(auth()->user()->role == 'member')
                 <li class="nav-item">
                     <a class= "nav-link {{ Request::is('courseMember') ? 'active' : '' }}"  href="/courseMember"><i class="bi bi-journal-text mx-2"></i>My Class</a>
                 </li>
                 <div class="vr" style="color :white; margin: 0px 8px 0px 8px;"></div>
-                @endif
+                @endif -->
                 <li class="nav-item dropdown">            
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Welcome back , {{ auth()->user()->name }}
@@ -51,9 +51,9 @@
                       @if(auth()->user()->role == 'admin')
                       <li><a class="dropdown-item" href="/dashboard"><i class="bi bi-clipboard-minus"></i> My Dashboard</a></li>
                       @else
-                      <li><a class="dropdown-item" href="/transaksiMember"><i class="bi bi-menu-button-wide"></i> My Transaction</a></li>
+                      <!-- <li><a class="dropdown-item" href="/transaksiMember"><i class="bi bi-menu-button-wide"></i> My Transaction</a></li> -->
                       @endif
-                      <li><hr class="dropdown-divider"></li>
+                      <!-- <li><hr class="dropdown-divider"></li> -->
                       <li>
                           <form action="/logout" action="get">
                               @csrf
