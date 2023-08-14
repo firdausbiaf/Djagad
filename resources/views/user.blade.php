@@ -122,7 +122,7 @@
                                     <div class="col-sm-12 col-xl-5">
 
                                         {{-- Progress --}}
-                                        <div class="row mb-3" style="max-height: 360px; overflow: auto;">
+                                        <div class="row mb-3" style="max-height: 380px; overflow: auto;">
                                             <div class="bg-light rounded-card p-4">
                                                 {{-- <div class="d-flex align-items-center justify-content-between mb-4"> --}}
                                                 <div class="row">
@@ -169,7 +169,7 @@
                                         </div>
 
                                         {{-- Promo --}}
-                                        <div class="row mb-3" style="max-height: 360px; overflow: hidden;">
+                                        <div class="row mb-3" style="max-height: 380px; overflow: hidden;">
                                             <div class="bg-light rounded-card p-4">
                                                 <div class="row">
                                                     <div class="card shadow mb-4">
@@ -296,5 +296,5 @@
     });
 </script>
 
-@include('layout.dashboard.footer')
+
 @endsection

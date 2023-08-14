@@ -6,12 +6,8 @@
         </button>
       </div>
       <div>
-        <a class="navbar-brand brand-logo"  href="/">
           <img src="{{ asset('images/logologo.png') }}" alt="logo" width="100%" height=auto>
-        </a>
-        <a class="navbar-brand brand-logo-mini" href="/">
           <img src="{{ asset('images/logologo.png') }}" alt="logo" width="100%" height=auto>
-        </a>
       </div>
     </div>
     <div class="navbar-menu-wrapper d-flex align-items-top"> 

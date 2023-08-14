@@ -102,6 +102,8 @@
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
   </div>
+
+  @include('layout.footer')
   </body>
 </html>
 

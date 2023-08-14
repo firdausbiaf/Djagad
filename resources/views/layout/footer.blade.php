@@ -43,9 +43,9 @@
           <!-- Content -->
           <h6 class="text-uppercase fw-bold">Company name</h6>
           <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px" />
-          <p>
-            Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          </p>
+          <a class="navbar-brand" href="/">
+            <img src="{{ asset('images\dnest.png') }}" alt="logo" height="50" class="d-inline-block align-text-top">     
+          </a>
         </div>
         <!-- Grid column -->
 
