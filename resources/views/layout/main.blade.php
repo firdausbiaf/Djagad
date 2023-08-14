@@ -58,6 +58,11 @@
           border-color: #507cad7e; /* Ganti dengan warna yang Anda inginkan */
       }
   </style>
+  <style>
+    .icon-large {
+        font-size: 25px; /* Atur ukuran sesuai keinginan Anda */
+    }
+  </style>
   
 
   </head>

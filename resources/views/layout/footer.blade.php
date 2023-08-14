@@ -11,24 +11,21 @@
 
       <!-- Right -->
       <div>
-        <a href="" class="text-white me-4">
-          <i class="fab fa-facebook-f"></i>
+        <a href="https://web.facebook.com/djagadlandcom" class="text-white me-4" target="_blank" style="text-decoration: none;">
+          <i class="fab fa-facebook-f icon-large"></i>
         </a>
-        <a href="" class="text-white me-4">
-          <i class="fab fa-twitter"></i>
+        <a href="https://bit.ly/hellojagad" class="text-white me-4" target="_blank" style="text-decoration: none;">
+          <i class="fas fa-phone icon-large"></i>
         </a>
-        <a href="" class="text-white me-4">
-          <i class="fab fa-google"></i>
+        <a href="https://www.instagram.com/djagad_land/" class="text-white me-4" target="_blank" style="text-decoration: none;">
+          <i class="fab fa-instagram icon-large"></i>
         </a>
-        <a href="" class="text-white me-4">
-          <i class="fab fa-instagram"></i>
+        <a href="mailto:marketing@djagadland.com" class="text-white me-4" target="_blank" style="text-decoration: none;">
+          <i class="fas fa-envelope icon-large"></i>
         </a>
-        <a href="" class="text-white me-4">
-          <i class="fab fa-linkedin"></i>
-        </a>
-        <a href="" class="text-white me-4">
-          <i class="fab fa-github"></i>
-        </a>
+        <!-- <a href="mailto:your@email.com" class="text-white me-4">
+          <img src="{{ asset('images\mail.png') }}" alt="logo" height="20" target="_blank">
+        </a> -->
       </div>
       <!-- Right -->
     </section>
@@ -39,26 +36,54 @@
       <!-- Grid row -->
       <div class="row mt-3">
         <!-- Grid column -->
-        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+        <div class="col-md-5 col-lg-6 col-xl-5 mx-auto mb-8">
           <!-- Content -->
-          <h6 class="text-uppercase fw-bold">Company name</h6>
+          <h6 class="text-uppercase fw-bold">D'JAGAD LAND GROUP</h6>
           <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px" />
-          <a class="navbar-brand" href="/">
-            <img src="{{ asset('images\dnest.png') }}" alt="logo" height="50" class="d-inline-block align-text-top">     
-          </a>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <a class="navbar-brand" href="/">
+                        <img src="{{ asset('images\batu.png') }}" alt="logo" height="50" class="d-inline-block align-text-top">     
+                    </a>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <a class="navbar-brand" href="/">
+                        <img src="{{ asset('images\bintan.png') }}" alt="logo" height="50" class="d-inline-block align-text-top">     
+                    </a>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <a class="navbar-brand" href="https://www.dparkcity.com/" target="_blank">
+                        <img src="{{ asset('images\dpark.png') }}" alt="logo" height="50" class="d-inline-block align-text-top">     
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <a class="navbar-brand" href="/">
+                        <img src="{{ asset('images\singosari.png') }}" alt="logo" height="50" class="d-inline-block align-text-top">     
+                    </a>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <a class="navbar-brand" href="/">
+                        <img src="{{ asset('images\villa.png') }}" alt="logo" height="50" class="d-inline-block align-text-top">     
+                    </a>
+                </div>
+            </div>
+
+
         </div>
         <!-- Grid column -->
 
         <!-- Grid column -->
-        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+        <!-- <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4"> -->
           <!-- Links -->
-          <h6 class="text-uppercase fw-bold">Products</h6>
+          <!-- <h6 class="text-uppercase fw-bold">Products</h6>
           <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px" />
           <p><a href="#!" class="text-white">MDBootstrap</a></p>
           <p><a href="#!" class="text-white">MDWordPress</a></p>
           <p><a href="#!" class="text-white">BrandFlow</a></p>
           <p><a href="#!" class="text-white">Bootstrap Angular</a></p>
-        </div>
+        </div> -->
         <!-- Grid column -->
 
         <!-- Grid column -->
@@ -90,10 +115,10 @@
     <!-- Section: Links  -->
 
     <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+    <!-- <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
       © 2020 Copyright:
       <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-    </div>
+    </div> -->
     <!-- Copyright -->
   </footer>
 </div>
