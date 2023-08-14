@@ -13,6 +13,7 @@
                     <li class="list-group-item"><b>Nomor Legalitas : </b>{{ $legalitas->nomor }}</li>
                     <li class="list-group-item"><b>Tanggal Masuk : </b>{{ $legalitas->tgl_masuk }}</li>
                     <li class="list-group-item"><b>Tanggal Keluar : </b>{{ $legalitas->tgl_keluar }}</li>
+                    <li class="list-group-item"><b>Keterangan : </b>{{ $legalitas->keterangan }}</li>
                 </ul>
             </div>
             <a class="btn btn-success mt-3 mb-3" href="{{ route('legalitas.index') }}">Kembali</a>

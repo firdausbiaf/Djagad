@@ -88,15 +88,17 @@
                                       </div>
                                   @enderror
                     </div>
-                    <div class="form-check">
-                        {{-- <button class="btn btn-primary btn-block" type="submit">Log In</button> --}}
-                        <a class="forgot" href="/register">Don't have any account?</a>
-                        <button type="submit" class="btn btn-login float-right">Log In</button>
+                    <div class="form-check d-flex justify-content-center">
+                        <button type="submit" class="btn btn-login">Log In</button>
                     </div>
                 </form>
+                <div class="d-flex justify-content-center">
+                    <a class="forgot" href="/register">Don't have any account?</a>
+                </div>
             </div>            
         </div>
     </div>
+    
 
     <!-- Modal -->
     <div id="myModal" class="modal fade ">

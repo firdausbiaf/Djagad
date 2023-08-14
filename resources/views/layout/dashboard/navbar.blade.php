@@ -7,7 +7,7 @@
       </div>
       <div>
           <img src="{{ asset('images/logologo.png') }}" alt="logo" width="100%" height=auto>
-          <img src="{{ asset('images/logologo.png') }}" alt="logo" width="100%" height=auto>
+          {{-- <img src="{{ asset('images/logologo.png') }}" alt="logo" width="100%" height=auto> --}}
       </div>
     </div>
     <div class="navbar-menu-wrapper d-flex align-items-top"> 

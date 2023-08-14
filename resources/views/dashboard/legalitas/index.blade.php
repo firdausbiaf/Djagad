@@ -15,10 +15,11 @@
                 <th scope="col">No.</th>
                 <th scope="col">Nomor Legalitas</th>
                 <th scope="col">Kavling</th>
-                <th scope="col">Uang Masuk</th>
                 <th scope="col">Tanggal Masuk</th>
-                <th scope="col">Uang Keluar</th>
                 <th scope="col">Tanggal Keluar</th>
+                <th scope="col">Masuk</th>
+                <th scope="col">Keluar</th>
+                <th scope="col">Keterangan</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -34,34 +35,18 @@
                 @endphp
                 <td>{{ $legal->nomor }}</td>
                 <td>{{ $legal->data->kavling }}</td>
-                <td>       
-                    @if( $legal->uang_masuk  == 0)
-                    <form action="/uang_masuk_out" method="get" class="d-inline">
-                    @csrf
-                    <input type="hidden" name="id" value="{{ $legal->id }}">
-                    <button type="submit" class="badge bg-warning border-0" ><span>&#10005;</span></button>
-                    </form>
-
-                    @else
-                    <form action="/uang_masuk_in" method="get" class="d-inline">
-                    @csrf
-                    <input type="hidden" name="id" value="{{ $legal->id }}">
-                    <button type="submit" class="badge bg-success border-0" ><span>&#10003;</span></button>
-                    </form>
-
-                    @endif          
-                </td>
                 <td>{{ $legal->tgl_masuk }}</td>
+                <td>{{ $legal->tgl_keluar }}</td>
                 <td>       
-                    @if( $legal->uang_keluar == 0)
-                    <form action="/uang_keluar_out" method="get" class="d-inline">
+                    @if( $legal->masuk  == 0)
+                    <form action="/masuk_out" method="get" class="d-inline">
                     @csrf
                     <input type="hidden" name="id" value="{{ $legal->id }}">
                     <button type="submit" class="badge bg-warning border-0" ><span>&#10005;</span></button>
                     </form>
 
                     @else
-                    <form action="/uang_keluar_in" method="get" class="d-inline">
+                    <form action="/masuk_in" method="get" class="d-inline">
                     @csrf
                     <input type="hidden" name="id" value="{{ $legal->id }}">
                     <button type="submit" class="badge bg-success border-0" ><span>&#10003;</span></button>
@@ -69,8 +54,24 @@
 
                     @endif          
                 </td>
-                <td>{{ $legal->tgl_keluar }}</td>
-                
+                <td>       
+                    @if( $legal->keluar == 0)
+                    <form action="/keluar_out" method="get" class="d-inline">
+                    @csrf
+                    <input type="hidden" name="id" value="{{ $legal->id }}">
+                    <button type="submit" class="badge bg-warning border-0" ><span>&#10005;</span></button>
+                    </form>
+
+                    @else
+                    <form action="/keluar_in" method="get" class="d-inline">
+                    @csrf
+                    <input type="hidden" name="id" value="{{ $legal->id }}">
+                    <button type="submit" class="badge bg-success border-0" ><span>&#10003;</span></button>
+                    </form>
+
+                    @endif          
+                </td>
+                <td>{{ $legal->keterangan }}</td>
                 <td>
                     <a href="{{ route('legalitas.show', $legal->id) }}" class="badge bg-info" style="text-decoration: none;">Show</a>
                     <a href="{{ route('legalitas.edit', $legal->id) }}" class="badge bg-warning" style="text-decoration: none;">Edit</a>
