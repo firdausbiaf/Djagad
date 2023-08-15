@@ -14,10 +14,11 @@ class Legalitas extends Model
     protected $fillable = [
         'data_id',
         'nomor',
-        'uang_masuk',
         'tgl_masuk',
-        'uang_keluar',
         'tgl_keluar',
+        'masuk',
+        'keluar',
+        'keterangan',
     ];
 
     // Relasi ke model Data

@@ -29,37 +29,47 @@
         .login-sec{padding: 50px 30px; position:relative;}
         .login-sec .copy-text{position:absolute; width:80%; bottom:20px; font-size:13px; text-align:center;}
         .login-sec .copy-text i{color:#FEB58A;}
-        .login-sec .copy-text a{color:#3c3d8f;}
-        .login-sec h2{margin-bottom:30px; font-weight:800; font-size:30px; color: #3c3d8f;}
-        .login-sec h2:after{content:" "; width:100px; height:5px; background:#3c3d8f; display:block; margin-top:20px; border-radius:3px; margin-left:auto;margin-right:auto}
-        .btn-login{background: #4b4d9a; color:#fff; font-weight:600;}
+        .login-sec .copy-text a{color:#ac2828;}
+        .login-sec h2{margin-bottom:30px; font-weight:800; font-size:30px; color: #ac2828;}
+        .login-sec h2:after{content:" "; width:100px; height:5px; background:#ac2828; display:block; margin-top:20px; border-radius:3px; margin-left:auto;margin-right:auto}
+        .btn-login{background: #523535; color:#fff; font-weight:600;}
         .banner-text{width:70%; position:absolute; bottom:40px; padding-left:20px;}
         .banner-text h2{color:#fff; font-weight:600;}
         .banner-text h2:after{content:" "; width:100px; height:5px; background:#FFF; display:block; margin-top:20px; border-radius:3px;}
         .banner-text p{color:#fff;}
 
         .login-block {
-            background: linear-gradient(to bottom, #d6dffc, #100f70);
+            background: linear-gradient(to bottom, #fffbfb, #ac2828);
             
             float: left;
             width: 100%;
-            min-height: 100vh; /* Set minimum height to cover the viewport */
+            height: 100vh; /* Set minimum height to cover the viewport */
             display: flex;
             justify-content: center;
             align-items: center;
+            align-items: center;
         }
         .carousel-item.active img {
-            width: 100%;
-            height: auto; /* Set the desired height for the carousel (in this example, 100vh will make it full-screen) */
-            object-fit: cover; /* This ensures the image maintains its aspect ratio */
-        }
+    width: 100%;
+    height: 500px; /* Set the desired height */
+    object-fit: cover; /* This ensures the image maintains its aspect ratio */
+  }
+
+  .carousel-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(84, 101, 252, 0.342); /* Blue color with 0.5 opacity */
+  }
 
         @media (max-width: 768px) {
             .login-block {
                         padding: 30px 0;
             }
         }
-
         .carousel-caption {
             position: absolute;
             top: 50%;
@@ -88,7 +98,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(84, 101, 252, 0.342); /* Blue color with 0.5 opacity */
+            background-color: rgba(172, 15, 15, 0.342); /* Blue color with 0.5 opacity */
         }
 
         .modal-dialog {
@@ -104,7 +114,16 @@
             width: 100%;
             text-align: center;
         }
-    </style>
+    .login-form {
+        background-color: rgba(185, 17, 17, 0.856); /* Set your desired background color here */
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .red-input {
+        background-color: rgba(185, 17, 17, 0.856); /* Set your desired background color here */
+    }
+</style>
 
     {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">

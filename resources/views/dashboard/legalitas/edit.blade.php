@@ -54,6 +54,17 @@
             </div>
             @enderror
         </div>
+
+        <div class="mb-3">
+            <label for="keterangan" class="form-label">Keterangan</label>
+            <input type="text" class="form-control @error('nomor') is-invalid @enderror" id="keterangan" name="keterangan" value="{{ old('keterangan', $legalitas->keterangan) }}" required>
+            @error('keterangan')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+
         <button type="submit" class="btn btn-primary">Update</button>
     </form>
 </div>

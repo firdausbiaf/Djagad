@@ -17,10 +17,11 @@ class CreateLegalitasTable extends Migration
             $table->id();
             $table->unsignedBigInteger('data_id');
             $table->string('nomor');
-            $table->integer('uang_masuk')->default(0);
             $table->date('tgl_masuk');
-            $table->integer('uang_keluar')->default(0);
             $table->date('tgl_keluar');
+            $table->integer('keluar')->default(0);
+            $table->integer('masuk')->default(0);
+            $table->string('keterangan');
             $table->timestamps();
 
             $table->foreign('data_id')->references('id')->on('data')->onDelete('cascade');
