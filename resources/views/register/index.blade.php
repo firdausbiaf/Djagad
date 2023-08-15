@@ -102,13 +102,16 @@
                                         </div>
                                     @enderror
                     </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-login float-right">Register</button>
-                    </div>
-                    <div class="form-check">
-                        <a class="forgot" href="/">Have any account?</a></form>
-                    </div>                    
+                    
+<div class="form-group d-flex justify-content-center">
+    <button type="submit" class="btn btn-login mx-auto my-auto">Register</button>
+</div>
+
+                                       
                 </form>
+                <div class="form-group d-flex justify-content-center">
+                <a class="forgot text-center" href="/">Have any account?</a>
+            </div> 
             </div>            
         </div>
     </div>

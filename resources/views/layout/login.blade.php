@@ -32,7 +32,7 @@
         .login-sec .copy-text a{color:#ac2828;}
         .login-sec h2{margin-bottom:30px; font-weight:800; font-size:30px; color: #ac2828;}
         .login-sec h2:after{content:" "; width:100px; height:5px; background:#ac2828; display:block; margin-top:20px; border-radius:3px; margin-left:auto;margin-right:auto}
-        .btn-login{background: #523535; color:#fff; font-weight:600;}
+        .btn-login{background: #ffffff; color:#791111; font-weight:600;}
         .banner-text{width:70%; position:absolute; bottom:40px; padding-left:20px;}
         .banner-text h2{color:#fff; font-weight:600;}
         .banner-text h2:after{content:" "; width:100px; height:5px; background:#FFF; display:block; margin-top:20px; border-radius:3px;}
@@ -47,7 +47,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            align-items: center;
+            
         }
         .carousel-item.active img {
     width: 100%;
@@ -118,7 +118,9 @@
         background-color: rgba(185, 17, 17, 0.856); /* Set your desired background color here */
         padding: 20px;
         border-radius: 10px;
+        text-align: center;
     }
+    
 
     .red-input {
         background-color: rgba(185, 17, 17, 0.856); /* Set your desired background color here */
