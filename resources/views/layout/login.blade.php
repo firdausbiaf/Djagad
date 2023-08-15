@@ -50,10 +50,20 @@
             align-items: center;
         }
         .carousel-item.active img {
-            width: 100%;
-            height: auto; /* Set the desired height for the carousel (in this example, 100vh will make it full-screen) */
-            object-fit: cover; /* This ensures the image maintains its aspect ratio */
-        }
+    width: 100%;
+    height: 500px; /* Set the desired height */
+    object-fit: cover; /* This ensures the image maintains its aspect ratio */
+  }
+
+  .carousel-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(84, 101, 252, 0.342); /* Blue color with 0.5 opacity */
+  }
 
         @media (max-width: 768px) {
             .login-block {
