@@ -141,13 +141,19 @@
                                                                             @endphp
                                                                             <div id="fotoCarousel-{{ $item->id }}" class="carousel slide" data-bs-ride="carousel">
                                                                                 <div class="carousel-inner">
-                                                                                    @foreach($itemFoto as $index => $f)
-                                                                                        <div class="carousel-item @if ($index === 0) active @endif">
-                                                                                            <div class="d-flex justify-content-center align-items-center" style="height: 190px;">
-                                                                                                <img src="{{ asset('storage/' . $f->photo) }}" class="d-block" alt="Foto" style="max-height: 100%; object-fit: cover;">
-                                                                                            </div>
+                                                                                    @if($itemFoto->count() == 0)
+                                                                                        <div class="d-flex justify-content-center align-items-center" style="height: 190px;">
+                                                                                            <img src="{{ asset('images/proses.png') }}" class="d-block" alt="Foto" style="max-height: 100%; object-fit: cover;">
                                                                                         </div>
-                                                                                    @endforeach
+                                                                                    @else
+                                                                                        @foreach($itemFoto as $index => $f)
+                                                                                            <div class="carousel-item @if ($index === 0) active @endif">
+                                                                                                <div class="d-flex justify-content-center align-items-center" style="height: 190px;">
+                                                                                                    <img src="{{ asset('storage/' . $f->photo) }}" class="d-block" alt="Foto" style="max-height: 100%; object-fit: cover;">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        @endforeach
+                                                                                    @endif
                                                                                 </div>
                                                                                 <button class="carousel-control-prev custom-carousel-prev" type="button" data-bs-target="#fotoCarousel-{{ $item->id }}" data-bs-slide="prev">
                                                                                     <span class="carousel-control-prev-icon custom-carousel-prev-icon" aria-hidden="true"></span>
