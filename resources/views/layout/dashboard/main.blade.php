@@ -239,7 +239,7 @@
     <!-- page-body-wrapper ends -->
   </div>
   <!-- partial:partials/_footer.html -->
-  @include('layout.dashboard.footer')
+  {{-- @include('layout.dashboard.footer') --}}
   <!-- container-scroller -->
 
   <!-- plugins:js -->
