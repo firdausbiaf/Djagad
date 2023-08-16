@@ -14,7 +14,7 @@
         <div class="col">
             <center><br>
                 <h3 class="display-4 text-white">Djagad Land Group</h3>
-                <h4 class="text-white text-uppercase mb-3">Pilihan Investasi Terbaik</h4><br>
+                <h4 class="text-white text-uppercase mb-3">Make Your Live Harmony</h4><br>
             </center>
             @auth
                 @if(auth()->user()->role == "member" && $data)
@@ -139,7 +139,7 @@
                                                                             @php
                                                                                 $itemFoto = $foto->where('data_id', $item->id)->sortByDesc('created_at')->take(4);
                                                                             @endphp
-                                                                            <div class="row" style="width: 90%; margin-left: 20px">
+                                                                            <div class="row" style="width: 90%; margin-left: 30px">
                                                                                 <div class="col-md-12">
                                                                                     <div id="progressPhotoCarousel-{{ $item->id }}" class="carousel slide" data-bs-ride="carousel">
                                                                                         <div class="carousel-inner">
@@ -149,15 +149,16 @@
                                                                                                 </div>
                                                                                             @endforeach
                                                                                         </div>
-                                                                                        <button class="carousel-control-prev custom-carousel-prev" type="button" data-bs-target="#progressPhotoCarousel-{{ $item->id }}" data-bs-slide="prev">
-                                                                                            <span class="carousel-control-prev-icon custom-carousel-prev-icon" aria-hidden="true"></span>
-                                                                                            <span class="visually-hidden">Previous</span>
-                                                                                        </button>
-                                                                                        <button class="carousel-control-next custom-carousel-next" type="button" data-bs-target="#progressPhotoCarousel-{{ $item->id }}" data-bs-slide="next">
-                                                                                            <span class="carousel-control-next-icon custom-carousel-next-icon" aria-hidden="true"></span>
-                                                                                            <span class="visually-hidden">Next</span>
-                                                                                        </button>
+                                                                                        
                                                                                     </div>
+                                                                                    <button class="carousel-control-prev custom-carousel-prev" type="button" data-bs-target="#progressPhotoCarousel-{{ $item->id }}" data-bs-slide="prev">
+                                                                                        <span class="carousel-control-prev-icon custom-carousel-prev-icon" aria-hidden="true"></span>
+                                                                                        <span class="visually-hidden">Previous</span>
+                                                                                    </button>
+                                                                                    <button class="carousel-control-next custom-carousel-next" type="button" data-bs-target="#progressPhotoCarousel-{{ $item->id }}" data-bs-slide="next">
+                                                                                        <span class="carousel-control-next-icon custom-carousel-next-icon" aria-hidden="true"></span>
+                                                                                        <span class="visually-hidden">Next</span>
+                                                                                    </button>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
