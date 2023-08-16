@@ -143,11 +143,17 @@
                                                                                 <div class="col-md-12">
                                                                                     <div id="progressPhotoCarousel-{{ $item->id }}" class="carousel slide" data-bs-ride="carousel">
                                                                                         <div class="carousel-inner">
-                                                                                            @foreach($itemFoto as $f)
-                                                                                                <div class="carousel-item @if ($loop->first) active @endif">
-                                                                                                    <img src="{{ asset('storage/' . $f->photo) }}" class="card-img-top" alt="Foto" style="width: 100%; height: 200px; object-fit: cover;">
+                                                                                            @if($itemFoto->count() == 0)
+                                                                                                <div class="d-flex justify-content-center align-items-center" style="height: 190px;">
+                                                                                                    <img src="{{ asset('images/proses.png') }}" class="d-block" alt="Foto" style="max-height: 100%; object-fit: cover;">
                                                                                                 </div>
-                                                                                            @endforeach
+                                                                                            @else
+                                                                                                @foreach($itemFoto as $f)
+                                                                                                    <div class="carousel-item @if ($loop->first) active @endif">
+                                                                                                        <img src="{{ asset('storage/' . $f->photo) }}" class="card-img-top" alt="Foto" style="width: 100%; height: 200px; object-fit: cover;">
+                                                                                                    </div>
+                                                                                                @endforeach
+                                                                                            @endif
                                                                                         </div>
                                                                                         
                                                                                     </div>
