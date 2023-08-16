@@ -44,6 +44,31 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <style>
+      /* Ganti ukuran slide gambar progress sesuai kebutuhan Anda */
+      #progressPhotoCarousel .carousel-inner img {
+          width: 100%;
+          height: 200px;
+          object-fit: cover;
+      }
+  
+      /* Ganti gaya tombol kontrol slide sesuai kebutuhan Anda */
+      .custom-carousel-prev,
+      .custom-carousel-next {
+          background-color: rgba(0, 0, 0, 0.8);
+          border: none;
+          border-radius: 50%;
+          color: white;
+      }
+  
+      /* Ganti gaya ikon tombol kontrol slide */
+      .custom-carousel-prev-icon,
+      .custom-carousel-next-icon {
+          font-size: 1.5rem;
+      }
+  </style>
+  
+
+    <style>
       /* Warna garis panah carousel sebelumnya dan sesudahnya */
       .custom-carousel-prev-icon,
       .custom-carousel-next-icon {

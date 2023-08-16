@@ -127,7 +127,7 @@
                                                 {{-- <div class="d-flex align-items-center justify-content-between mb-4"> --}}
                                                 <div class="row">
                                                     {{-- <h6 class="mb-0">Foto Progress</h6> --}}
-                                                    <div class="card shadow mb-4">
+                                                    <div class="card shadow">
                                                         <div class="card-header py-3">
                                                             <h6 class="m-0 font-weight-bold text-primary">PROGRESS PEMBANGUNAN</h6>
                                                         </div>
@@ -139,24 +139,26 @@
                                                                             @php
                                                                                 $itemFoto = $foto->where('data_id', $item->id)->sortByDesc('created_at')->take(4);
                                                                             @endphp
-                                                                            <div id="fotoCarousel-{{ $item->id }}" class="carousel slide" data-bs-ride="carousel">
-                                                                                <div class="carousel-inner">
-                                                                                    @foreach($itemFoto as $index => $f)
-                                                                                        <div class="carousel-item @if ($index === 0) active @endif">
-                                                                                            <div class="d-flex justify-content-center align-items-center" style="height: 190px;">
-                                                                                                <img src="{{ asset('storage/' . $f->photo) }}" class="d-block" alt="Foto" style="max-height: 100%; object-fit: cover;">
-                                                                                            </div>
+                                                                            <div class="row" style="width: 90%; margin-left: 20px">
+                                                                                <div class="col-md-12">
+                                                                                    <div id="progressPhotoCarousel-{{ $item->id }}" class="carousel slide" data-bs-ride="carousel">
+                                                                                        <div class="carousel-inner">
+                                                                                            @foreach($itemFoto as $f)
+                                                                                                <div class="carousel-item @if ($loop->first) active @endif">
+                                                                                                    <img src="{{ asset('storage/' . $f->photo) }}" class="card-img-top" alt="Foto" style="width: 100%; height: 200px; object-fit: cover;">
+                                                                                                </div>
+                                                                                            @endforeach
                                                                                         </div>
-                                                                                    @endforeach
+                                                                                        <button class="carousel-control-prev custom-carousel-prev" type="button" data-bs-target="#progressPhotoCarousel-{{ $item->id }}" data-bs-slide="prev">
+                                                                                            <span class="carousel-control-prev-icon custom-carousel-prev-icon" aria-hidden="true"></span>
+                                                                                            <span class="visually-hidden">Previous</span>
+                                                                                        </button>
+                                                                                        <button class="carousel-control-next custom-carousel-next" type="button" data-bs-target="#progressPhotoCarousel-{{ $item->id }}" data-bs-slide="next">
+                                                                                            <span class="carousel-control-next-icon custom-carousel-next-icon" aria-hidden="true"></span>
+                                                                                            <span class="visually-hidden">Next</span>
+                                                                                        </button>
+                                                                                    </div>
                                                                                 </div>
-                                                                                <button class="carousel-control-prev custom-carousel-prev" type="button" data-bs-target="#fotoCarousel-{{ $item->id }}" data-bs-slide="prev">
-                                                                                    <span class="carousel-control-prev-icon custom-carousel-prev-icon" aria-hidden="true"></span>
-                                                                                    <span class="visually-hidden">Previous</span>
-                                                                                </button>
-                                                                                <button class="carousel-control-next custom-carousel-next" type="button" data-bs-target="#fotoCarousel-{{ $item->id }}" data-bs-slide="next">
-                                                                                    <span class="carousel-control-next-icon custom-carousel-next-icon" aria-hidden="true"></span>
-                                                                                    <span class="visually-hidden">Next</span>
-                                                                                </button>
                                                                             </div>
                                                                         </div>
                                                                     @endforeach
@@ -172,41 +174,32 @@
                                         <div class="row mb-3" style="max-height: 380px; overflow: hidden;">
                                             <div class="bg-light rounded-card p-4">
                                                 <div class="row">
-                                                    <div class="card shadow mb-4">
-                                                        <div class="card-header py-3">
-                                                            <h6 class="m-0 font-weight-bold text-primary">PROMO</h6>
-                                                        </div>
-                                                        <div class="card-body">
-                                                            <div class="table-responsive col-md-10 mx-4 mt-1">
-                                                                <div id="promoCarousel" class="carousel slide" data-bs-ride="carousel">
-                                                                    <div class="carousel-inner">
-                                                                        @php
-                                                                            $latestPromo = $promo->sortByDesc('created_at')->take(4);
-                                                                        @endphp
-                                        
-                                                                        @foreach ($latestPromo as $index => $pro)
-                                                                            <div class="carousel-item @if ($index === 0) active @endif">
-                                                                                @if ($pro->gambar)
-                                                                                <div class="d-flex justify-content-center align-items-center" style="height: 200px;">
-                                                                                    <img src="{{ asset('storage/' . $pro->gambar) }}" class="d-block" alt="Promo Gambar" style="max-height: 100%; object-fit: cover;">
-                                                                                </div>
-                                                                                @else
-                                                                                    <p>Tidak ada gambar</p>
-                                                                                @endif
-                                                                            </div>
-                                                                        @endforeach
+                                                    <div id="promoCarousel" class="carousel slide" data-bs-ride="carousel">
+                                                        <div class="carousel-inner">
+                                                            @php
+                                                                $latestPromo = $promo->sortByDesc('created_at')->take(4);
+                                                            @endphp
+                            
+                                                            @foreach ($latestPromo as $index => $pro)
+                                                                <div class="carousel-item @if ($index === 0) active @endif">
+                                                                    @if ($pro->gambar)
+                                                                    <div class="d-flex justify-content-center align-items-center" style="height: 330px;">
+                                                                        <img src="{{ asset('storage/' . $pro->gambar) }}" class="d-block" alt="Promo Gambar" style="max-height: 100%; object-fit: cover;">
                                                                     </div>
-                                                                    <button class="carousel-control-prev custom-carousel-prev" type="button" data-bs-target="#promoCarousel" data-bs-slide="prev">
-                                                                        <span class="carousel-control-prev-icon custom-carousel-prev-icon" aria-hidden="true"></span>
-                                                                        <span class="visually-hidden">Previous</span>
-                                                                    </button>
-                                                                    <button class="carousel-control-next custom-carousel-next" type="button" data-bs-target="#promoCarousel" data-bs-slide="next">
-                                                                        <span class="carousel-control-next-icon custom-carousel-next-icon" aria-hidden="true"></span>
-                                                                        <span class="visually-hidden">Next</span>
-                                                                    </button>                                                                                                                                                                                                         
+                                                                    @else
+                                                                        <p>Tidak ada gambar</p>
+                                                                    @endif
                                                                 </div>
-                                                            </div>
+                                                            @endforeach
                                                         </div>
+                                                        <button class="carousel-control-prev custom-carousel-prev" type="button" data-bs-target="#promoCarousel" data-bs-slide="prev">
+                                                            <span class="carousel-control-prev-icon custom-carousel-prev-icon" aria-hidden="true"></span>
+                                                            <span class="visually-hidden">Previous</span>
+                                                        </button>
+                                                        <button class="carousel-control-next custom-carousel-next" type="button" data-bs-target="#promoCarousel" data-bs-slide="next">
+                                                            <span class="carousel-control-next-icon custom-carousel-next-icon" aria-hidden="true"></span>
+                                                            <span class="visually-hidden">Next</span>
+                                                        </button>                                                                                                                                                                                                         
                                                     </div>
                                                 </div>
                                             </div>

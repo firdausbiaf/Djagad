@@ -30,7 +30,7 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label for="gambar_preview" class="form-label">Preview Gambar</label>
+            <label for="gambar_preview" class="form-label"></label>
             <img id="gambar_preview" style="max-width: 200px; max-height: 200px;" src="{{ asset('storage/'.$promo->gambar) }}" alt="Preview">
         </div>
         <button type="submit" class="btn btn-primary">Update</button>
