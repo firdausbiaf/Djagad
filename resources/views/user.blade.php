@@ -14,7 +14,7 @@
         <div class="col">
             <center><br>
                 <h3 class="display-4 text-white">Djagad Land Group</h3>
-                <h4 class="text-white text-uppercase mb-3">Make Your Live Harmony</h4><br>
+                <h4 class="text-white text-uppercase mb-3">Make Your Living Harmony</h4><br>
             </center>
             @auth
                 @if(auth()->user()->role == "member" && $data)

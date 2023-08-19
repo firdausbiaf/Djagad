@@ -93,7 +93,7 @@
   </head>
 <style>
   body{
-    background-image: linear-gradient(rgba(27, 27, 27, 0.445), rgba(13, 10, 20, 0.76)),url("https://www.djagadland.com/wp-content/uploads/2021/09/Type-57-1-600x450.jpg");
+    background-image: linear-gradient(rgba(1, 0, 0, 0.80), rgba(13, 10, 20, 0.76)),url("https://www.djagadland.com/wp-content/uploads/2021/09/Type-57-1-600x450.jpg");
   }
 </style>
   <body>
