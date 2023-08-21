@@ -4,10 +4,24 @@
 <div class="table-responsive col-lg-10 mx-5 mt-4">
     <h2>Data User</h2><br>
     <a href="{{ route('data.create') }}" class="btn btn-primary mx-2">Tambah Data</a>
+
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
       Import
     </button>
+
+    <div class="row justify-content-end mb-3">
+      <div class="col-md-4">
+          <form action="{{ route('data.search') }}" method="GET">
+              <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Cari.... " name="search">
+                  <button class="btn btn-danger btn-sm" type="submit">Cari</button>
+              </div>
+          </form>
+      </div>
+  </div>
+  
+  
   
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

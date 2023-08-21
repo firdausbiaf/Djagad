@@ -250,4 +250,31 @@ class DataController extends Controller
 
         // return redirect()->route('data.index')->with('success', 'Data berhasil diimpor dari Excel.');
     }
+
+    public function search(Request $request)
+{
+    $search = $request->input('search'); // Ambil kata kunci pencarian dari input
+
+    // Gunakan fitur pencarian hanya jika kata kunci pencarian ada
+    if ($search) {
+        $data = Data::select("*")
+            ->when($search, function ($query, $search) {
+                return $query->whereHas('user', function ($query) use ($search) {
+                    $query->where('name', 'LIKE', "%{$search}%");
+                })
+                ->orWhere('lokasi', 'LIKE', "%{$search}%")
+                ->orWhere('kavling', 'LIKE', "%{$search}%")
+                ->orWhere('sales', 'LIKE', "%{$search}%");
+            })
+            ->orderBy("id", "asc")
+            ->paginate(10);
+    } else {
+        // Jika tidak ada kata kunci pencarian, tampilkan semua data seperti sebelumnya
+        $data = Data::select("*")->orderBy("id", "asc")->paginate(10);
+    }
+
+    return view('dashboard.data.index', compact('data', 'search'));
+}
+
+
 }
