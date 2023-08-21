@@ -12,14 +12,11 @@
                     <li class="list-group-item"><b>ID : </b>{{ $data->id }}</li>
                     <li class="list-group-item"><b>Nama User : </b>{{ $data->user->name }}</li>
                     <li class="list-group-item"><b>Telepon : </b>{{ $data->user->phone }}</li>
-                    <li class="list-group-item"><b>Alamat : </b>{{ $data->alamat }}</li>
                     <li class="list-group-item"><b>Kavling : </b>{{ $data->kavling }}</li>
                     <li class="list-group-item"><b>Lokasi : </b>{{ $data->lokasi }}</li>
                     <li class="list-group-item"><b>Tipe : </b>{{ $data->tipe }}</li>
                     <li class="list-group-item"><b>SPK : </b>{{ $data->spk }}</li>
                     <li class="list-group-item"><b>Harga Deal : </b>{{ $data->harga_deal }}</li>
-                    <li class="list-group-item"><b>Cicilan Ke: </b>{{ $data->cicilan }}</li>
-                    <li class="list-group-item"><b>Uang Masuk </b>{{ $data->uang_masuk }}</li>
                     <li class="list-group-item"><b>Progres : </b>{{ $data->progres }} %</li>
                 </ul>
             </div>

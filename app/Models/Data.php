@@ -13,15 +13,15 @@ class Data extends Model
 
     protected $fillable = [
         'user_id',
-        'alamat',
         'kavling',
         'lokasi',
         'tipe',
         'spk',
+        'ptb',
         'harga_deal',
-        'cicilan',
-        'uang_masuk',
         'progres',
+        'sales',
+        'ktp',
     ];
 
     // Relasi ke model User

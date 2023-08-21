@@ -1,4 +1,10 @@
 <!-- Footer -->
+
+<head>
+  <!-- ... existing meta tags ... -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
 <div class="container-fluid" style="padding: 0;">
   <footer class="text-center text-lg-start text-white" style="background-color: #910000">
     <!-- Section: Social media -->
@@ -114,6 +120,57 @@
         </div>
         <!-- Grid column -->
       </div>
+
+      <!-- ... existing HTML code ... -->
+
+<style>
+  /* General styles */
+  .container-fluid {
+    padding: 0;
+  }
+
+  /* Media query for mobile devices */
+  @media (max-width: 767px) {
+    /* Adjust the padding and font size for better mobile appearance */
+    .text-lg-start {
+      padding: 15px;
+    }
+    
+    /* Center align text for better mobile appearance */
+    .text-center {
+      text-align: center !important;
+    }
+    
+    /* Adjust spacing for social media icons */
+    .d-flex.justify-content-between.p-4 {
+      padding: 15px 0;
+    }
+
+    /* Make the icons smaller on mobile */
+    .icon-large {
+      font-size: 20px;
+    }
+
+    /* Adjust spacing between logo images */
+    .navbar-brand {
+      margin-bottom: 10px;
+    }
+
+    /* Adjust margin for the last logo image */
+    .d-inline-block.align-text-top:last-child {
+      margin-left: 0;
+    }
+
+    /* Adjust address font size and spacing */
+    .address {
+      flex-direction: column;
+      align-items: flex-start;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+  }
+</style>
+
       <!-- Grid row -->
     </section>
     <!-- Section: Links  -->

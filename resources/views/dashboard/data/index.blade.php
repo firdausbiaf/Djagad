@@ -41,15 +41,15 @@
                 <th scope="col">No.</th>
                 <th scope="col">Nama User</th>
                 <th scope="col">Telepon</th>
-                <th scope="col">Alamat</th>
                 <th scope="col">Lokasi</th>
                 <th scope="col">Kavling</th>
                 <th scope="col">Tipe</th>
                 <th scope="col">SPK</th>
+                <th scope="col">PTB</th>
                 <th scope="col">Harga Deal</th>
-                <th scope="col">Cicilan Ke</th>
-                <th scope="col">Uang Masuk</th>
                 <th scope="col">Progres (%)</th>
+                <th scope="col">Sales</th>
+                <th scope="col">KTP</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -65,15 +65,18 @@
                 @endphp
                 <td>{{ $item->user->name }}</td>
                 <td>{{ $item->user->phone }}</td>
-                <td>{{ $item->alamat }}</td>
                 <td>{{ $item->lokasi }}</td>
                 <td>{{ $item->kavling }}</td>
                 <td>{{ $item->tipe }}</td>
                 <td>{{ $item->spk }}</td>
+                <td>{{ $item->ptb }}</td>
                 <td>{{ $item->harga_deal }}</td>
-                <td>{{ $item->cicilan }}</td>
-                <td>{{ $item->uang_masuk }}</td>
                 <td>{{ $item->progres }} %</td>
+                <td>{{ $item->sales }}</td>
+                <td>
+                  <a href="{{ route('data.view_ktp', $item->id) }}" class="badge bg-success" style="text-decoration: none;">Klik</a>
+
+                </td>
                 <td>
                     <a href="{{ route('data.show', $item->id) }}" class="badge bg-info" style="text-decoration: none;">Show</a>
                     <a href="{{ route('data.edit', $item->id) }}" class="badge bg-warning" style="text-decoration: none;">Edit</a>
