@@ -93,6 +93,8 @@ Route::resource('/admin/promo', PromoController::class)->middleware('checkRole:a
 Route::get('/admin/foto', [FotoController::class, 'index'])->name('foto.index');
 Route::get('/admin/foto/filter', [FotoController::class, 'filter'])->name('foto.filter');
 Route::resource('/admin/foto', FotoController::class)->except(['index', 'filter']);
+Route::get('/data/search', [DataController::class, 'search'])->name('data.search');
+
 
 Route::post('/importexcel', [DataController::class, 'importExcel'])->name('import.excel');
 
