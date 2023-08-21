@@ -162,39 +162,38 @@
                                         </div>
 
                                         {{-- Promo --}}
-                                        <div class="row mb-3" style="max-height: 380px; overflow: hidden;">
-                                            <div class="bg-light rounded-card p-4">
-                                                <div class="row">
-                                                    <div id="promoCarousel" class="carousel slide" data-bs-ride="carousel">
-                                                        <div class="carousel-inner">
-                                                            @php
-                                                                $latestPromo = $promo->sortByDesc('created_at')->take(4);
-                                                            @endphp
-                            
-                                                            @foreach ($latestPromo as $index => $pro)
-                                                                <div class="carousel-item @if ($index === 0) active @endif">
-                                                                    @if ($pro->gambar)
-                                                                    <div class="d-flex justify-content-center align-items-center" style="height: 330px;">
-                                                                        <img src="{{ asset('storage/' . $pro->gambar) }}" class="d-block" alt="Promo Gambar" style="max-height: 100%; object-fit: cover;">
-                                                                    </div>
-                                                                    @else
-                                                                        <p>Tidak ada gambar</p>
-                                                                    @endif
+                                        <div class="row mb-3 d-flex justify-content-center align-items-center">
+                                            <div class="row">
+                                                <div id="promoCarousel" class="carousel slide" data-bs-ride="carousel">
+                                                    <div class="carousel-inner">
+                                                        @php
+                                                            $latestPromo = $promo->sortByDesc('created_at')->take(4);
+                                                        @endphp
+
+                                                        @foreach ($latestPromo as $index => $pro)
+                                                            <div class="carousel-item @if ($index === 0) active @endif">
+                                                                @if ($pro->gambar)
+                                                                <div class="d-flex justify-content-center align-items-center" style="height: 0; padding-bottom: 100%; position: relative; overflow: hidden;">
+                                                                    <img src="{{ asset('storage/' . $pro->gambar) }}" class="d-block position-absolute top-0 start-0" alt="Promo Gambar" style="width: 100%; height: 100%; object-fit: cover;">
                                                                 </div>
-                                                            @endforeach
-                                                        </div>
-                                                        <button class="carousel-control-prev custom-carousel-prev" type="button" data-bs-target="#promoCarousel" data-bs-slide="prev">
-                                                            <span class="carousel-control-prev-icon custom-carousel-prev-icon" aria-hidden="true"></span>
-                                                            <span class="visually-hidden">Previous</span>
-                                                        </button>
-                                                        <button class="carousel-control-next custom-carousel-next" type="button" data-bs-target="#promoCarousel" data-bs-slide="next">
-                                                            <span class="carousel-control-next-icon custom-carousel-next-icon" aria-hidden="true"></span>
-                                                            <span class="visually-hidden">Next</span>
-                                                        </button>                                                                                                                                                                                                         
+                                                                @else
+                                                                    <p>Tidak ada gambar</p>
+                                                                @endif
+                                                            </div>
+                                                        @endforeach
                                                     </div>
+                                                    <button class="carousel-control-prev custom-carousel-prev" type="button" data-bs-target="#promoCarousel" data-bs-slide="prev">
+                                                        <span class="carousel-control-prev-icon custom-carousel-prev-icon" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Previous</span>
+                                                    </button>
+                                                    <button class="carousel-control-next custom-carousel-next" type="button" data-bs-target="#promoCarousel" data-bs-slide="next">
+                                                        <span class="carousel-control-next-icon custom-carousel-next-icon" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Next</span>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
