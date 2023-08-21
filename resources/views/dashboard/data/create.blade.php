@@ -24,15 +24,6 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label for="alamat" class="form-label">Alamat</label>
-            <input type="text" class="form-control @error('kavling') is-invalid @enderror" id="alamat" name="alamat" value="{{ old('alamat') }}" required>
-            @error('alamat')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-            @enderror
-        </div>
-        <div class="mb-3">
             <label for="lokasi" class="form-label">Lokasi</label>
             <select class="form-select @error('lokasi') is-invalid @enderror" id="lokasi" name="lokasi" required>
                 <option value="">Pilih Lokasi</option>
@@ -75,6 +66,15 @@
             @enderror
         </div>
         <div class="mb-3">
+            <label for="ptb" class="form-label">PTB</label>
+            <input type="text" class="form-control @error('spk') is-invalid @enderror" id="ptb" name="ptb" value="{{ old('ptb') }}" required>
+            @error('ptb')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="mb-3">
             <label for="harga_deal" class="form-label">Harga Deal</label>
             <input type="number" class="form-control @error('cicilan') is-invalid @enderror" id="harga_deal" name="harga_deal" value="{{ old('harga_deal') }}" required>
             @error('harga_deal')
@@ -83,24 +83,7 @@
             </div>
             @enderror
         </div>
-        <div class="mb-3">
-            <label for="cicilan" class="form-label">Cicilan Ke</label>
-            <input type="number" class="form-control @error('cicilan') is-invalid @enderror" id="cicilan" name="cicilan" value="{{ old('cicilan') }}" required>
-            @error('cicilan')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-            @enderror
-        </div>
-        <div class="mb-3">
-            <label for="uang_masuk" class="form-label">Uang Masuk</label>
-            <input type="number" class="form-control @error('cicilan') is-invalid @enderror" id="uang_masuk" name="uang_masuk" value="{{ old('uang_masuk') }}" required>
-            @error('uang_masuk')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-            @enderror
-        </div>
+        
         <div class="mb-3">
             <label for="progres" class="form-label">Progres (%)</label>
             <input type="number" class="form-control @error('progres') is-invalid @enderror" id="progres" name="progres" value="{{ old('progres') }}" required>
@@ -110,6 +93,31 @@
             </div>
             @enderror
         </div>
+        <div class="mb-3">
+            <label for="sales" class="form-label">Sales</label>
+            <input type="text" class="form-control @error('kavling') is-invalid @enderror" id="sales" name="sales" value="{{ old('sales') }}" required>
+            @error('sales')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+
+        <div class="mb-3">
+            <label for="ktp" class="form-label @error('photo') is-invalid @enderror">KTP</label>
+            <div>
+                <input class="form-control" type="file" id="ktp" name="ktp[]" onchange="previewImage()" multiple>
+            </div>
+            @error('ktp')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+
+            <!-- Tambahkan elemen img-preview di sini -->
+            <img class="img-preview mt-2" style="max-width: 200px; max-height: 200px;" src="" alt="Preview">
+        </div>
+
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>

@@ -60,10 +60,6 @@
                                                                                 <td>{{ $item->user->phone }}</td>
                                                                             </tr>
                                                                             <tr>
-                                                                                <th scope="row">Alamat</th>
-                                                                                <td>{{ $item->alamat }}</td>
-                                                                            </tr>
-                                                                            <tr>
                                                                                 <th scope="row">Kavling</th>
                                                                                 <td>{{ $item->kavling }}</td>
                                                                             </tr>
@@ -79,18 +75,7 @@
                                                                                 <th scope="row">Harga Deal</th>
                                                                                 <td>{{ $item->harga_deal }}</td>
                                                                             </tr>
-                                                                            <tr>
-                                                                                <th scope="row">Cicilan Ke</th>
-                                                                                <td>{{ $item->cicilan }}</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">Uang Masuk</th>
-                                                                                <td>{{ $item->uang_masuk }}</td>
-                                                                            </tr>
-                                                                            {{-- <tr>
-                                                                                <th scope="row">SPK</th>
-                                                                                <td>{{ $item->spk }}</td>
-                                                                            </tr> --}}
+                                                                            
                                                                             <tr>
                                                                                 <th scope="row">Progres (%)</th>
                                                                                 <td>{{ $item->progres }} %</td>
