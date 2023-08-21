@@ -60,7 +60,7 @@
             <div class="row">
                 <div class="col-lg-6 mb-3">
                     <a class="navbar-brand" href="/">
-                        <img src="{{ asset('images\singosari.png') }}" alt="logo" height="35" class="d-inline-block align-text-top" style="margin-left: 110px;">     
+                        <img src="{{ asset('images\singosari.png') }}" alt="logo" height="35" class="d-inline-block align-text-top">     
                     </a>
                 </div>
                 <div class="col-lg-6 mb-3">

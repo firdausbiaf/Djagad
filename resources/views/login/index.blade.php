@@ -13,7 +13,7 @@
                     </ol> --}}
                     <div class="carousel-inner" role="listbox">
                         <div class="carousel-item active">
-                            <img class="d-block img-fluid" src="https://www.djagadland.com/wp-content/uploads/2021/09/Type-57-1-600x450.jpg" alt="First slide">
+                            <img class="d-block img-fluid" src="{{ asset('images\foto-login.png') }}" alt="First slide">
                             <div class="carousel-caption">
                                 <h1 class="display-3 text-white">Djagad Land Group</h1>
                                 <h3 class="text-white text-uppercase mb-3">Pilihan Investasi Terbaik</h3>

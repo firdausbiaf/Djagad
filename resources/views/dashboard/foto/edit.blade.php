@@ -52,6 +52,16 @@
             <!-- Tambahkan elemen img-preview di sini -->
             <img class="img-preview mt-2" style="max-width: 200px; max-height: 200px;" src="{{ asset('storage/' . $foto->photo) }}" alt="Preview">
         </div>
+        <div class="mb-3">
+            <label for="komplain" class="form-label">Komplain</label>
+            <textarea class="form-control @error('komplain') is-invalid @enderror" id="komplain" name="komplain" style="height: 100px;">{{ $foto->komplain }}</textarea>
+            <!-- <input type="text" class="form-control @error('komplain') is-invalid @enderror" id="komplain" name="komplain" value="{{ $foto->komplain }}"> -->
+            @error('komplain')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
         <button type="submit" class="btn btn-primary">Update</button>
     </form>
 </div>
