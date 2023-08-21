@@ -72,7 +72,7 @@
               $count = 1; 
             @endphp
             @foreach ($data as $item)
-            <tr>
+            <tr @if ($item->progres == 100) style="background-color: #C1FF7A;" @endif>
                 <td>{{ $count }}</td> <!-- Display the incrementing number -->
                 @php
                     $count++; // Increment the counter
