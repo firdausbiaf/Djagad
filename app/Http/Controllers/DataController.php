@@ -48,62 +48,63 @@ class DataController extends Controller
      */
     public function store(StoreDataRequest $request)
 {
-
-    // dd($request->all());
     try {
-    $request->validate([
-        'user_id' => 'required|exists:users,id',
-        'kavling' => 'required',
-        'lokasi' => 'required',
-        'tipe' => 'required|integer',
-        'spk' => 'required',
-        'ptb' => 'required',
-        'harga_deal' => 'required|integer',
-        'progres' => 'required|integer',
-        'sales' => 'required',
-        'ktp.*' => 'image|mimes:jpeg,png,jpg|max:2048',
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'kavling' => 'required',
+            'lokasi' => 'required',
+            'tipe' => 'required|integer',
+            'spk' => 'required',
+            'ptb' => 'required',
+            'harga_deal' => 'required|integer',
+            'progres' => 'required|integer',
+            'sales' => 'required',
+            'ktp' => 'required|array',
+            'ktp.*' => 'image|mimes:jpeg,png,jpg|max:2048',
+        ]);
 
-    ]);
+        $data = new Data;
+        $data->user_id = $request->input('user_id');
+        $data->kavling = $request->input('kavling');
+        $data->lokasi = $request->input('lokasi');
+        $data->tipe = $request->input('tipe');
+        $data->spk = $request->input('spk');
+        $data->ptb = $request->input('ptb');
+        $data->harga_deal = $request->input('harga_deal');
+        $data->progres = $request->input('progres');
+        $data->sales = $request->input('sales');
 
-    $data = new Data;
-    $data->user_id = $request->input('user_id');
-    $data->kavling = $request->input('kavling');
-    $data->lokasi = $request->input('lokasi');
-    $data->tipe = $request->input('tipe');
-    $data->spk = $request->input('spk');
-    $data->ptb = $request->input('ptb');
-    $data->harga_deal = $request->input('harga_deal');
-    $data->progres = $request->input('progres');
-    $data->sales = $request->input('sales');
-    $data->save();
+        if ($request->hasFile('ktp')) {
+            $ktpPaths = [];
+            $uploadedKtpCount = count($request->file('ktp'));
 
-    // if ($request->hasFile('ktp')) {
-    //     foreach ($request->file('ktp') as $file) {
-    //         $nama_ktp = $file->store('ktp', 'public');
-    
-    //         // Simpan nama file gambar pada kolom 'ktp' pada record Data yang sesuai
-    //         $data->ktp = $nama_ktp;
-    //         $data->save();
-    //     }
-    // }
+            // Check if the number of uploaded KTP photos exceeds 10
+            if ($uploadedKtpCount > 10) {
+                return redirect()->back()->withErrors(['ktp' => 'Maximum 10 KTP photos are allowed.']);
+            }
 
-    if ($request->hasFile('ktp')) {
-        $ktpPaths = [];
-        foreach ($request->file('ktp') as $file) {
-            $nama_ktp = $file->store('ktp', 'public');
-            $ktpPaths[] = $nama_ktp;
+            foreach ($request->file('ktp') as $file) {
+                $nama_ktp = $file->store('ktp', 'public');
+                $ktpPaths[] = $nama_ktp;
+            }
+            $data->ktp = implode(',', $ktpPaths);
+        } else {
+            $request->validate([
+                'ktp' => 'required',
+            ], ['ktp.required' => 'Mohon unggah setidaknya satu file KTP.']);
+
+            return redirect()->back()->withInput()->withErrors(['ktp' => 'Mohon unggah setidaknya satu file KTP.']);
         }
-        $data->ktp = implode(',', $ktpPaths);
+
         $data->save();
-    }
-    
 
-    return redirect()->route('data.index')->with('success', 'Data baru telah ditambahkan');
-}catch (\Exception $e) {
-
- // This will display the error message
+        // Redirect to index page with success message
+        return redirect()->route('data.index')->with('success', 'Data baru telah ditambahkan');
+    } catch (\Exception $e) {
+        // Handle exception, if necessary
     }
 }
+
 
     /**
      * Display the specified resource.

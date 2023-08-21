@@ -104,16 +104,16 @@
         </div>
 
         <div class="mb-3">
-            <label for="ktp" class="form-label @error('photo') is-invalid @enderror">KTP</label>
+            <label for="ktp" class="form-label">KTP</label>
             <div>
-                <input class="form-control" type="file" id="ktp" name="ktp[]" onchange="previewImage()" multiple>
+                <input class="form-control" type="file" id="ktp" name="ktp[]" onchange="previewImage()" multiple required>
             </div>
             @error('ktp')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
+            <div class="alert alert-danger mt-2">
+                {{ $message }}
+            </div>
             @enderror
-
+        
             <!-- Tambahkan elemen img-preview di sini -->
             <img class="img-preview mt-2" style="max-width: 200px; max-height: 200px;" src="" alt="Preview">
         </div>
