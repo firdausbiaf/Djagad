@@ -22,7 +22,7 @@
             width:100%;
             padding : 50px 0;
         }
-        .banner-sec{background:url(https://www.djagadland.com/wp-content/uploads/2021/09/Type-57-1-600x450.jpg)  no-repeat left bottom; background-size:cover; min-height:500px; border-radius: 0 10px 10px 0; padding:0;}
+        .banner-sec{background:url("images/foto-login.png")  no-repeat left bottom; background-size:cover; min-height:500px; border-radius: 0 10px 10px 0; padding:0;}
         .container{background:#fff; border-radius: 10px; box-shadow:15px 20px 0px rgba(0,0,0,0.1);}
         .carousel-inner{border-radius:0 10px 10px 0;}
         .carousel-caption{text-align:left; left:5%;}
@@ -39,8 +39,9 @@
         .banner-text p{color:#fff;}
 
         .login-block {
-            background: linear-gradient(to bottom, #fffbfb, #ac2828);
-            
+            background: url("images/bg-login.jpg");
+            background-size: cover; /* Adjust the background size */
+
             float: left;
             width: 100%;
             height: 100vh; /* Set minimum height to cover the viewport */
@@ -50,20 +51,10 @@
             
         }
         .carousel-item.active img {
-    width: 100%;
-    height: 500px; /* Set the desired height */
-    object-fit: cover; /* This ensures the image maintains its aspect ratio */
-  }
-
-  .carousel-item::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(84, 101, 252, 0.342); /* Blue color with 0.5 opacity */
-  }
+            width: 100%;
+            height: 500px; /* Set the desired height */
+            object-fit: cover; /* This ensures the image maintains its aspect ratio */
+        }
 
         @media (max-width: 768px) {
             .login-block {
@@ -98,7 +89,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(172, 15, 15, 0.342); /* Blue color with 0.5 opacity */
+            background-color: rgba(0, 0, 0, 0.3); /* Blue color with 0.5 opacity */
         }
 
         .modal-dialog {
@@ -114,17 +105,18 @@
             width: 100%;
             text-align: center;
         }
-    .login-form {
-        background-color: rgba(185, 17, 17, 0.856); /* Set your desired background color here */
-        padding: 20px;
-        border-radius: 10px;
-        text-align: center;
-    }
-    
+        
+        .login-form {
+            background-color: rgba(185, 17, 17, 0.856); /* Set your desired background color here */
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
 
-    .red-input {
-        background-color: rgba(185, 17, 17, 0.856); /* Set your desired background color here */
-    }
+        .red-input {
+            background-color: rgba(185, 17, 17, 0.856); /* Set your desired background color here */
+        }
 </style>
 
     {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">

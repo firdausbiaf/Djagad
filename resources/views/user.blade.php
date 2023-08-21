@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col">
             <center><br>
-                <h3 class="display-4 text-white">Djagad Land Group</h3>
+                <h3 class="display-4 text-white">D'JAGAD LAND GROUP</h3>
                 <h4 class="text-white text-uppercase mb-3">Make Your Living Harmony</h4><br>
             </center>
             @auth
