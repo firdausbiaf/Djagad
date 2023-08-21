@@ -40,6 +40,8 @@
                             <th scope="col">Lokasi</th>
                             <th scope="col">Kavling</th>
                             <th scope="col">Foto</th>
+                            <th scope="col">Komplain</th>
+                            <th scope="col">Status Komplain</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -56,6 +58,42 @@
                                     @else
                                         <p>Tidak ada foto</p>
                                     @endif
+                                </td>
+                                <td>
+                                    <div class="complaint-text">
+                                        
+                                        @if (strlen($foto->komplain) > 2)
+                                            <div class="complaint-full" style="display: none;">
+                                                <ul class="full-list">
+                                                    <!-- Menggunakan explode() untuk memisahkan komplain berdasarkan baris baru -->
+                                                    @foreach (explode("\n", $foto->komplain) as $line)
+                                                        <li class="full-text">{{ $line }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                            <button class="btn btn-link show-more-btn">Show More</button>
+                                            <button class="btn btn-link show-less-btn" style="display: none;">Show Less</button>
+                                        @endif
+                                    </div>
+                                </td>
+                                <td>       
+                                    @if (strlen($foto->komplain) == 0)
+                                        
+                                    @else
+                                        @if( $foto->status_komplain  == 0)
+                                            <form action="/komplain_start" method="get" class="d-inline">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $foto->id }}">
+                                            <button type="submit" class="badge bg-warning border-0" ><span>&#10005;</span></button>
+                                            </form>
+                                        @else
+                                            <form action="/komplain_finish" method="get" class="d-inline">
+                                        @csrf
+                                            <input type="hidden" name="id" value="{{ $foto->id }}">
+                                            <button type="submit" class="badge bg-success border-0" ><span>&#10003;</span></button>
+                                            </form>
+                                        @endif
+                                    @endif       
                                 </td>
                                 <td>
                                     <a href="{{ route('foto.show', $foto->id) }}" class="badge bg-info" style="text-decoration: none;">Show</a>
@@ -166,4 +204,34 @@ $(document).ready(function() {
     }
 });
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const showMoreButtons = document.querySelectorAll('.show-more-btn');
+        const showLessButtons = document.querySelectorAll('.show-less-btn');
+
+        showMoreButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const complaintFull = button.closest('.complaint-text').querySelector('.complaint-full');
+                const showLessButton = button.closest('.complaint-text').querySelector('.show-less-btn');
+
+                complaintFull.style.display = 'block';
+                button.style.display = 'none';
+                showLessButton.style.display = 'inline';
+            });
+        });
+
+        showLessButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const complaintFull = button.closest('.complaint-text').querySelector('.complaint-full');
+                const showMoreButton = button.closest('.complaint-text').querySelector('.show-more-btn');
+
+                complaintFull.style.display = 'none';
+                button.style.display = 'none';
+                showMoreButton.style.display = 'inline';
+            });
+        });
+    });
+</script>
+
+
 @endsection

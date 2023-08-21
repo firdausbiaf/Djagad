@@ -72,6 +72,10 @@ Route::get('/keluar_in', [LegalitasController::class, 'keluar_in']);
 
 Route::get('/keluar_out', [LegalitasController::class, 'keluar_out']);
 
+Route::get('/komplain_start', [FotoController::class, 'komplain_start']);
+
+Route::get('/komplain_finish', [FotoController::class, 'komplain_finish']);
+
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 

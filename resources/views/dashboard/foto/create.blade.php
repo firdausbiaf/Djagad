@@ -44,6 +44,16 @@
             <!-- Tambahkan elemen img-preview di sini -->
             <img class="img-preview mt-2" style="max-width: 200px; max-height: 200px;" src="" alt="Preview">
         </div>
+        <div class="mb-3">
+            <label for="komplain" class="form-label">Komplain</label>
+            <textarea class="form-control @error('komplain') is-invalid @enderror" id="komplain" name="komplain" style="height: 100px;"></textarea>
+            <!-- <input type="text" class="form-control @error('komplain') is-invalid @enderror" id="komplain" name="komplain"> -->
+            @error('komplain')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>

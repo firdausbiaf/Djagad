@@ -56,10 +56,6 @@
                                                                                 <td>{{ $item->user->name }}</td>
                                                                             </tr>
                                                                             <tr>
-                                                                                <th scope="row">Telepon</th>
-                                                                                <td>{{ $item->user->phone }}</td>
-                                                                            </tr>
-                                                                            <tr>
                                                                                 <th scope="row">Kavling</th>
                                                                                 <td>{{ $item->kavling }}</td>
                                                                             </tr>
@@ -75,7 +71,10 @@
                                                                                 <th scope="row">Harga Deal</th>
                                                                                 <td>{{ $item->harga_deal }}</td>
                                                                             </tr>
-                                                                            
+                                                                            <tr>
+                                                                                <th scope="row">PTB</th>
+                                                                                <td>{{ $item->ptb }}</td>
+                                                                            </tr>
                                                                             <tr>
                                                                                 <th scope="row">Progres (%)</th>
                                                                                 <td>{{ $item->progres }} %</td>
@@ -86,13 +85,13 @@
                                                                         <div class="progress mb-4">
                                                                             <div class="progress-bar" role="progressbar" style="width: {{ $item->progres }}%" aria-valuenow="{{ $item->progres }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                         </div>
-                                                                        <h6 class="medium font-weight-bold">Progress Cicilan ({{ $item->uang_masuk }} / {{ $item->harga_deal }})</h6>
+                                                                        <!-- <h6 class="medium font-weight-bold">Progress Cicilan ({{ $item->uang_masuk }} / {{ $item->harga_deal }})</h6>
                                                                                 @php
                                                                                     $progressCicilan = ($item->uang_masuk / $item->harga_deal) * 100;
                                                                                 @endphp
                                                                                 <div class="progress mb-4">
                                                                                     <div class="progress-bar" id="cicilan-progress" role="progressbar" style="width: {{ $progressCicilan }}%" aria-valuenow="{{ $progressCicilan }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                                </div>
+                                                                                </div> -->
                                                                     </div>
                                                                 </div>
                                                             </div>

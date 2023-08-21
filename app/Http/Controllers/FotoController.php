@@ -95,6 +95,7 @@ class FotoController extends Controller
              $foto = new Foto;
              $foto->data_id = $data->id;
              $foto->photo = $nama_photo;
+             $foto->komplain = $request->get('komplain');
              $foto->save();
          }
  
@@ -150,6 +151,7 @@ class FotoController extends Controller
             'lokasi' => 'required',
             'kavling' => 'required',
             'photo' => 'image|file|max:10240',
+            'komplain' => 'nullable|string'
         ]);
 
         $foto = Foto::findOrFail($id);
@@ -174,6 +176,7 @@ class FotoController extends Controller
             $foto->photo = $nama_photo;
         }
 
+        $foto->komplain = $request->get('komplain');
         $foto->save();
 
         return redirect()->route('foto.index')->with('success', 'Foto berhasil diupdate');
@@ -228,15 +231,38 @@ class FotoController extends Controller
     }
 
     public function getFotosByLocation(Request $request)
-{
-    $lokasi = $request->input('lokasi');
-    $fotos = Foto::whereHas('data', function ($dataQuery) use ($lokasi) {
-        $dataQuery->where('lokasi', $lokasi);
-    })->orderBy('id', 'asc')->get();
+    {
+        $lokasi = $request->input('lokasi');
+        $fotos = Foto::whereHas('data', function ($dataQuery) use ($lokasi) {
+            $dataQuery->where('lokasi', $lokasi);
+        })->orderBy('id', 'asc')->get();
 
-    // Perbaiki cara mengirimkan data foto dalam format JSON
-    return response()->json($fotos);
-}
+        // Perbaiki cara mengirimkan data foto dalam format JSON
+        return response()->json($fotos);
+    }
 
+    public function komplain_start(Request $request, Foto $foto)
+    {
+
+        $foto = Foto::findOrFail($request->id);
+        if ($foto) {
+            $foto->status_komplain = '1';
+            $foto->save();
+        }
+
+        return redirect('/admin/foto');
+    }
+
+    public function komplain_finish(Request $request)
+    {
+
+        $foto = Foto::findOrFail($request->id);
+        if ($foto) {
+            $foto->status_komplain = '0';
+            $foto->save();
+        }
+
+        return redirect('/admin/foto');
+    }
     
 }

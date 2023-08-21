@@ -14,6 +14,8 @@ class Foto extends Model
     protected $fillable = [
         'data_id',
         'photo',
+        'komplain',
+        'status_komplain'
     ];
 
     // Relasi ke model Data
