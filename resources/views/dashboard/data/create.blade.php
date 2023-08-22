@@ -113,6 +113,23 @@
                 {{ $message }}
             </div>
             @enderror
+
+            <script>
+                function previewImage() {
+                    const previewContainer = document.querySelector('.img-preview');
+                    const files = document.querySelector('#ktp').files;
+                
+                    previewContainer.innerHTML = ''; // Clear previous previews
+                
+                    for (const file of files) {
+                        const img = document.createElement('img');
+                        img.src = URL.createObjectURL(file);
+                        img.style.maxWidth = '200px';
+                        img.style.maxHeight = '200px';
+                        previewContainer.appendChild(img);
+                    }
+                }
+                </script>
         
             <!-- Tambahkan elemen img-preview di sini -->
             <img class="img-preview mt-2" style="max-width: 200px; max-height: 200px;" src="" alt="Preview">
