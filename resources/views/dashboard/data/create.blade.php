@@ -106,7 +106,7 @@
         <div class="mb-3">
             <label for="ktp" class="form-label">KTP</label>
             <div>
-                <input class="form-control" type="file" id="ktp" name="ktp[]" onchange="previewImage()" multiple required>
+                <input class="form-control" type="file" id="ktp" name="ktp[]" onchange="previewImages()" multiple required>
             </div>
             @error('ktp')
             <div class="alert alert-danger mt-2">
@@ -114,28 +114,34 @@
             </div>
             @enderror
 
-            <script>
-                function previewImage() {
-                    const previewContainer = document.querySelector('.img-preview');
-                    const files = document.querySelector('#ktp').files;
-                
-                    previewContainer.innerHTML = ''; // Clear previous previews
-                
-                    for (const file of files) {
-                        const img = document.createElement('img');
-                        img.src = URL.createObjectURL(file);
-                        img.style.maxWidth = '200px';
-                        img.style.maxHeight = '200px';
-                        previewContainer.appendChild(img);
-                    }
-                }
-                </script>
-        
             <!-- Tambahkan elemen img-preview di sini -->
-            <img class="img-preview mt-2" style="max-width: 200px; max-height: 200px;" src="" alt="Preview">
+            <div class="img-preview-container mt-2" id="preview-container" style="display: flex; flex-wrap: wrap;"></div>
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
+
+<script>
+    function previewImages() {
+        const previewContainer = document.querySelector('#preview-container');
+        const files = document.querySelector('#ktp').files;
+
+        previewContainer.innerHTML = ''; // Clear previous previews
+
+        for (const file of files) {
+            const img = document.createElement('img');
+            img.src = URL.createObjectURL(file);
+            img.style.maxWidth = '200px';
+            img.style.maxHeight = '200px';
+            
+            const imgPreviewContainer = document.createElement('div');
+            imgPreviewContainer.className = 'img-preview-container mr-2 mb-2';
+            imgPreviewContainer.style.flexBasis = '20%';
+            imgPreviewContainer.appendChild(img);
+
+            previewContainer.appendChild(imgPreviewContainer);
+        }
+    }
+</script>
 @endsection
