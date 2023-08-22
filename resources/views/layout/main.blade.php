@@ -93,7 +93,7 @@
   </head>
 <style>
   body{
-    background-image: url("images/bg-user.jpg");
+    background-image: url("images/bg-user2.jpg");
   }
 </style>
   <body>

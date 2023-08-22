@@ -13,7 +13,7 @@
                     </ol> --}}
                     <div class="carousel-inner" role="listbox">
                         <div class="carousel-item active">
-                            <img class="d-block img-fluid" src="{{ asset('images\foto-login.png') }}" alt="First slide">
+                            <img class="d-block img-fluid" src="{{ asset('images\foto-login2.png') }}" alt="First slide">
                             <div class="carousel-caption">
                                 <h1 class="display-3 text-white animate__animated animate__fadeInDown" style="background-color: rgba(145, 0, 0, 0.9);">D'JAGAD LAND GROUP</h1>
                                 <h3 class="text-white text-uppercase mb-3 animate__animated animate__fadeInUp">Make Your Living Harmony</h3>

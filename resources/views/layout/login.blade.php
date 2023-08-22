@@ -22,7 +22,7 @@
             width:100%;
             padding : 50px 0;
         }
-        .banner-sec{background:url("images/foto-login.png")  no-repeat left bottom; background-size:cover; min-height:500px; border-radius: 0 10px 10px 0; padding:0;}
+        .banner-sec{background:url("images/foto-login2.png")  no-repeat left bottom; background-size:cover; min-height:500px; border-radius: 0 10px 10px 0; padding:0;}
         .container{background:#fff; border-radius: 10px; box-shadow:15px 20px 0px rgba(0,0,0,0.1);}
         .carousel-inner{border-radius:0 10px 10px 0;}
         .carousel-caption{text-align:left; left:5%;}
@@ -39,7 +39,7 @@
         .banner-text p{color:#fff;}
 
         .login-block {
-            background: url("images/bg-login.jpg");
+            background: url("images/bg-login2.jpg");
             background-size: cover; /* Adjust the background size */
 
             float: left;
