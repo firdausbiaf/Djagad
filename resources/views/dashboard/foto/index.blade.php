@@ -39,6 +39,8 @@
                             <th scope="col">ID</th>
                             <th scope="col">Lokasi</th>
                             <th scope="col">Kavling</th>
+                            <th scope="col">Komplain</th>
+                            <th scope="col">Status</th>
                             <th scope="col">Foto</th>
                             <th scope="col">Komplain</th>
                             <th scope="col">Status Komplain</th>
@@ -51,7 +53,7 @@
                             <tr class="table-row" data-lokasi="{{ $lokasi }}" data-kavling="{{ $foto->data->kavling }}">
                                 <td>{{ $foto->id }}</td>
                                 <td>{{ $foto->data->lokasi }}</td>
-                                <td>{{ $foto->data->kavling }}</td>
+                                <td>{{ $foto->data->kavling }}</td>                                
                                 <td>
                                     @if ($foto->photo)
                                         <img src="{{ asset('storage/' . $foto->photo) }}" class="card-img-top" alt="Foto">
@@ -80,7 +82,7 @@
                                     @if (strlen($foto->komplain) == 0)
                                         
                                     @else
-                                        @if( $foto->status_komplain  == 0)
+                                        @if( $foto->status == 0)
                                             <form action="/komplain_start" method="get" class="d-inline">
                                             @csrf
                                             <input type="hidden" name="id" value="{{ $foto->id }}">
@@ -232,6 +234,4 @@ $(document).ready(function() {
         });
     });
 </script>
-
-
 @endsection

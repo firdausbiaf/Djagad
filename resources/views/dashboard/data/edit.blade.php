@@ -108,8 +108,7 @@
         <div class="mb-3">
             <label for="ktp" class="form-label @error('photo') is-invalid @enderror">KTP</label>
             <div>
-                <input class="form-control" type="file" id="ktp" name="ktp[]" onchange="previewImage()" multiple>
-
+                <input class="form-control" type="file" id="ktp" name="ktp[]" onchange="previewImages()" multiple>
             </div>
             @error('ktp')
                 <div class="invalid-feedback">
@@ -119,17 +118,51 @@
 
             <!-- Inisialisasi variabel $ktpPhotos dengan foto-foto yang sudah ada -->
             @php
-                $ktpPhotos = explode(',', $data->ktp);
+                $ktpPhotos = json_decode($data->ktp); // Ubah dari explode menjadi json_decode
             @endphp
 
             <!-- Tambahkan elemen img-preview di sini -->
-            <div class="mt-2">
-                @foreach ($ktpPhotos as $photo)
-                    <img class="img-preview mr-2 mb-2" style="max-width: 100px; max-height: 100px;" src="{{ asset('storage/'.$photo) }}" alt="Preview">
+            <div class="mt-2" id="preview-container" style="display: flex; flex-wrap: wrap;">
+                @foreach ($ktpPhotos as $index => $photo)
+                    <div class="img-preview-container mr-2 mb-2" style="max-width: 200px; flex-basis: 20%;">
+                        <img class="img-preview img-fluid" src="{{ asset('storage/'.$photo) }}" alt="Preview" style="max-width: 100%;">
+                    </div>
+                    @if (($index + 1) % 5 === 0)
+                        <div style="flex-basis: 100%;"></div> <!-- Membuat baris baru setelah 5 gambar -->
+                    @endif
                 @endforeach
             </div>
-        </div>
+            
         <button type="submit" class="btn btn-primary">Update</button>
     </form>
 </div>
+
+<script>
+    function previewImages() {
+        const input = document.querySelector('#ktp');
+        const previewContainer = document.querySelector('#preview-container');
+
+        // Clear previous previews
+        previewContainer.innerHTML = '';
+
+        // Loop through selected files and display previews
+        for (const file of input.files) {
+            const reader = new FileReader();
+
+            reader.onload = function(event) {
+                const img = document.createElement('img');
+                img.className = 'img-preview img-fluid';
+                img.src = event.target.result;
+
+                const previewDiv = document.createElement('div');
+                previewDiv.className = 'img-preview-container mr-2 mb-2';
+                previewDiv.appendChild(img);
+
+                previewContainer.appendChild(previewDiv);
+            };
+
+            reader.readAsDataURL(file);
+        }
+    }
+</script>
 @endsection

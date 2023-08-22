@@ -75,19 +75,18 @@ class DataController extends Controller
         $data->sales = $request->input('sales');
 
         if ($request->hasFile('ktp')) {
-            $ktpPaths = [];
             $uploadedKtpCount = count($request->file('ktp'));
 
-            // Check if the number of uploaded KTP photos exceeds 10
             if ($uploadedKtpCount > 10) {
                 return redirect()->back()->withErrors(['ktp' => 'Maximum 10 KTP photos are allowed.']);
             }
 
+            $ktpPaths = [];
             foreach ($request->file('ktp') as $file) {
                 $nama_ktp = $file->store('ktp', 'public');
                 $ktpPaths[] = $nama_ktp;
             }
-            $data->ktp = implode(',', $ktpPaths);
+            $data->ktp = json_encode($ktpPaths); // Simpan array jalur file dalam bentuk JSON
         } else {
             $request->validate([
                 'ktp' => 'required',
@@ -98,12 +97,45 @@ class DataController extends Controller
 
         $data->save();
 
-        // Redirect to index page with success message
         return redirect()->route('data.index')->with('success', 'Data baru telah ditambahkan');
     } catch (\Exception $e) {
+        dd($e->getMessage()); // Debug pesan kesalahan
         // Handle exception, if necessary
     }
 }
+
+
+//         if ($request->hasFile('ktp')) {
+//             $ktpPaths = [];
+//             $uploadedKtpCount = count($request->file('ktp'));
+
+//             // Check if the number of uploaded KTP photos exceeds 10
+//             if ($uploadedKtpCount > 10) {
+//                 return redirect()->back()->withErrors(['ktp' => 'Maximum 10 KTP photos are allowed.']);
+//             }
+
+//             foreach ($request->file('ktp') as $file) {
+//                 $nama_ktp = $file->store('ktp', 'public');
+//                 $ktpPaths[] = $nama_ktp;
+//             }
+//             $data->ktp = implode(',', $ktpPaths);
+//         } else {
+//             $request->validate([
+//                 'ktp' => 'required',
+//             ], ['ktp.required' => 'Mohon unggah setidaknya satu file KTP.']);
+
+//             return redirect()->back()->withInput()->withErrors(['ktp' => 'Mohon unggah setidaknya satu file KTP.']);
+//         }
+
+//         $data->save();
+
+//         // Redirect to index page with success message
+//         return redirect()->route('data.index')->with('success', 'Data baru telah ditambahkan');
+//     } catch (\Exception $e) {
+//         dd($e->getMessage());
+//         // Handle exception, if necessary
+//     }
+// }
 
 
     /**
