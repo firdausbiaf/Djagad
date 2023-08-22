@@ -166,12 +166,12 @@
                 var legalData = {
                   labels: labels,
                   datasets: [{
-                    label: 'Total Legalitas Tanggal Masuk',
+                    label: 'Total Legalitas Masuk',
                     data: dataTglMasuk,
                     borderColor: 'blue', // Ubah warna garis
                     fill: false
                   }, {
-                    label: 'Total Legalitas Tanggal Keluar',
+                    label: 'Total Legalitas Keluar',
                     data: dataTglKeluar,
                     borderColor: 'purple', // Ubah warna garis
                     fill: false

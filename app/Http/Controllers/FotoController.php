@@ -239,15 +239,15 @@ class FotoController extends Controller
     }
 
     public function getFotosByLocation(Request $request)
-{
-    $lokasi = $request->input('lokasi');
-    $fotos = Foto::whereHas('data', function ($dataQuery) use ($lokasi) {
-        $dataQuery->where('lokasi', $lokasi);
-    })->orderBy('id', 'asc')->get();
+    {
+        $lokasi = $request->input('lokasi');
+        $fotos = Foto::whereHas('data', function ($dataQuery) use ($lokasi) {
+            $dataQuery->where('lokasi', $lokasi);
+        })->orderBy('id', 'asc')->get();
 
-    // Perbaiki cara mengirimkan data foto dalam format JSON
-    return response()->json($fotos);
-}
+        // Perbaiki cara mengirimkan data foto dalam format JSON
+        return response()->json($fotos);
+    }
 
 public function komplain_start(Request $request, Foto $foto)
     {
@@ -272,6 +272,5 @@ public function komplain_start(Request $request, Foto $foto)
 
         return redirect('/admin/foto');
     }
-
     
 }

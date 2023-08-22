@@ -42,6 +42,8 @@
                             <th scope="col">Komplain</th>
                             <th scope="col">Status</th>
                             <th scope="col">Foto</th>
+                            <th scope="col">Komplain</th>
+                            <th scope="col">Status Komplain</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -204,7 +206,6 @@ $(document).ready(function() {
     }
 });
 </script>
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const showMoreButtons = document.querySelectorAll('.show-more-btn');

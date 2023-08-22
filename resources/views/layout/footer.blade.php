@@ -1,8 +1,14 @@
 <!-- Footer -->
+
+<head>
+  <!-- ... existing meta tags ... -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
 <div class="container-fluid" style="padding: 0;">
-  <footer class="text-center text-lg-start text-white" style="background-color: #1c2331">
+  <footer class="text-center text-lg-start text-white" style="background-color: #910000">
     <!-- Section: Social media -->
-    <section class="d-flex justify-content-between p-4" style="background-color: #6351ce">
+    <section class="d-flex justify-content-between p-4" style="background-color: #6F0606">
       <!-- Left -->
       <div class="me-5">
         <span>Get connected with us on social networks:</span>
@@ -60,7 +66,7 @@
             <div class="row">
                 <div class="col-lg-6 mb-3">
                     <a class="navbar-brand" href="/">
-                        <img src="{{ asset('images\singosari.png') }}" alt="logo" height="35" class="d-inline-block align-text-top" style="margin-left: 110px;">     
+                        <img src="{{ asset('images\singosari.png') }}" alt="logo" height="35" class="d-inline-block align-text-top">     
                     </a>
                 </div>
                 <div class="col-lg-6 mb-3">
@@ -86,29 +92,85 @@
         <!-- Grid column -->
 
         <!-- Grid column -->
-        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+        <!-- <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4"> -->
           <!-- Links -->
-          <h6 class="text-uppercase fw-bold">Useful links</h6>
+          <!-- <h6 class="text-uppercase fw-bold">Useful links</h6>
           <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px" />
           <p><a href="#!" class="text-white">Your Account</a></p>
           <p><a href="#!" class="text-white">Become an Affiliate</a></p>
           <p><a href="#!" class="text-white">Shipping Rates</a></p>
           <p><a href="#!" class="text-white">Help</a></p>
-        </div>
+        </div> -->
         <!-- Grid column -->
-
+        <style>
+          .address {
+            display: flex;
+            align-items: flex-start;
+          }
+        </style>
         <!-- Grid column -->
         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
           <!-- Links -->
           <h6 class="text-uppercase fw-bold">Contact</h6>
           <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px" />
-          <p><i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
-          <p><i class="fas fa-envelope mr-3"></i> info@example.com</p>
-          <p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
-          <p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+          <p class="address"><i class="fas fa-home mr-3"></i>  Perumahan Persada Bhayangkara Blok F No. 5, Pangetan, Pagentan, Kec. Singosari, Kabupaten Malang, Jawa Timur 65153</p>
+          <p><i class="fas fa-envelope mr-3"></i> marketing@djagadland.com</p>
+          <p><i class="fas fa-phone mr-3"></i> (0341) 3062086</p>
+          <!-- <p><i class="fas fa-print mr-3"></i> (0341) 3062086</p> -->
         </div>
         <!-- Grid column -->
       </div>
+
+      <!-- ... existing HTML code ... -->
+
+<style>
+  /* General styles */
+  .container-fluid {
+    padding: 0;
+  }
+
+  /* Media query for mobile devices */
+  @media (max-width: 767px) {
+    /* Adjust the padding and font size for better mobile appearance */
+    .text-lg-start {
+      padding: 15px;
+    }
+    
+    /* Center align text for better mobile appearance */
+    .text-center {
+      text-align: center !important;
+    }
+    
+    /* Adjust spacing for social media icons */
+    .d-flex.justify-content-between.p-4 {
+      padding: 15px 0;
+    }
+
+    /* Make the icons smaller on mobile */
+    .icon-large {
+      font-size: 20px;
+    }
+
+    /* Adjust spacing between logo images */
+    .navbar-brand {
+      margin-bottom: 10px;
+    }
+
+    /* Adjust margin for the last logo image */
+    .d-inline-block.align-text-top:last-child {
+      margin-left: 0;
+    }
+
+    /* Adjust address font size and spacing */
+    .address {
+      flex-direction: column;
+      align-items: flex-start;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+  }
+</style>
+
       <!-- Grid row -->
     </section>
     <!-- Section: Links  -->

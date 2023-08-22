@@ -72,6 +72,10 @@ Route::get('/keluar_in', [LegalitasController::class, 'keluar_in']);
 
 Route::get('/keluar_out', [LegalitasController::class, 'keluar_out']);
 
+Route::get('/komplain_start', [FotoController::class, 'komplain_start']);
+
+Route::get('/komplain_finish', [FotoController::class, 'komplain_finish']);
+
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 
@@ -86,6 +90,7 @@ Route::resource('/admin/course', DashboardCourseController::class)->middleware('
 Route::resource('/admin/materi', DashboardMateriController::class)->middleware('checkRole:admin');
 Route::resource('/admin/tugas', DashboardTugasController::class)->middleware('checkRole:admin');
 Route::resource('/admin/data', DataController::class)->middleware('checkRole:admin');
+Route::get('/data/{id}/ktp', [DataController::class, 'viewKtp'])->name('data.view_ktp');
 Route::resource('/admin/promo', PromoController::class)->middleware('checkRole:admin');
 // Route::resource('/admin/foto', FotoController::class)->middleware('checkRole:admin');
 
@@ -96,6 +101,8 @@ Route::get('/komplain_finish', [FotoController::class, 'komplain_finish']);
 Route::get('/admin/foto', [FotoController::class, 'index'])->name('foto.index');
 Route::get('/admin/foto/filter', [FotoController::class, 'filter'])->name('foto.filter');
 Route::resource('/admin/foto', FotoController::class)->except(['index', 'filter']);
+Route::get('/data/search', [DataController::class, 'search'])->name('data.search');
+
 
 Route::post('/importexcel', [DataController::class, 'importExcel'])->name('import.excel');
 

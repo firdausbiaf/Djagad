@@ -16,15 +16,15 @@ class CreateDataTable extends Migration
         Schema::create('data', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('alamat');
             $table->string('kavling');
             $table->enum('lokasi',['DJAGAD LAND BATU','DJAGAD LAND SINGHASARI','DPARK CITY'])->default('DJAGAD LAND BATU');
             $table->unsignedBigInteger('tipe');
             $table->string('spk');
+            $table->string('ptb');
             $table->unsignedBigInteger('harga_deal');
-            $table->unsignedBigInteger('cicilan');
-            $table->unsignedBigInteger('uang_masuk');
             $table->unsignedBigInteger('progres');
+            $table->string('sales');
+            $table->text('ktp');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

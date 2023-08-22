@@ -13,8 +13,8 @@
     <div class="row">
         <div class="col">
             <center><br>
-                <h3 class="display-4 text-white">Djagad Land Group</h3>
-                <h4 class="text-white text-uppercase mb-3">Make Your Live Harmony</h4><br>
+                <h3 class="display-4 text-white">D'JAGAD LAND GROUP</h3>
+                <h4 class="text-white text-uppercase mb-3">Make Your Living Harmony</h4><br>
             </center>
             @auth
                 @if(auth()->user()->role == "member" && $data)
@@ -56,14 +56,6 @@
                                                                                 <td>{{ $item->user->name }}</td>
                                                                             </tr>
                                                                             <tr>
-                                                                                <th scope="row">Telepon</th>
-                                                                                <td>{{ $item->user->phone }}</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">Alamat</th>
-                                                                                <td>{{ $item->alamat }}</td>
-                                                                            </tr>
-                                                                            <tr>
                                                                                 <th scope="row">Kavling</th>
                                                                                 <td>{{ $item->kavling }}</td>
                                                                             </tr>
@@ -80,17 +72,9 @@
                                                                                 <td>{{ $item->harga_deal }}</td>
                                                                             </tr>
                                                                             <tr>
-                                                                                <th scope="row">Cicilan Ke</th>
-                                                                                <td>{{ $item->cicilan }}</td>
+                                                                                <th scope="row">PTB</th>
+                                                                                <td>{{ $item->ptb }}</td>
                                                                             </tr>
-                                                                            <tr>
-                                                                                <th scope="row">Uang Masuk</th>
-                                                                                <td>{{ $item->uang_masuk }}</td>
-                                                                            </tr>
-                                                                            {{-- <tr>
-                                                                                <th scope="row">SPK</th>
-                                                                                <td>{{ $item->spk }}</td>
-                                                                            </tr> --}}
                                                                             <tr>
                                                                                 <th scope="row">Progres (%)</th>
                                                                                 <td>{{ $item->progres }} %</td>
@@ -101,13 +85,13 @@
                                                                         <div class="progress mb-4">
                                                                             <div class="progress-bar" role="progressbar" style="width: {{ $item->progres }}%" aria-valuenow="{{ $item->progres }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                         </div>
-                                                                        <h6 class="medium font-weight-bold">Progress Cicilan ({{ $item->uang_masuk }} / {{ $item->harga_deal }})</h6>
+                                                                        <!-- <h6 class="medium font-weight-bold">Progress Cicilan ({{ $item->uang_masuk }} / {{ $item->harga_deal }})</h6>
                                                                                 @php
                                                                                     $progressCicilan = ($item->uang_masuk / $item->harga_deal) * 100;
                                                                                 @endphp
                                                                                 <div class="progress mb-4">
                                                                                     <div class="progress-bar" id="cicilan-progress" role="progressbar" style="width: {{ $progressCicilan }}%" aria-valuenow="{{ $progressCicilan }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                                </div>
+                                                                                </div> -->
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -143,11 +127,17 @@
                                                                                 <div class="col-md-12">
                                                                                     <div id="progressPhotoCarousel-{{ $item->id }}" class="carousel slide" data-bs-ride="carousel">
                                                                                         <div class="carousel-inner">
-                                                                                            @foreach($itemFoto as $f)
-                                                                                                <div class="carousel-item @if ($loop->first) active @endif">
-                                                                                                    <img src="{{ asset('storage/' . $f->photo) }}" class="card-img-top" alt="Foto" style="width: 100%; height: 200px; object-fit: cover;">
+                                                                                            @if($itemFoto->count() == 0)
+                                                                                                <div class="d-flex justify-content-center align-items-center" style="height: 190px;">
+                                                                                                    <img src="{{ asset('images/proses.png') }}" class="d-block" alt="Foto" style="max-height: 100%; object-fit: cover;">
                                                                                                 </div>
-                                                                                            @endforeach
+                                                                                            @else
+                                                                                                @foreach($itemFoto as $f)
+                                                                                                    <div class="carousel-item @if ($loop->first) active @endif">
+                                                                                                        <img src="{{ asset('storage/' . $f->photo) }}" class="card-img-top" alt="Foto" style="width: 100%; height: 200px; object-fit: cover;">
+                                                                                                    </div>
+                                                                                                @endforeach
+                                                                                            @endif
                                                                                         </div>
                                                                                         
                                                                                     </div>
@@ -172,39 +162,38 @@
                                         </div>
 
                                         {{-- Promo --}}
-                                        <div class="row mb-3" style="max-height: 380px; overflow: hidden;">
-                                            <div class="bg-light rounded-card p-4">
-                                                <div class="row">
-                                                    <div id="promoCarousel" class="carousel slide" data-bs-ride="carousel">
-                                                        <div class="carousel-inner">
-                                                            @php
-                                                                $latestPromo = $promo->sortByDesc('created_at')->take(4);
-                                                            @endphp
-                            
-                                                            @foreach ($latestPromo as $index => $pro)
-                                                                <div class="carousel-item @if ($index === 0) active @endif">
-                                                                    @if ($pro->gambar)
-                                                                    <div class="d-flex justify-content-center align-items-center" style="height: 330px;">
-                                                                        <img src="{{ asset('storage/' . $pro->gambar) }}" class="d-block" alt="Promo Gambar" style="max-height: 100%; object-fit: cover;">
-                                                                    </div>
-                                                                    @else
-                                                                        <p>Tidak ada gambar</p>
-                                                                    @endif
+                                        <div class="row mb-3 d-flex justify-content-center align-items-center">
+                                            <div class="row">
+                                                <div id="promoCarousel" class="carousel slide" data-bs-ride="carousel">
+                                                    <div class="carousel-inner">
+                                                        @php
+                                                            $latestPromo = $promo->sortByDesc('created_at')->take(4);
+                                                        @endphp
+
+                                                        @foreach ($latestPromo as $index => $pro)
+                                                            <div class="carousel-item @if ($index === 0) active @endif">
+                                                                @if ($pro->gambar)
+                                                                <div class="d-flex justify-content-center align-items-center" style="height: 0; padding-bottom: 100%; position: relative; overflow: hidden;">
+                                                                    <img src="{{ asset('storage/' . $pro->gambar) }}" class="d-block position-absolute top-0 start-0" alt="Promo Gambar" style="width: 100%; height: 100%; object-fit: cover;">
                                                                 </div>
-                                                            @endforeach
-                                                        </div>
-                                                        <button class="carousel-control-prev custom-carousel-prev" type="button" data-bs-target="#promoCarousel" data-bs-slide="prev">
-                                                            <span class="carousel-control-prev-icon custom-carousel-prev-icon" aria-hidden="true"></span>
-                                                            <span class="visually-hidden">Previous</span>
-                                                        </button>
-                                                        <button class="carousel-control-next custom-carousel-next" type="button" data-bs-target="#promoCarousel" data-bs-slide="next">
-                                                            <span class="carousel-control-next-icon custom-carousel-next-icon" aria-hidden="true"></span>
-                                                            <span class="visually-hidden">Next</span>
-                                                        </button>                                                                                                                                                                                                         
+                                                                @else
+                                                                    <p>Tidak ada gambar</p>
+                                                                @endif
+                                                            </div>
+                                                        @endforeach
                                                     </div>
+                                                    <button class="carousel-control-prev custom-carousel-prev" type="button" data-bs-target="#promoCarousel" data-bs-slide="prev">
+                                                        <span class="carousel-control-prev-icon custom-carousel-prev-icon" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Previous</span>
+                                                    </button>
+                                                    <button class="carousel-control-next custom-carousel-next" type="button" data-bs-target="#promoCarousel" data-bs-slide="next">
+                                                        <span class="carousel-control-next-icon custom-carousel-next-icon" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Next</span>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>

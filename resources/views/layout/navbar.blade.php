@@ -19,9 +19,9 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #910000;">
     <div class="container">
-    <img src="{{ asset('images\logologo.png') }}" alt="logo" height="50" class="d-inline-block align-text-top">     
+    <img src="{{ asset('images\jagad-group.png') }}" alt="logo" height="50" class="d-inline-block align-text-top">     
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -42,7 +42,7 @@
                 <div class="vr" style="color :white; margin: 0px 8px 0px 8px;"></div>
                 @endif -->
                 <li class="nav-item dropdown">            
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #FFFFFF;">
                       Welcome back, {{ auth()->user()->name }}
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">

@@ -25,15 +25,6 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label for="alamat" class="form-label">Alamat</label>
-            <input type="text" class="form-control @error('kavling') is-invalid @enderror" id="alamat" name="alamat" value="{{ old('alamat', $data->alamat) }}" required>
-            @error('alamat')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-            @enderror
-        </div>
-        <div class="mb-3">
             <label for="lokasi" class="form-label">Lokasi</label>
             <select class="form-select @error('lokasi') is-invalid @enderror" id="lokasi" name="lokasi" required>
                 <option value="">Pilih Lokasi</option>
@@ -75,6 +66,16 @@
             </div>
             @enderror
         </div>
+
+        <div class="mb-3">
+            <label for="ptb" class="form-label">PTB</label>
+            <input type="text" class="form-control @error('spk') is-invalid @enderror" id="ptb" name="ptb" value="{{ old('ptb', $data->ptb) }}" required>
+            @error('ptb')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
         <div class="mb-3">
             <label for="harga_deal" class="form-label">Harga Deal</label>
             <input type="number" class="form-control @error('cicilan') is-invalid @enderror" id="harga_deal" name="harga_deal" value="{{ old('harga_deal', $data->harga_deal) }}" required>
@@ -84,24 +85,7 @@
             </div>
             @enderror
         </div>
-        <div class="mb-3">
-            <label for="cicilan" class="form-label">Cicilan Ke</label>
-            <input type="number" class="form-control @error('cicilan') is-invalid @enderror" id="cicilan" name="cicilan" value="{{ old('cicilan', $data->cicilan) }}" required>
-            @error('cicilan')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-            @enderror
-        </div>
-        <div class="mb-3">
-            <label for="uang_masuk" class="form-label">Uang Masuk</label>
-            <input type="number" class="form-control @error('cicilan') is-invalid @enderror" id="uang_masuk" name="uang_masuk" value="{{ old('uang_masuk', $data->uang_masuk) }}" required>
-            @error('uang_masuk')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-            @enderror
-        </div>
+        
         <div class="mb-3">
             <label for="progres" class="form-label">Progres (%)</label>
             <input type="number" class="form-control @error('progres') is-invalid @enderror" id="progres" name="progres" value="{{ old('progres', $data->progres) }}" required>
@@ -111,7 +95,74 @@
             </div>
             @enderror
         </div>
+        <div class="mb-3">
+            <label for="sales" class="form-label">Sales</label>
+            <input type="text" class="form-control @error('kavling') is-invalid @enderror" id="sales" name="sales" value="{{ old('sales', $data->sales) }}" required>
+            @error('kavling')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+
+        <div class="mb-3">
+            <label for="ktp" class="form-label @error('photo') is-invalid @enderror">KTP</label>
+            <div>
+                <input class="form-control" type="file" id="ktp" name="ktp[]" onchange="previewImages()" multiple>
+            </div>
+            @error('ktp')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+
+            <!-- Inisialisasi variabel $ktpPhotos dengan foto-foto yang sudah ada -->
+            @php
+                $ktpPhotos = json_decode($data->ktp); // Ubah dari explode menjadi json_decode
+            @endphp
+
+            <!-- Tambahkan elemen img-preview di sini -->
+            <div class="mt-2" id="preview-container" style="display: flex; flex-wrap: wrap;">
+                @foreach ($ktpPhotos as $index => $photo)
+                    <div class="img-preview-container mr-2 mb-2" style="max-width: 200px; flex-basis: 20%;">
+                        <img class="img-preview img-fluid" src="{{ asset('storage/'.$photo) }}" alt="Preview" style="max-width: 100%;">
+                    </div>
+                    @if (($index + 1) % 5 === 0)
+                        <div style="flex-basis: 100%;"></div> <!-- Membuat baris baru setelah 5 gambar -->
+                    @endif
+                @endforeach
+            </div>
+            
         <button type="submit" class="btn btn-primary">Update</button>
     </form>
 </div>
+
+<script>
+    function previewImages() {
+        const input = document.querySelector('#ktp');
+        const previewContainer = document.querySelector('#preview-container');
+
+        // Clear previous previews
+        previewContainer.innerHTML = '';
+
+        // Loop through selected files and display previews
+        for (const file of input.files) {
+            const reader = new FileReader();
+
+            reader.onload = function(event) {
+                const img = document.createElement('img');
+                img.className = 'img-preview img-fluid';
+                img.src = event.target.result;
+
+                const previewDiv = document.createElement('div');
+                previewDiv.className = 'img-preview-container mr-2 mb-2';
+                previewDiv.appendChild(img);
+
+                previewContainer.appendChild(previewDiv);
+            };
+
+            reader.readAsDataURL(file);
+        }
+    }
+</script>
 @endsection
