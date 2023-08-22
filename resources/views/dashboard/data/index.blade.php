@@ -63,7 +63,7 @@
                 <th scope="col">Harga Deal</th>
                 <th scope="col">Progres (%)</th>
                 <th scope="col">Sales</th>
-                <th scope="col">KTP</th>
+                <th scope="col">Berkas</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>

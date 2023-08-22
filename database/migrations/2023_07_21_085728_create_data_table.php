@@ -24,7 +24,7 @@ class CreateDataTable extends Migration
             $table->unsignedBigInteger('harga_deal');
             $table->unsignedBigInteger('progres');
             $table->string('sales');
-            $table->text('ktp');
+            $table->text('ktp')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

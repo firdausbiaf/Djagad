@@ -104,12 +104,12 @@
         </div>
 
         <div class="mb-3">
-            <label for="ktp" class="form-label">KTP</label>
+            <label for="ktp" class="form-label @error('photo') is-invalid @enderror">KTP</label>
             <div>
-                <input class="form-control" type="file" id="ktp" name="ktp[]" onchange="previewImages()" multiple required>
+                <input class="form-control" type="file" id="ktp" name="ktp[]" onchange="previewImages()" multiple>
             </div>
             @error('ktp')
-            <div class="alert alert-danger mt-2">
+            <div class="invalid-feedback">
                 {{ $message }}
             </div>
             @enderror
