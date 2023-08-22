@@ -89,6 +89,10 @@ Route::resource('/admin/data', DataController::class)->middleware('checkRole:adm
 Route::resource('/admin/promo', PromoController::class)->middleware('checkRole:admin');
 // Route::resource('/admin/foto', FotoController::class)->middleware('checkRole:admin');
 
+Route::get('/komplain_start', [FotoController::class, 'komplain_start']);
+
+Route::get('/komplain_finish', [FotoController::class, 'komplain_finish']);
+
 Route::get('/admin/foto', [FotoController::class, 'index'])->name('foto.index');
 Route::get('/admin/foto/filter', [FotoController::class, 'filter'])->name('foto.filter');
 Route::resource('/admin/foto', FotoController::class)->except(['index', 'filter']);
