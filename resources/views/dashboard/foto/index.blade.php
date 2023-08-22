@@ -39,8 +39,6 @@
                             <th scope="col">ID</th>
                             <th scope="col">Lokasi</th>
                             <th scope="col">Kavling</th>
-                            <th scope="col">Komplain</th>
-                            <th scope="col">Status</th>
                             <th scope="col">Foto</th>
                             <th scope="col">Komplain</th>
                             <th scope="col">Status Komplain</th>
