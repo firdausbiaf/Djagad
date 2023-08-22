@@ -67,40 +67,44 @@ class FotoController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-     public function store(StoreFotoRequest $request)
-     {
-         // Validasi form menggunakan StoreFotoRequest
-         // Anda tidak perlu lagi melakukan validasi di sini karena sudah dilakukan di StoreFotoRequest
- 
-         // Ambil data_id berdasarkan lokasi dan kavling
-         $data = Data::where('lokasi', $request->input('lokasi'))
-                     ->where('kavling', $request->input('kavling'))
-                     ->first();
- 
-         if (!$data) {
-             return redirect()->route('foto.create')->with('error', 'Data kavling tidak ditemukan.');
-         }
- 
-         $fotoPaths = []; // Simpan path file foto untuk setiap foto yang diunggah
- 
-         if ($request->hasFile('photo')) {
-             foreach ($request->file('photo') as $file) {
-                 $nama_photo = $file->store('photo', 'public');
-                 $fotoPaths[] = $nama_photo;
-             }
-         }
- 
-         // Buat entri untuk setiap foto yang diunggah
-         foreach ($fotoPaths as $nama_photo) {
-             $foto = new Foto;
-             $foto->data_id = $data->id;
-             $foto->photo = $nama_photo;
-             $foto->komplain = $request->get('komplain');
-             $foto->save();
-         }
- 
-         return redirect()->route('foto.index')->with('success', 'Foto baru telah ditambahkan');
-     }
+    public function store(StoreFotoRequest $request)
+    {
+        // Validasi form menggunakan StoreFotoRequest
+        // Anda tidak perlu lagi melakukan validasi di sini karena sudah dilakukan di StoreFotoRequest
+
+        // Ambil data_id berdasarkan lokasi dan kavling
+        $data = Data::where('lokasi', $request->input('lokasi'))
+            ->where('kavling', $request->input('kavling'))
+            ->first();
+
+        if (!$data) {
+            return redirect()->route('foto.create')->with('error', 'Data kavling tidak ditemukan.');
+        }
+
+        $fotoPaths = []; // Simpan path file foto untuk setiap foto yang diunggah
+
+        if ($request->hasFile('photo')) {
+            foreach ($request->file('photo') as $file) {
+                $nama_photo = $file->store('photo', 'public');
+                $fotoPaths[] = $nama_photo;
+            }
+        }
+
+        // Buat entri untuk setiap foto yang diunggah
+        foreach ($fotoPaths as $nama_photo) {
+            $foto = new Foto;
+            $foto->data_id = $data->id;
+            $foto->photo = $nama_photo;
+
+            // Set nilai default untuk kolom "komplain" dan "status"
+            $foto->komplain = null;
+            $foto->status = 0;
+
+            $foto->save();
+        }
+
+        return redirect()->route('foto.index')->with('success', 'Foto baru telah ditambahkan');
+    }
     
 
     /**
@@ -151,15 +155,16 @@ class FotoController extends Controller
             'lokasi' => 'required',
             'kavling' => 'required',
             'photo' => 'image|file|max:10240',
-            'komplain' => 'nullable|string'
+            'komplain' => 'nullable|string', // Validasi komplain sebagai string opsional
+            'status' => 'nullable|integer|between:0,1', // Validasi status sebagai integer antara 0 dan 1
         ]);
 
         $foto = Foto::findOrFail($id);
 
         // Ambil data_id berdasarkan lokasi dan kavling
         $data = Data::where('lokasi', $request->input('lokasi'))
-                    ->where('kavling', $request->input('kavling'))
-                    ->first();
+            ->where('kavling', $request->input('kavling'))
+            ->first();
 
         if (!$data) {
             return redirect()->route('foto.edit', $foto->id)->with('error', 'Data kavling tidak ditemukan.');
@@ -176,7 +181,10 @@ class FotoController extends Controller
             $foto->photo = $nama_photo;
         }
 
-        $foto->komplain = $request->get('komplain');
+        // Set nilai untuk kolom "komplain" dan "status"
+        $foto->komplain = $request->input('komplain');
+        $foto->status = $request->input('status', 0); // Default value adalah 0 jika tidak disertakan
+
         $foto->save();
 
         return redirect()->route('foto.index')->with('success', 'Foto berhasil diupdate');
@@ -241,12 +249,12 @@ class FotoController extends Controller
         return response()->json($fotos);
     }
 
-    public function komplain_start(Request $request, Foto $foto)
+public function komplain_start(Request $request, Foto $foto)
     {
 
         $foto = Foto::findOrFail($request->id);
         if ($foto) {
-            $foto->status_komplain = '1';
+            $foto->status = '1';
             $foto->save();
         }
 
@@ -258,7 +266,7 @@ class FotoController extends Controller
 
         $foto = Foto::findOrFail($request->id);
         if ($foto) {
-            $foto->status_komplain = '0';
+            $foto->status = '0';
             $foto->save();
         }
 

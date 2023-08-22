@@ -17,8 +17,8 @@ class CreateFotosTable extends Migration
             $table->id();
             $table->unsignedBigInteger('data_id');
             $table->string('photo')->nullable();
-            $table->string('komplain')->nullable();
-            $table->integer('status_komplain')->default(0);
+            $table->string('komplain')->nullable(); // Tambahkan kolom komplain
+            $table->unsignedTinyInteger('status')->default(0); // Tambahkan kolom status
             $table->timestamps();
 
             $table->foreign('data_id')->references('id')->on('data')->onDelete('cascade');
