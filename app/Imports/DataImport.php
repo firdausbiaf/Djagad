@@ -32,15 +32,15 @@ class DataImport implements ToCollection, WithHeadingRow
 
             Data::create([
                 'user_id' => $user->id,
-                'alamat' => $row['alamat'],
-                'kavling' => $row['kavling'],
+                // 'alamat' => $row['alamat'],
                 'lokasi' => $row['lokasi'],
+                'kavling' => $row['kavling'],
                 'tipe' => $row['tipe'],
                 'spk' => $row['spk'],
+                'ptb' => $row['ptb'],
                 'harga_deal' => $row['harga_deal'],
-                'cicilan' => $row['cicilan'],
-                'uang_masuk' => $row['uang_masuk'],
                 'progres' => $row['progres'],
+                'sales' => $row['sales'],
             ]);
         }
     }

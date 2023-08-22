@@ -118,20 +118,22 @@
 
             <!-- Inisialisasi variabel $ktpPhotos dengan foto-foto yang sudah ada -->
             @php
-                $ktpPhotos = json_decode($data->ktp); // Ubah dari explode menjadi json_decode
-            @endphp
+    $ktpPhotos = json_decode($data->ktp) ?? []; // Menambahkan nilai default berupa array kosong jika $data->ktp bernilai null
+@endphp
 
             <!-- Tambahkan elemen img-preview di sini -->
-            <div class="mt-2" id="preview-container" style="display: flex; flex-wrap: wrap;">
-                @foreach ($ktpPhotos as $index => $photo)
-                    <div class="img-preview-container mr-2 mb-2" style="max-width: 200px; flex-basis: 20%;">
-                        <img class="img-preview img-fluid" src="{{ asset('storage/'.$photo) }}" alt="Preview" style="max-width: 100%;">
-                    </div>
-                    @if (($index + 1) % 5 === 0)
-                        <div style="flex-basis: 100%;"></div> <!-- Membuat baris baru setelah 5 gambar -->
-                    @endif
-                @endforeach
+<div class="mt-2" id="preview-container" style="display: flex; flex-wrap: wrap;">
+    @if (!empty($ktpPhotos)) <!-- Cek apakah $ktpPhotos tidak kosong -->
+        @foreach ($ktpPhotos as $index => $photo)
+            <div class="img-preview-container mr-2 mb-2" style="max-width: 200px; flex-basis: 20%;">
+                <img class="img-preview img-fluid" src="{{ asset('storage/'.$photo) }}" alt="Preview" style="max-width: 100%;">
             </div>
+            @if (($index + 1) % 5 === 0)
+                <div style="flex-basis: 100%;"></div> <!-- Membuat baris baru setelah 5 gambar -->
+            @endif
+        @endforeach
+    @endif
+</div>
             
         <button type="submit" class="btn btn-primary">Update</button>
     </form>

@@ -59,7 +59,7 @@ class DataController extends Controller
             'harga_deal' => 'required|integer',
             'progres' => 'required|integer',
             'sales' => 'required',
-            'ktp' => 'required|array',
+            // 'ktp' => 'required|array',
             'ktp.*' => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
@@ -87,13 +87,15 @@ class DataController extends Controller
                 $ktpPaths[] = $nama_ktp;
             }
             $data->ktp = json_encode($ktpPaths); // Simpan array jalur file dalam bentuk JSON
-        } else {
-            $request->validate([
-                'ktp' => 'required',
-            ], ['ktp.required' => 'Mohon unggah setidaknya satu file KTP.']);
+        } 
+        
+        // else {
+        //     $request->validate([
+        //         'ktp' => 'required',
+        //     ], ['ktp.required' => 'Mohon unggah setidaknya satu file KTP.']);
 
-            return redirect()->back()->withInput()->withErrors(['ktp' => 'Mohon unggah setidaknya satu file KTP.']);
-        }
+        //     return redirect()->back()->withInput()->withErrors(['ktp' => 'Mohon unggah setidaknya satu file KTP.']);
+        // }
 
         $data->save();
 

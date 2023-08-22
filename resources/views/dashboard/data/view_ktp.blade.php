@@ -15,15 +15,19 @@
                             $ktpPhotos = json_decode($data->ktp); // Assuming $data->ktp is a JSON-encoded array of photo paths
                         @endphp
 
-                        <div class="row">
-                            @foreach ($ktpPhotos as $index => $ktpPhoto)
-                                <div class="col-md-6 mb-3">
-                                    <div class="photo-container">
-                                        <img class="img-fluid" src="{{ asset('storage/'.$ktpPhoto) }}" alt="KTP Photo {{ $index + 1 }}">
+                        @if (!empty($ktpPhotos) && count($ktpPhotos) > 0)
+                            <div class="row">
+                                @foreach ($ktpPhotos as $index => $ktpPhoto)
+                                    <div class="col-md-6 mb-3">
+                                        <div class="photo-container">
+                                            <img class="img-fluid" src="{{ asset('storage/'.$ktpPhoto) }}" alt="KTP Photo {{ $index + 1 }}">
+                                        </div>
                                     </div>
-                                </div>
-                            @endforeach
-                        </div>
+                                @endforeach
+                            </div>
+                        @else
+                            <p>Belum ada gambar yang diupload.</p>
+                        @endif
                     </li>
                 </ul>
             </div>
