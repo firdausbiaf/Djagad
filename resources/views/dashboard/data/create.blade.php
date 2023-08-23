@@ -122,26 +122,43 @@
     </form>
 </div>
 
+<style>
+    .img-preview-container {
+        flex-basis: 20%;
+        margin-right: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .img-preview-container img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+
+
 <script>
     function previewImages() {
-        const previewContainer = document.querySelector('#preview-container');
-        const files = document.querySelector('#ktp').files;
+    const previewContainer = document.querySelector('#preview-container');
+    const files = document.querySelector('#ktp').files;
 
-        previewContainer.innerHTML = ''; // Clear previous previews
+    previewContainer.innerHTML = ''; // Clear previous previews
 
-        for (const file of files) {
-            const img = document.createElement('img');
-            img.src = URL.createObjectURL(file);
-            img.style.maxWidth = '200px';
-            img.style.maxHeight = '200px';
-            
-            const imgPreviewContainer = document.createElement('div');
-            imgPreviewContainer.className = 'img-preview-container mr-2 mb-2';
-            imgPreviewContainer.style.flexBasis = '20%';
-            imgPreviewContainer.appendChild(img);
+    for (const file of files) {
+        const img = document.createElement('img');
+        img.src = URL.createObjectURL(file);
+        img.style.maxWidth = '100%'; // Set the width to fit the container
+        img.style.height = 'auto'; // Keep the aspect ratio
+        
+        const imgPreviewContainer = document.createElement('div');
+        imgPreviewContainer.className = 'img-preview-container mr-2 mb-2';
+        imgPreviewContainer.style.flexBasis = '20%';
+        imgPreviewContainer.appendChild(img);
 
-            previewContainer.appendChild(imgPreviewContainer);
-        }
+        previewContainer.appendChild(imgPreviewContainer);
     }
+}
+
 </script>
+
 @endsection

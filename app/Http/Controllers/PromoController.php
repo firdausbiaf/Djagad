@@ -18,7 +18,8 @@ class PromoController extends Controller
     public function index(Request $request)
     {
         $promos = Promo::paginate(10);
-        return view('dashboard.promo.index', compact('promos'));
+        $promo = Promo::all(); // Ambil semua data promo
+    return view('dashboard.promo.index', compact('promos', 'promo'));
     }
 
     /**

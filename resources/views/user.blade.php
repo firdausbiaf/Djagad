@@ -166,16 +166,12 @@
                                             <div class="row">
                                                 <div id="promoCarousel" class="carousel slide" data-bs-ride="carousel">
                                                     <div class="carousel-inner">
-                                                        @php
-                                                            $latestPromo = $promo->sortByDesc('created_at')->take(4);
-                                                        @endphp
-
-                                                        @foreach ($latestPromo as $index => $pro)
+                                                        @foreach ($promo as $index => $pro)
                                                             <div class="carousel-item @if ($index === 0) active @endif">
                                                                 @if ($pro->gambar)
-                                                                <div class="d-flex justify-content-center align-items-center" style="height: 0; padding-bottom: 100%; position: relative; overflow: hidden;">
-                                                                    <img src="{{ asset('storage/' . $pro->gambar) }}" class="d-block position-absolute top-0 start-0" alt="Promo Gambar" style="width: 100%; height: 100%; object-fit: cover;">
-                                                                </div>
+                                                                    <div class="d-flex justify-content-center align-items-center" style="height: 0; padding-bottom: 100%; position: relative; overflow: hidden;">
+                                                                        <img src="{{ asset('storage/' . $pro->gambar) }}" class="d-block position-absolute top-0 start-0" alt="Promo Gambar" style="width: 100%; height: 100%; object-fit: cover;">
+                                                                    </div>
                                                                 @else
                                                                     <p>Tidak ada gambar</p>
                                                                 @endif
@@ -193,6 +189,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        
 
                                     </div>
                                 </div>
