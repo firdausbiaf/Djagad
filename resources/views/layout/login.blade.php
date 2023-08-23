@@ -12,6 +12,8 @@
 {{-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> --}}
 
+<link rel="preload" href="images/bg-login2.jpg" as="image">
+
     <style>
         @import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
         .login-block{

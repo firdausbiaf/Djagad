@@ -87,6 +87,17 @@
     .icon-large {
         font-size: 25px; /* Atur ukuran sesuai keinginan Anda */
     }
+    .table {
+    border-collapse: separate;
+    border-spacing: 0 20px; /* Atur jarak antar baris sesuai kebutuhan Anda */
+    }
+
+    .table td,
+    .table th {
+        font-size: 18px; /* Atur ukuran teks sesuai kebutuhan Anda */
+    }
+
+
   </style>
   
 

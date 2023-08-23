@@ -29,29 +29,29 @@
                                     <div class="col-sm-12 col-xl-7">
                                         <div class="bg-light rounded-card p-4">
                                             {{-- <div class="d-flex align-items-center justify-content-between mb-4"> --}}
-                                            <div class="row" style="max-height: 800px; overflow: auto;">
-                                                <h6 class="mb-2">KAVLING</h6>
+                                            <div class="row" style="max-height: 850px; overflow: auto;">
+                                                <h5 class="mb-2">KAVLING</h5>
                                                 <!-- Nav tabs for kavling -->
                                                 <ul class="nav nav-tabs" id="kavlingTab" role="tablist">
                                                     @foreach ($data as $item)
                                                         <li class="nav-item">
-                                                            <a class="nav-link" id="kavling-tab-{{ $item->id }}" data-toggle="tab" href="#content-{{ $item->id }}" role="tab" aria-controls="content-{{ $item->id }}" aria-selected="false">{{ $item->kavling }}</a>
+                                                            <a class="nav-link" id="kavling-tab-{{ $item->id }}" data-toggle="tab" href="#content-{{ $item->id }}" role="tab" aria-controls="content-{{ $item->id }}" aria-selected="false" style="font-size: 18px;">{{ $item->kavling }}</a>
                                                         </li>
                                                     @endforeach
                                                 </ul>
 
                                                 <!-- Tab panes for kavling -->
-                                                <div class="tab-content mt-4" id="kavlingTabContent" style="max-height: 600px;">
+                                                <div class="tab-content mt-4" id="kavlingTabContent" style="max-height: 850px;">
                                                     @foreach ($data as $item)
                                                         <div class="tab-pane fade @if($loop->first) show active @endif" id="content-{{ $item->id }}" role="tabpanel" aria-labelledby="kavling-tab-{{ $item->id }}">
                                                             <div class="card shadow mb-4 rounded-card">
                                                                 <div class="card-header py-3">
-                                                                    <h6 class="m-1 font-weight-bold text-primary">Data Pembeli Kavling {{ $item->kavling }}</h6>
+                                                                    <h5 class="m-1 font-weight-bold text-primary">Data Pembeli Kavling {{ $item->kavling }}</h5>
                                                                 </div>
                                                                 <div class="card-body">
                                                                     <div class="table-responsive col-lg-11 mx-4 mt-4">
                                                                         <table class="table table-striped table-sm">
-                                                                            <tr>
+                                                                            <tr style="margin-bottom: 100px;">
                                                                                 <th scope="row">Nama User</th>
                                                                                 <td>{{ $item->user->name }}</td>
                                                                             </tr>
@@ -81,7 +81,7 @@
                                                                             </tr>
                                                 
                                                                         </table>
-                                                                        <h6 class="medium font-weight-bold"> Progress Pembangunan <span class="float-right">{{ $item->progres }}%</span></h6>
+                                                                        <h5 class="medium font-weight-bold"> Progress Pembangunan <span class="float-right">{{ $item->progres }}%</span></h5>
                                                                         <div class="progress mb-4">
                                                                             <div class="progress-bar" role="progressbar" style="width: {{ $item->progres }}%" aria-valuenow="{{ $item->progres }}" aria-valuemin="0" aria-valuemax="100"></div>
                                                                         </div>
@@ -106,7 +106,7 @@
                                     <div class="col-sm-12 col-xl-5">
 
                                         {{-- Progress --}}
-                                        <div class="row mb-3" style="max-height: 380px; overflow: auto;">
+                                        <div class="row mb-3" style="max-height: 500px; overflow: auto;">
                                             <div class="bg-light rounded-card p-4">
                                                 {{-- <div class="d-flex align-items-center justify-content-between mb-4"> --}}
                                                 <div class="row">
@@ -134,7 +134,7 @@
                                                                                             @else
                                                                                                 @foreach($itemFoto as $f)
                                                                                                     <div class="carousel-item @if ($loop->first) active @endif">
-                                                                                                        <img src="{{ asset('storage/' . $f->photo) }}" class="card-img-top" alt="Foto" style="width: 100%; height: 200px; object-fit: cover;">
+                                                                                                        <img src="{{ asset('storage/' . $f->photo) }}" class="card-img-top" alt="Foto" style="width: 100%; max-height: 300px; object-fit: cover;">
                                                                                                     </div>
                                                                                                 @endforeach
                                                                                             @endif
@@ -171,13 +171,13 @@
                                                         @endphp
 
                                                         @foreach ($latestPromo as $index => $pro)
-                                                            <div class="carousel-item @if ($index === 0) active @endif">
+                                                            <div class="carousel-item @if ($index === 0) active @endif" style="max-height: 400px;">
                                                                 @if ($pro->gambar)
-                                                                <div class="d-flex justify-content-center align-items-center" style="height: 0; padding-bottom: 100%; position: relative; overflow: hidden;">
-                                                                    <img src="{{ asset('storage/' . $pro->gambar) }}" class="d-block position-absolute top-0 start-0" alt="Promo Gambar" style="width: 100%; height: 100%; object-fit: cover;">
+                                                                <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 100%; position: relative; overflow: hidden;">
+                                                                    <img src="{{ asset('storage/' . $pro->gambar) }}" class="d-block position-absolute top-0 start-0" alt="Promo Gambar" style="width: 100%; height: 80%; object-fit: contain;">
                                                                 </div>
                                                                 @else
-                                                                    <p>Tidak ada gambar</p>
+                                                                    <p>Tidak ada promo</p>
                                                                 @endif
                                                             </div>
                                                         @endforeach
