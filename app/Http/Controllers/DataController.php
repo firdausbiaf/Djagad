@@ -242,9 +242,9 @@ class DataController extends Controller
                 $ktpPaths[] = $nama_ktp;
             }
             $data->ktp = implode(',', $ktpPaths); // Simpan hanya foto baru yang diunggah
-            $data->save();
         }
-        
+
+        $data->save(); // Save the data after updating fields
 
         return redirect()->route('data.index')->with('success', 'Data berhasil diedit');
     } catch (\Exception $e) {

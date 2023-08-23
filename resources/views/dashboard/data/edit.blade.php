@@ -141,30 +141,24 @@
 
 <script>
     function previewImages() {
-        const input = document.querySelector('#ktp');
         const previewContainer = document.querySelector('#preview-container');
+    const files = document.querySelector('#ktp').files;
 
-        // Clear previous previews
-        previewContainer.innerHTML = '';
+    previewContainer.innerHTML = ''; // Clear previous previews
 
-        // Loop through selected files and display previews
-        for (const file of input.files) {
-            const reader = new FileReader();
+    for (const file of files) {
+        const img = document.createElement('img');
+        img.src = URL.createObjectURL(file);
+        img.style.maxWidth = '100%'; // Set the width to fit the container
+        img.style.height = 'auto'; // Keep the aspect ratio
+        
+        const imgPreviewContainer = document.createElement('div');
+        imgPreviewContainer.className = 'img-preview-container mr-2 mb-2';
+        imgPreviewContainer.style.flexBasis = '20%';
+        imgPreviewContainer.appendChild(img);
 
-            reader.onload = function(event) {
-                const img = document.createElement('img');
-                img.className = 'img-preview img-fluid';
-                img.src = event.target.result;
-
-                const previewDiv = document.createElement('div');
-                previewDiv.className = 'img-preview-container mr-2 mb-2';
-                previewDiv.appendChild(img);
-
-                previewContainer.appendChild(previewDiv);
-            };
-
-            reader.readAsDataURL(file);
-        }
+        previewContainer.appendChild(imgPreviewContainer);
     }
+}
 </script>
 @endsection

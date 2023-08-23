@@ -167,7 +167,7 @@
                                                 <div id="promoCarousel" class="carousel slide" data-bs-ride="carousel">
                                                     <div class="carousel-inner">
                                                         @php
-                                                            $latestPromo = $promo->sortByDesc('created_at')->take(4);
+                                                            $latestPromo = $promo->sortByDesc('created_at');
                                                         @endphp
 
                                                         @foreach ($latestPromo as $index => $pro)
@@ -193,6 +193,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        
 
                                     </div>
                                 </div>
