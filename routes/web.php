@@ -20,6 +20,7 @@ use App\Http\Controllers\DashboardMateriController;
 use App\Http\Controllers\DashboardCategoryController;
 use App\Http\Controllers\DashboardTugasController;
 use App\Http\Controllers\DataController;
+use App\Http\Controllers\DparkController;
 use App\Http\Controllers\FotoController;
 use App\Http\Controllers\IndexUserController;
 use App\Http\Controllers\LegalitasController;
@@ -76,6 +77,10 @@ Route::get('/komplain_start', [FotoController::class, 'komplain_start']);
 
 Route::get('/komplain_finish', [FotoController::class, 'komplain_finish']);
 
+Route::get('/sold', [DparkController::class, 'sold']);
+
+Route::get('/open', [DparkController::class, 'open']);
+
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 
@@ -83,6 +88,8 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::resource('/admin/member', DashboardUserController::class)->middleware('checkRole:admin');
 Route::resource('/admin/user', DashboardAdminController::class)->middleware('checkRole:admin');
 Route::resource('/admin/petugas', PetugasController::class)->middleware('checkRole:admin');
+
+Route::resource('/admin/stok-dpark', DparkController::class)->middleware('checkRole:admin');
 
 Route::resource('/admin/kelas', DashboardCategoryController::class)->middleware('checkRole:admin');
 

@@ -73,6 +73,28 @@
               <span class="menu-title">Data</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#stok" aria-expanded="false" aria-controls="stok">
+              <i class="menu-icon mdi mdi-account"></i>
+              <span class="menu-title">Stok</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="stok">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/admin/stok-singhasari">Djagad Land Singhasari</a></li>
+              </ul>
+            </div>
+            <div class="collapse" id="stok">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/admin/stok-batu">Djagad Land Batu</a></li>
+              </ul>
+            </div>
+            <div class="collapse" id="stok">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/admin/stok-dpark">Dpark City</a></li>
+              </ul>
+            </div>
+          </li>
           <li class="nav-item nav-category">Legalitas</li>
           <li class="nav-item">
             <a class="nav-link" href="/admin/legalitas">
