@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BatuController;
 use App\Http\Models\User;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Artisan;
@@ -117,6 +118,11 @@ Route::resource('/admin/legalitas', LegalitasController::class)->middleware('che
 Route::get('/get-kavlings', [FotoController::class, 'getKavlingsByLocation'])->name('get-kavlings');
 // Route::get('/api/getKavlingsByLocation', [FotoController::class, 'getKavlingsByLocation']);
 Route::get('/api/getFotosByLocation', 'FotoController@getFotosByLocation')->name('fotos.getByLocation');
+
+Route::resource('/admin/stok-batu', BatuController::class)->middleware('checkRole:admin');
+Route::get('/sold', [BatuController::class, 'sold']);
+Route::get('/open', [BatuController::class, 'open']);
+
 
 
 

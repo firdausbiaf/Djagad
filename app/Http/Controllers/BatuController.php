@@ -53,7 +53,7 @@ class BatuController extends Controller
 
             $batu->save();
 
-            return redirect()->route('batu.index')->with('success', 'Data baru telah ditambahkan');
+            return redirect()->route('stok-batu.index')->with('success', 'Data baru telah ditambahkan');
         } catch (\Exception $e) {
             dd($e->getMessage()); // Debug pesan kesalahan
             // Handle exception, if necessary
@@ -108,9 +108,9 @@ class BatuController extends Controller
 
             $batu->save();
 
-            return redirect()->route('batu.index')->with('success', 'Data berhasil diedit');
+            return redirect()->route('stok-batu.index')->with('success', 'Data berhasil diedit');
         } catch (\Exception $e) {
-            return redirect()->route('batu.edit', $id)->with('error', 'Terjadi kesalahan saat mengedit data: ' . $e->getMessage());
+            return redirect()->route('stok-batu.edit', $id)->with('error', 'Terjadi kesalahan saat mengedit data: ' . $e->getMessage());
         }
     }
 
@@ -125,7 +125,7 @@ class BatuController extends Controller
         $batu = Batu::findOrFail($id);
         $batu->delete();
 
-        return redirect()->route('batu.index')->with('success', 'Data berhasil dihapus');
+        return redirect()->route('stok-batu.index')->with('success', 'Data berhasil dihapus');
     }
 
     public function sold(Request $request, Batu $batu)
