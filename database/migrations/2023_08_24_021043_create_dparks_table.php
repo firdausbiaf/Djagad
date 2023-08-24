@@ -18,7 +18,7 @@ class CreateDparksTable extends Migration
             $table->enum('cluster',['ALEXANDRIA','SEVILLA','ANDALUSIA', 'GRANADA'])->default('ALEXANDRIA');
             $table->string('kavling');
             $table->unsignedTinyInteger('status')->default(1); // Tambahkan kolom status
-            $table->string('keterangan')->nullable(); // Tambahkan kolom komplain
+            $table->string('keterangan'); // Tambahkan kolom komplain
             $table->timestamps();
         });
     }

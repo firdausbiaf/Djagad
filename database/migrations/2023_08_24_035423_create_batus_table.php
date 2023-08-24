@@ -17,7 +17,7 @@ class CreateBatusTable extends Migration
             $table->id();
             $table->string('cluster');
             $table->string('kavling');
-            $table->unsignedTinyInteger('status')->default(0);
+            $table->unsignedTinyInteger('status')->default(1);
             $table->string('keterangan');
             $table->timestamps();
         });

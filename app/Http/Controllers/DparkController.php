@@ -133,7 +133,7 @@ class DparkController extends Controller
         return redirect()->route('stok-dpark.index')->with('success', 'Data berhasil dihapus');
     }
 
-    public function sold(Request $request, Dpark $dpark)
+    public function soldDpark(Request $request, Dpark $dpark)
     {
 
         $dpark = Dpark::findOrFail($request->id);
@@ -145,7 +145,7 @@ class DparkController extends Controller
         return redirect('/admin/stok-dpark');
     }
 
-    public function open(Request $request)
+    public function openDpark(Request $request)
     {
 
         $dpark = Dpark::findOrFail($request->id);
