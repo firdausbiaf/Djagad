@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Batu;
 use App\Http\Requests\StoreBatuRequest;
 use App\Http\Requests\UpdateBatuRequest;
+use Illuminate\Http\Request;
 
 class BatuController extends Controller
 {
@@ -15,7 +16,8 @@ class BatuController extends Controller
      */
     public function index()
     {
-        //
+        $batus = Batu::select("*")->orderBy("id", "asc")->paginate(10);
+        return view('dashboard.batu.index', compact('batus'));
     }
 
     /**
@@ -25,7 +27,8 @@ class BatuController extends Controller
      */
     public function create()
     {
-        //
+        $clusterOptions = ['Tahap 1', 'Tahap 2', 'Tahap 3', 'Tahap 4'];
+        return view('dashboard.batu.create', compact('clusterOptions'));
     }
 
     /**
@@ -36,7 +39,25 @@ class BatuController extends Controller
      */
     public function store(StoreBatuRequest $request)
     {
-        //
+        try {
+            $request->validate([
+                'cluster' => 'required',
+                'kavling' => 'required',
+                'keterangan' => 'required',
+            ]);
+
+            $batu = new Batu;
+            $batu->cluster = $request->input('cluster');
+            $batu->kavling = $request->input('kavling');
+            $batu->keterangan = $request->input('keterangan');
+
+            $batu->save();
+
+            return redirect()->route('batu.index')->with('success', 'Data baru telah ditambahkan');
+        } catch (\Exception $e) {
+            dd($e->getMessage()); // Debug pesan kesalahan
+            // Handle exception, if necessary
+        }
     }
 
     /**
@@ -45,9 +66,10 @@ class BatuController extends Controller
      * @param  \App\Models\Batu  $batu
      * @return \Illuminate\Http\Response
      */
-    public function show(Batu $batu)
+    public function show($id)
     {
-        //
+        $batu = Batu::findOrFail($id);
+        return view('dashboard.batu.show', compact('batu'));
     }
 
     /**
@@ -56,9 +78,11 @@ class BatuController extends Controller
      * @param  \App\Models\Batu  $batu
      * @return \Illuminate\Http\Response
      */
-    public function edit(Batu $batu)
+    public function edit($id)
     {
-        //
+        $batu = Batu::findOrFail($id);
+        $clusterOptions = ['Tahap 1', 'Tahap 2', 'Tahap 3', 'Tahap 4'];
+        return view('dashboard.batu.edit', compact('batu', 'clusterOptions'));
     }
 
     /**
@@ -68,9 +92,26 @@ class BatuController extends Controller
      * @param  \App\Models\Batu  $batu
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateBatuRequest $request, Batu $batu)
+    public function update(UpdateBatuRequest $request, $id)
     {
-        //
+        try {
+            $request->validate([
+                'cluster' => 'required',
+                'kavling' => 'required',
+                'keterangan' => 'required',
+            ]);
+
+            $batu = Batu::findOrFail($id);
+            $batu->cluster = $request->input('cluster');
+            $batu->kavling = $request->input('kavling');
+            $batu->keterangan = $request->input('keterangan');
+
+            $batu->save();
+
+            return redirect()->route('batu.index')->with('success', 'Data berhasil diedit');
+        } catch (\Exception $e) {
+            return redirect()->route('batu.edit', $id)->with('error', 'Terjadi kesalahan saat mengedit data: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -79,8 +120,33 @@ class BatuController extends Controller
      * @param  \App\Models\Batu  $batu
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Batu $batu)
+    public function destroy($id)
     {
-        //
+        $batu = Batu::findOrFail($id);
+        $batu->delete();
+
+        return redirect()->route('batu.index')->with('success', 'Data berhasil dihapus');
+    }
+
+    public function sold(Request $request, Batu $batu)
+    {
+        $batu = Batu::findOrFail($request->id);
+        if ($batu) {
+            $batu->status = '1';
+            $batu->save();
+        }
+
+        return redirect('/admin/stok-batu');
+    }
+
+    public function open(Request $request)
+    {
+        $batu = Batu::findOrFail($request->id);
+        if ($batu) {
+            $batu->status = '0';
+            $batu->save();
+        }
+
+        return redirect('/admin/stok-batu');
     }
 }
