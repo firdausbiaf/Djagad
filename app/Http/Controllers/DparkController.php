@@ -16,8 +16,16 @@ class DparkController extends Controller
      */
     public function index()
     {
-        $dpark = Dpark::select("*")->orderBy("id", "asc")->paginate(10);
-        return view('dashboard.dpark.index', compact('dpark'));
+        $clusterOptions = ['ALEXANDRIA','SEVILLA','ANDALUSIA', 'GRANADA'];
+        $clusterData = [];
+
+        foreach ($clusterOptions as $cluster) {
+            $clusterData[$cluster] = Dpark::where('cluster', $cluster)
+                ->orderBy('id', 'asc')
+                ->paginate(10);
+        }
+
+        return view('dashboard.dpark.index', compact('clusterOptions', 'clusterData'));
     }
 
     /**
