@@ -16,8 +16,16 @@ class BatuController extends Controller
      */
     public function index()
     {
-        $batus = Batu::select("*")->orderBy("id", "asc")->paginate(10);
-        return view('dashboard.batu.index', compact('batus'));
+        $clusterOptions = ['Tahap 1', 'Tahap 2', 'Tahap 3', 'Tahap 4'];
+        $clusterData = [];
+
+        foreach ($clusterOptions as $cluster) {
+            $clusterData[$cluster] = Batu::where('cluster', $cluster)
+                ->orderBy('id', 'asc')
+                ->paginate(10);
+        }
+
+        return view('dashboard.batu.index', compact('clusterOptions', 'clusterData'));
     }
 
     /**
