@@ -87,7 +87,7 @@ class DparkController extends Controller
         // Enum values for 'cluster'
         $clusterOptions = ['ALEXANDRIA','SEVILLA','ANDALUSIA', 'GRANADA'];
 
-        return view('dashboard.data.edit', compact('dpark', 'clusterOptions'));
+        return view('dashboard.dpark.edit', compact('dpark', 'clusterOptions'));
     }
 
     /**
@@ -113,9 +113,9 @@ class DparkController extends Controller
     
             $dpark->save(); // Save the data after updating fields
     
-            return redirect()->route('dpark.index')->with('success', 'Data berhasil diedit');
+            return redirect()->route('stok-dpark.index')->with('success', 'Data berhasil diedit');
         } catch (\Exception $e) {
-            return redirect()->route('dpark.edit', $id)->with('error', 'Terjadi kesalahan saat mengedit data: ' . $e->getMessage());
+            return redirect()->route('stok-dpark.edit', $id)->with('error', 'Terjadi kesalahan saat mengedit data: ' . $e->getMessage());
         }
     }
 
@@ -130,7 +130,7 @@ class DparkController extends Controller
         $dpark = Dpark::findOrFail($id);
         $dpark->delete();
 
-        return redirect()->route('dpark.index')->with('success', 'Data berhasil dihapus');
+        return redirect()->route('stok-dpark.index')->with('success', 'Data berhasil dihapus');
     }
 
     public function sold(Request $request, Dpark $dpark)
