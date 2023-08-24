@@ -3,7 +3,7 @@
 @section('content')
 <div class="col-lg-8 mx-5 mt-4">
     <h2>Edit Stok</h2>
-    <form action="{{ route('stok-dpark.update', $foto->id) }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('stok-dpark.update', $dpark->id) }}" method="post" enctype="multipart/form-data">
         @method('put')
         @csrf
         <div class="mb-3">
@@ -24,7 +24,7 @@
         </div>
         <div class="mb-3">
             <label for="kavling" class="form-label">Kavling</label>
-            <input type="text" class="form-control @error('kavling') is-invalid @enderror" id="kavling" name="kavling" value="{{ old('kavling', $data->kavling) }}" required>
+            <input type="text" class="form-control @error('kavling') is-invalid @enderror" id="kavling" name="kavling" value="{{ old('kavling', $dpark->kavling) }}" required>
             @error('kavling')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -33,7 +33,7 @@
         </div>
         <div class="mb-3">
             <label for="keterangan" class="form-label">Keterangan</label>
-            <input type="text" class="form-control @error('nomor') is-invalid @enderror" id="keterangan" name="keterangan" value="{{ old('keterangan', $legalitas->keterangan) }}" required>
+            <input type="text" class="form-control @error('nomor') is-invalid @enderror" id="keterangan" name="keterangan" value="{{ old('keterangan', $dpark->keterangan) }}" required>
             @error('keterangan')
             <div class="invalid-feedback">
                 {{ $message }}
