@@ -15,10 +15,9 @@ class CreateSinghasarisTable extends Migration
     {
         Schema::create('singhasaris', function (Blueprint $table) {
             $table->id();
-            $table->enum('kluster', ['1'])->default('1');
+            $table->string('kluster')->default('1');
             $table->string('kavling');
-            $table->integer('sold')->default(0);
-            $table->integer('open')->default(0);
+            $table->integer('status')->default(1);
             $table->string('keterangan');
             $table->timestamps();
         });

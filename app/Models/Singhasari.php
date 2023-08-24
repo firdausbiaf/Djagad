@@ -13,7 +13,7 @@ class Singhasari extends Model
     protected $fillable = [
         'kluster',
         'kavling',
-        'stok',
+        'status',
         'keterangan',
     ];
 }

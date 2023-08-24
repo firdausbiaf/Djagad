@@ -3,28 +3,13 @@
 @section('content')
 <div class="col-lg-8 mx-5 mt-4">
     <h2>Tambah Stok Baru</h2>
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-    <form action="{{ route('singhasari.store') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('stok-singhasari.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
-            <label for="kluster" class="form-label">Kluster</label>
-            <select class="form-select @error('lokasi') is-invalid @enderror" id="kluster" name="kluster" required>
-                <option value="1" {{ old('kluster') == '1' ? 'selected' : '' }}>1</option>
-            </select>
-            @error('kluster ')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-            @enderror
+            <label for="kluster" class="form-label">Cluster</label>
+            <input type="text" class="form-control" id="kluster" name="kluster" value="1" readonly>
         </div>
+        
 
         <div class="mb-3">
             <label for="kavling" class="form-label">Kavling</label>
