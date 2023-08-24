@@ -20,6 +20,9 @@
     <div class="tab-content">
         @foreach ($clusterOptions as $cluster)
             <div id="{{ Str::slug($cluster) }}" class="tab-pane fade {{ $loop->first ? 'show active' : '' }}">
+                <div class="input-group mb-3 mt-3">
+                    <input type="text" class="form-control search-input" placeholder="Cari Kavling...">
+                </div>
                 <table class="table table-striped table-sm">
                     <thead>
                         <tr>
@@ -35,7 +38,7 @@
                             $count = 1;
                         @endphp
                         @foreach ($clusterData[$cluster] as $batu)
-                            <tr>
+                            <tr class="data-row">
                                 <td>{{ $count }}</td>
                                 @php
                                     $count++;
@@ -77,4 +80,31 @@
         @endforeach
     </div>
 </div>
+
+<script>
+    // Mendapatkan elemen input pencarian
+    const searchInputs = document.querySelectorAll('.search-input');
+
+    // Menambahkan event listener untuk setiap input pencarian
+    searchInputs.forEach(searchInput => {
+        searchInput.addEventListener('input', function() {
+            const searchTerm = searchInput.value.trim().toLowerCase();
+            const dataRows = searchInput.closest('.tab-pane').querySelectorAll('.data-row');
+
+            // Loop melalui setiap baris data dan memeriksa apakah kavling cocok dengan pencarian
+            dataRows.forEach(row => {
+                const kavlingCell = row.querySelector('td:nth-child(2)');
+                const kavlingText = kavlingCell.textContent.toLowerCase();
+
+                // Menampilkan atau menyembunyikan baris berdasarkan pencocokan
+                if (kavlingText.includes(searchTerm)) {
+                    row.style.display = 'table-row';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
+
 @endsection

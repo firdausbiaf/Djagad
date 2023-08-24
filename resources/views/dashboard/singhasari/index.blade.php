@@ -6,6 +6,9 @@
         <div class="col-md-6">
             <h2>Singhasari</h2><br>
             <a href="{{ route('stok-singhasari.create') }}" class="btn btn-primary mb-3">Tambah Stok Singhasari</a>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="searchInput" placeholder="Cari Kavling...">
+            </div>
         </div>
     </div>
     
@@ -20,7 +23,7 @@
                 <th scope="col">Action</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="tableBody">
             @php
                 $count = 1; 
             @endphp
@@ -68,4 +71,32 @@
         {{ $singhasaris->links() }}
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // Mendapatkan elemen input pencarian
+    const searchInput = $('#searchInput');
+
+    // Menambahkan event listener untuk memantau perubahan pada input pencarian
+    searchInput.on('input', function() {
+        const searchTerm = searchInput.val().trim().toLowerCase();
+
+        // Mendapatkan semua baris data pada tabel
+        const rows = $('#tableBody tr');
+
+        // Loop melalui setiap baris data dan memeriksa apakah kavling cocok dengan pencarian
+        rows.each(function() {
+            const kavlingCell = $(this).find('td:nth-child(3)');
+            const kavlingText = kavlingCell.text().toLowerCase();
+
+            // Menampilkan atau menyembunyikan baris berdasarkan pencocokan
+            if (kavlingText.includes(searchTerm)) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    });
+</script>
+
 @endsection
