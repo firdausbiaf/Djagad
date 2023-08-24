@@ -128,7 +128,7 @@ class BatuController extends Controller
         return redirect()->route('stok-batu.index')->with('success', 'Data berhasil dihapus');
     }
 
-    public function sold(Request $request, Batu $batu)
+    public function soldBatu(Request $request, Batu $batu)
     {
         $batu = Batu::findOrFail($request->id);
         if ($batu) {
@@ -139,7 +139,7 @@ class BatuController extends Controller
         return redirect('/admin/stok-batu');
     }
 
-    public function open(Request $request)
+    public function openBatu(Request $request)
     {
         $batu = Batu::findOrFail($request->id);
         if ($batu) {

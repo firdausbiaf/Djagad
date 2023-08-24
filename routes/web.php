@@ -80,10 +80,6 @@ Route::get('/komplain_start', [FotoController::class, 'komplain_start']);
 
 Route::get('/komplain_finish', [FotoController::class, 'komplain_finish']);
 
-Route::get('/sold', [DparkController::class, 'sold']);
-
-Route::get('/open', [DparkController::class, 'open']);
-
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 
@@ -91,8 +87,6 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::resource('/admin/member', DashboardUserController::class)->middleware('checkRole:admin');
 Route::resource('/admin/user', DashboardAdminController::class)->middleware('checkRole:admin');
 Route::resource('/admin/petugas', PetugasController::class)->middleware('checkRole:admin');
-
-Route::resource('/admin/stok-dpark', DparkController::class)->middleware('checkRole:admin');
 
 Route::resource('/admin/kelas', DashboardCategoryController::class)->middleware('checkRole:admin');
 
@@ -127,11 +121,12 @@ Route::get('/get-kavlings', [FotoController::class, 'getKavlingsByLocation'])->n
 Route::get('/api/getFotosByLocation', 'FotoController@getFotosByLocation')->name('fotos.getByLocation');
 
 Route::resource('/admin/stok-batu', BatuController::class)->middleware('checkRole:admin');
-Route::get('/sold', [BatuController::class, 'sold']);
-Route::get('/open', [BatuController::class, 'open']);
+Route::get('/sold-batu', [BatuController::class, 'soldBatu']);
+Route::get('/open-batu', [BatuController::class, 'openBatu']);
 
-
-
+Route::resource('/admin/stok-dpark', DparkController::class)->middleware('checkRole:admin');
+Route::get('/sold-dpark', [DparkController::class, 'soldDpark']);
+Route::get('/open-dpark', [DparkController::class, 'openDpark']);
 
 
 

@@ -34,14 +34,14 @@
                 <td>{{ $batu->kavling }}</td>
                 <td>       
                     @if( $batu->status  == 0)
-                    <form action="/sold" method="get" class="d-inline">
+                    <form action="/sold-batu" method="get" class="d-inline">
                     @csrf
                     <input type="hidden" name="id" value="{{ $batu->id }}">
                     <button type="submit" class="badge bg-danger border-0" ><span>SOLD</span></button>
                     </form>
 
                     @else
-                    <form action="/open" method="get" class="d-inline">
+                    <form action="/open-batu" method="get" class="d-inline">
                     @csrf
                     <input type="hidden" name="id" value="{{ $batu->id }}">
                     <button type="submit" class="badge bg-success border-0" ><span>OPEN</span></button>
