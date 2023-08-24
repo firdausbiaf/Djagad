@@ -15,6 +15,10 @@ class CreateBatusTable extends Migration
     {
         Schema::create('batus', function (Blueprint $table) {
             $table->id();
+            $table->string('cluster');
+            $table->string('kavling');
+            $table->unsignedTinyInteger('status')->default(0);
+            $table->string('keterangan');
             $table->timestamps();
         });
     }
