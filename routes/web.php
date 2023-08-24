@@ -27,6 +27,8 @@ use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\TugasController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PromoController;
+use App\Http\Controllers\SinghasariController;
+use App\Models\Singhasari;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,6 +94,14 @@ Route::resource('/admin/tugas', DashboardTugasController::class)->middleware('ch
 Route::resource('/admin/data', DataController::class)->middleware('checkRole:admin');
 Route::get('/data/{id}/ktp', [DataController::class, 'viewKtp'])->name('data.view_ktp');
 Route::resource('/admin/promo', PromoController::class)->middleware('checkRole:admin');
+Route::resource('/admin/singhasari', SinghasariController::class)->middleware('checkRole:admin');
+Route::get('/sold_out', [SinghasariController::class, 'sold_out']);
+
+Route::get('/sold_in', [SinghasariController::class, 'sold_in']);
+
+Route::get('/open_out', [SinghasariController::class, 'open_out']);
+
+Route::get('/open_in', [SinghasariController::class, 'open_in']);
 // Route::resource('/admin/foto', FotoController::class)->middleware('checkRole:admin');
 
 Route::get('/komplain_start', [FotoController::class, 'komplain_start']);
