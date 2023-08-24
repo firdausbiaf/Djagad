@@ -54,7 +54,7 @@ class SinghasariController extends Controller
         $singhasari->keterangan = $request->get('keterangan');
 
         if ($singhasari->save()) {
-            return redirect()->route('singhasari.index')->with('success', 'Stok baru telah ditambahkan');
+            return redirect()->route('stok-singhasari.index')->with('success', 'Stok baru telah ditambahkan');
         } else {
             return redirect()->back()->with('error', 'Gagal menyimpan Stok. Silakan coba lagi.');
         }
@@ -67,9 +67,9 @@ class SinghasariController extends Controller
      * @param  \App\Models\Singhasari  $singhasari
      * @return \Illuminate\Http\Response
      */
-    public function show(Singhasari $singhasari)
+    public function show($id)
     {
-        $legalitas = Singhasari::findOrFail($singhasari);
+        $singhasari = Singhasari::findOrFail($id);
         return view('dashboard.singhasari.show', compact('singhasari'));
     }
 
@@ -79,9 +79,10 @@ class SinghasariController extends Controller
      * @param  \App\Models\Singhasari  $singhasari
      * @return \Illuminate\Http\Response
      */
-    public function edit(Singhasari $singhasari)
+    public function edit($id)
     {
-        //
+        $singhasari = Singhasari::findOrFail($id);
+        return view('dashboard.singhasari.edit', compact('singhasari'));
     }
 
     /**
@@ -93,8 +94,23 @@ class SinghasariController extends Controller
      */
     public function update(UpdateSinghasariRequest $request, Singhasari $singhasari)
     {
-        //
-    }
+        $request->validate([
+            'kluster' => 'required',
+            'kavling' => 'required',
+            'keterangan' => 'required',
+        ]);
+
+        $singhasari->kluster = $request->get('kluster');
+        $singhasari->kavling = $request->get('kavling');
+        $singhasari->keterangan = $request->get('keterangan');
+
+        if ($singhasari->save()) {
+            return redirect()->route('stok-singhasari.index')->with('success', 'Stok berhasil diperbarui');
+        } else {
+            return redirect()->back()->with('error', 'Gagal memperbarui Stok. Silakan coba lagi.');
+        }
+    } 
+    
 
     /**
      * Remove the specified resource from storage.
@@ -102,55 +118,35 @@ class SinghasariController extends Controller
      * @param  \App\Models\Singhasari  $singhasari
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Singhasari $singhasari)
+    public function destroy($id)
     {
-        //
+        $singhasari = Singhasari::findOrFail($id);
+        $singhasari->delete();
+
+        return redirect()->route('stok-singhasari.index')->with('success', 'Data berhasil dihapus');
     }
 
-    public function sold_in(Request $request, Singhasari $singhasari)
+    public function soldSinghasari(Request $request, Singhasari $singhasari)
     {
 
         $singhasari = Singhasari::findOrFail($request->id);
         if ($singhasari) {
-            $singhasari->sold = '0';
+            $singhasari->status = '1';
             $singhasari->save();
         }
 
-        return redirect('/admin/singhasari');
+        return redirect('/admin/stok-singhasari');
     }
 
-    public function sold_out(Request $request)
+    public function openSinghasari(Request $request)
     {
 
         $singhasari = Singhasari::findOrFail($request->id);
         if ($singhasari) {
-            $singhasari->sold = '1';
+            $singhasari->status = '0';
             $singhasari->save();
         }
 
-        return redirect('/admin/singhasari');
-    }
-    public function open_in(Request $request, Singhasari $singhasari)
-    {
-
-        $singhasari = Singhasari::findOrFail($request->id);
-        if ($singhasari) {
-            $singhasari->open = '0';
-            $singhasari->save();
-        }
-
-        return redirect('/admin/singhasari');
-    }
-
-    public function open_out(Request $request)
-    {
-
-        $singhasari = Singhasari::findOrFail($request->id);
-        if ($singhasari) {
-            $singhasari->open = '1';
-            $singhasari->save();
-        }
-
-        return redirect('/admin/singhasari');
+        return redirect('/admin/stok-singhasari');
     }
 }
