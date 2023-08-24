@@ -7,15 +7,9 @@
         @csrf
         <div class="mb-3">
             <label for="kluster" class="form-label">Cluster</label>
-            <select class="form-select @error('lokasi') is-invalid @enderror" id="kluster" name="kluster" @readonly(true)>
-                <option value="1" {{ old('kluster') == '1' ? 'selected' : '' }}>1</option>
-            </select>
-            @error('kluster ')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-            @enderror
+            <input type="text" class="form-control" id="kluster" name="kluster" value="1" readonly>
         </div>
+        
 
         <div class="mb-3">
             <label for="kavling" class="form-label">Kavling</label>
