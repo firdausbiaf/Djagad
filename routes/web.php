@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BatuController;
 use App\Http\Models\User;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Artisan;
@@ -20,6 +21,7 @@ use App\Http\Controllers\DashboardMateriController;
 use App\Http\Controllers\DashboardCategoryController;
 use App\Http\Controllers\DashboardTugasController;
 use App\Http\Controllers\DataController;
+use App\Http\Controllers\DparkController;
 use App\Http\Controllers\FotoController;
 use App\Http\Controllers\IndexUserController;
 use App\Http\Controllers\LegalitasController;
@@ -78,6 +80,10 @@ Route::get('/komplain_start', [FotoController::class, 'komplain_start']);
 
 Route::get('/komplain_finish', [FotoController::class, 'komplain_finish']);
 
+Route::get('/sold', [DparkController::class, 'sold']);
+
+Route::get('/open', [DparkController::class, 'open']);
+
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 
@@ -85,6 +91,8 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::resource('/admin/member', DashboardUserController::class)->middleware('checkRole:admin');
 Route::resource('/admin/user', DashboardAdminController::class)->middleware('checkRole:admin');
 Route::resource('/admin/petugas', PetugasController::class)->middleware('checkRole:admin');
+
+Route::resource('/admin/stok-dpark', DparkController::class)->middleware('checkRole:admin');
 
 Route::resource('/admin/kelas', DashboardCategoryController::class)->middleware('checkRole:admin');
 
@@ -120,6 +128,11 @@ Route::resource('/admin/legalitas', LegalitasController::class)->middleware('che
 Route::get('/get-kavlings', [FotoController::class, 'getKavlingsByLocation'])->name('get-kavlings');
 // Route::get('/api/getKavlingsByLocation', [FotoController::class, 'getKavlingsByLocation']);
 Route::get('/api/getFotosByLocation', 'FotoController@getFotosByLocation')->name('fotos.getByLocation');
+
+Route::resource('/admin/stok-batu', BatuController::class)->middleware('checkRole:admin');
+Route::get('/sold', [BatuController::class, 'sold']);
+Route::get('/open', [BatuController::class, 'open']);
+
 
 
 
