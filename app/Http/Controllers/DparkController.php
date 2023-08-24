@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\Dpark;
 use App\Http\Requests\StoreDparkRequest;
 use App\Http\Requests\UpdateDparkRequest;
@@ -149,7 +150,7 @@ class DparkController extends Controller
 
         $dpark = Dpark::findOrFail($request->id);
         if ($dpark) {
-            $dpark->masuk = '0';
+            $dpark->status = '0';
             $dpark->save();
         }
 
