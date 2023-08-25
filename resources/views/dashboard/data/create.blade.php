@@ -38,6 +38,12 @@
             @enderror
         </div>
         <div class="mb-3">
+            <label for="kluster" class="form-label">Kluster</label>
+            <select class="form-select" id="kluster" name="kluster" required>
+                <!-- Options will be dynamically populated by JavaScript -->
+            </select>
+        </div>
+        <div class="mb-3">
             <label for="kavling" class="form-label">Kavling</label>
             <input type="text" class="form-control @error('kavling') is-invalid @enderror" id="kavling" name="kavling" value="{{ old('kavling') }}" required>
             @error('kavling')
@@ -138,6 +144,31 @@
 
 
 <script>
+
+const lokasiSelect = document.getElementById('lokasi');
+    const klusterSelect = document.getElementById('kluster');
+
+    const klusters = {
+        'DJAGAD LAND BATU': ['Tahap 1', 'Tahap 2', 'Tahap 3', 'Tahap 4'],
+        'DJAGAD LAND SINGHASARI': ['1'],
+        'DPARK CITY': ['Alexandria', 'Sevilla', 'Andalusia', 'Granada']
+    };
+
+    function updateKlusterOptions() {
+        const selectedLokasi = lokasiSelect.value;
+        klusterSelect.innerHTML = '';
+
+        klusters[selectedLokasi].forEach(kluster => {
+            const option = document.createElement('option');
+            option.value = kluster;
+            option.textContent = kluster;
+            klusterSelect.appendChild(option);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', updateKlusterOptions);
+    lokasiSelect.addEventListener('change', updateKlusterOptions);
+
     function previewImages() {
     const previewContainer = document.querySelector('#preview-container');
     const files = document.querySelector('#ktp').files;

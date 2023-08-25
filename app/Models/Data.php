@@ -15,6 +15,7 @@ class Data extends Model
         'user_id',
         'kavling',
         'lokasi',
+        'kluster',
         'tipe',
         'spk',
         'ptb',

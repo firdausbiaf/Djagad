@@ -13,6 +13,7 @@
                     <li class="list-group-item"><b>Nama User : </b>{{ $data->user->name }}</li>
                     <li class="list-group-item"><b>Telepon : </b>{{ $data->user->phone }}</li>
                     <li class="list-group-item"><b>Kavling : </b>{{ $data->kavling }}</li>
+                    <li class="list-group-item"><b>Cluster : </b>{{ $data->kluster }}</li>
                     <li class="list-group-item"><b>Lokasi : </b>{{ $data->lokasi }}</li>
                     <li class="list-group-item"><b>Tipe : </b>{{ $data->tipe }}</li>
                     <li class="list-group-item"><b>SPK : </b>{{ $data->spk }}</li>

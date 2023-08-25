@@ -39,6 +39,12 @@
             @enderror
         </div>
         <div class="mb-3">
+            <label for="kluster" class="form-label">Kluster</label>
+            <select class="form-select" id="kluster" name="kluster" value="{{ old('kluster', $data->kluster) }}" required>
+                <!-- Options will be dynamically populated by JavaScript -->
+            </select>
+        </div>
+        <div class="mb-3">
             <label for="kavling" class="form-label">Kavling</label>
             <input type="text" class="form-control @error('kavling') is-invalid @enderror" id="kavling" name="kavling" value="{{ old('kavling', $data->kavling) }}" required>
             @error('kavling')
@@ -140,6 +146,38 @@
 </div>
 
 <script>
+
+const lokasiSelect = document.getElementById('lokasi');
+    const klusterSelect = document.getElementById('kluster');
+
+    const klusters = {
+        'DJAGAD LAND BATU': ['Kluster 1', 'Kluster 2'],
+        'DJAGAD LAND SINGHASARI': ['Tahap 1', 'Tahap 2', 'Tahap 3'],
+        'DPARK CITY': ['Alexandria', 'Sevilla', 'Andalusia', 'Granada']
+    };
+
+    function updateKlusterOptions() {
+        const selectedLokasi = lokasiSelect.value;
+        klusterSelect.innerHTML = '';
+
+        klusters[selectedLokasi].forEach(kluster => {
+            const option = document.createElement('option');
+            option.value = kluster;
+            option.textContent = kluster;
+            klusterSelect.appendChild(option);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', updateKlusterOptions);
+    lokasiSelect.addEventListener('change', updateKlusterOptions);
+
+    // Tambahkan kode di sini untuk mempertahankan nilai kluster saat mengedit data
+    window.addEventListener('load', () => {
+        updateKlusterOptions();
+        const selectedKluster = '{{ old("kluster", $data->kluster) }}';
+        klusterSelect.value = selectedKluster;
+    });
+
     function previewImages() {
         const previewContainer = document.querySelector('#preview-container');
     const files = document.querySelector('#ktp').files;

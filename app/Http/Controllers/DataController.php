@@ -53,6 +53,7 @@ class DataController extends Controller
             'user_id' => 'required|exists:users,id',
             'kavling' => 'required',
             'lokasi' => 'required',
+            'kluster' => 'required',
             'tipe' => 'required|integer',
             'spk' => 'required',
             'ptb' => 'required',
@@ -67,6 +68,7 @@ class DataController extends Controller
         $data->user_id = $request->input('user_id');
         $data->kavling = $request->input('kavling');
         $data->lokasi = $request->input('lokasi');
+        $data->kluster = $request->input('kluster');
         $data->tipe = $request->input('tipe');
         $data->spk = $request->input('spk');
         $data->ptb = $request->input('ptb');
@@ -197,6 +199,7 @@ class DataController extends Controller
         $request->validate([
             'user_id' => 'required|exists:users,id',
             'kavling' => 'required',
+            'kluster' => 'required',
             'tipe' => 'required|integer',
             'spk' => 'required',
             'ptb' => 'required',
@@ -208,6 +211,7 @@ class DataController extends Controller
 
         $data = Data::findOrFail($id);
         $data->user_id = $request->get('user_id');
+        $data->kluster = $request->get('kluster');
         $data->kavling = $request->get('kavling');
         $data->lokasi = $request->get('lokasi');
         $data->tipe = $request->get('tipe');
