@@ -34,6 +34,7 @@ class DataImport implements ToCollection, WithHeadingRow
                 'user_id' => $user->id,
                 // 'alamat' => $row['alamat'],
                 'lokasi' => $row['lokasi'],
+                'kluster' => $row['kluster'],
                 'kavling' => $row['kavling'],
                 'tipe' => $row['tipe'],
                 'spk' => $row['spk'],
