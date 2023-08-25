@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="table-responsive col-lg-10 mx-5 mt-4">
-    <h2>Data User</h2><br>
+    <h2>Data Pembelian</h2><br>
     <a href="{{ route('data.create') }}" class="btn btn-primary mx-2">Tambah Data</a>
 
     <!-- Button trigger modal -->

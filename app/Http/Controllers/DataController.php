@@ -302,6 +302,7 @@ class DataController extends Controller
                     $query->where('name', 'LIKE', "%{$search}%");
                 })
                 ->orWhere('lokasi', 'LIKE', "%{$search}%")
+                ->orWhere('kluster', 'LIKE', "%{$search}%")
                 ->orWhere('kavling', 'LIKE', "%{$search}%")
                 ->orWhere('sales', 'LIKE', "%{$search}%");
             })

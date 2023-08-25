@@ -38,7 +38,7 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label for="kluster" class="form-label">Kluster</label>
+            <label for="kluster" class="form-label">Cluster</label>
             <select class="form-select" id="kluster" name="kluster" required>
                 <!-- Options will be dynamically populated by JavaScript -->
             </select>
