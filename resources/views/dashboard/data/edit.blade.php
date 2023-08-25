@@ -40,7 +40,7 @@
         </div>
         <div class="mb-3">
             <label for="kluster" class="form-label">Kluster</label>
-            <select class="form-select" id="kluster" name="kluster" value="{{ old('kluster', $data->kluster) }}" required>
+            <select class="form-select" id="kluster" name="kluster" required>
                 <!-- Options will be dynamically populated by JavaScript -->
             </select>
         </div>
@@ -151,14 +151,14 @@ const lokasiSelect = document.getElementById('lokasi');
     const klusterSelect = document.getElementById('kluster');
 
     const klusters = {
-        'DJAGAD LAND BATU': ['Kluster 1', 'Kluster 2'],
-        'DJAGAD LAND SINGHASARI': ['Tahap 1', 'Tahap 2', 'Tahap 3'],
+        'DJAGAD LAND BATU': ['Tahap 1', 'Tahap 2', 'Tahap 3','Tahap 4'],
+        'DJAGAD LAND SINGHASARI': ['1'],
         'DPARK CITY': ['Alexandria', 'Sevilla', 'Andalusia', 'Granada']
     };
 
     function updateKlusterOptions() {
         const selectedLokasi = lokasiSelect.value;
-        klusterSelect.innerHTML = '';
+    klusterSelect.innerHTML = '';
 
         klusters[selectedLokasi].forEach(kluster => {
             const option = document.createElement('option');
@@ -168,15 +168,18 @@ const lokasiSelect = document.getElementById('lokasi');
         });
     }
 
-    document.addEventListener('DOMContentLoaded', updateKlusterOptions);
-    lokasiSelect.addEventListener('change', updateKlusterOptions);
+    document.addEventListener('DOMContentLoaded', () => {
+    // Call updateKlusterOptions() to populate kluster based on initial lokasi value
+    updateKlusterOptions();
 
-    // Tambahkan kode di sini untuk mempertahankan nilai kluster saat mengedit data
-    window.addEventListener('load', () => {
-        updateKlusterOptions();
-        const selectedKluster = '{{ old("kluster", $data->kluster) }}';
-        klusterSelect.value = selectedKluster;
-    });
+    // Get the initially selected kluster value from the server-side old() method
+    const initialKluster = '{{ old("kluster", $data->kluster) }}';
+
+    // Set the initial kluster value in the select element
+    klusterSelect.value = initialKluster;
+});
+
+lokasiSelect.addEventListener('change', updateKlusterOptions);
 
     function previewImages() {
         const previewContainer = document.querySelector('#preview-container');
