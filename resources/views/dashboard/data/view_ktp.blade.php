@@ -12,17 +12,23 @@
                     <li class="list-group-item">
                         <b>Foto KTP :</b><br><br>
                         @php
-                            $ktpPhotos = json_decode($data->ktp); // Assuming $data->ktp is a JSON-encoded array of photo paths
+                            $ktpPhotos = json_decode($data->ktp);
                         @endphp
 
                         @if (!empty($ktpPhotos) && count($ktpPhotos) > 0)
                             <div class="row">
                                 @foreach ($ktpPhotos as $index => $ktpPhoto)
+                                    @if ($index < 10) {{-- Batasi hingga 10 foto --}}
                                     <div class="col-md-6 mb-3">
                                         <div class="photo-container">
-                                            <img class="img-fluid" src="{{ asset('storage/'.$ktpPhoto) }}" alt="KTP Photo {{ $index + 1 }}">
+                                            <img class="img-fluid" src="{{ asset('storage/'.$ktpPhoto) }}" alt="Foto KTP {{ $index + 1 }}">
+                                            <div class="btn-group mt-2">
+                                                <a href="{{ asset('storage/'.$ktpPhoto) }}" class="btn btn-primary" target="_blank">View</a>
+                                                <button class="btn btn-danger ml-2" onclick="deletePhoto('{{ $ktpPhoto }}')">Hapus</button>
+                                            </div>
                                         </div>
                                     </div>
+                                    @endif
                                 @endforeach
                             </div>
                         @else
@@ -38,7 +44,41 @@
 
 <style>
     .photo-container {
-        padding: 5px; /* Adjust this value for the desired spacing */
+        padding: 5px; /* Sesuaikan nilai ini untuk mengatur jarak antara gambar */
     }
 </style>
+
+<script>
+    function deletePhoto(photoPath) {
+        if (confirm('Apakah Anda yakin ingin menghapus foto ini?')) {
+            // Lakukan aksi penghapusan foto, misalnya dengan AJAX request ke server
+        }
+    }
+
+    function deletePhoto(photoPath) {
+        if (confirm('Apakah Anda yakin ingin menghapus foto ini?')) {
+            // Lakukan aksi penghapusan foto, misalnya dengan AJAX request ke server
+            fetch('/delete-photo', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({ photoPath: photoPath })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Refresh halaman setelah penghapusan berhasil
+                    window.location.reload();
+                } else {
+                    alert('Gagal menghapus foto.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    }
+</script>
 @endsection

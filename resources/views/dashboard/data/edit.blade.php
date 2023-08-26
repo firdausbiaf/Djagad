@@ -146,19 +146,18 @@
 </div>
 
 <script>
-
-const lokasiSelect = document.getElementById('lokasi');
+    const lokasiSelect = document.getElementById('lokasi');
     const klusterSelect = document.getElementById('kluster');
 
     const klusters = {
-        'DJAGAD LAND BATU': ['Tahap 1', 'Tahap 2', 'Tahap 3','Tahap 4'],
+        'DJAGAD LAND BATU': ['Tahap 1', 'Tahap 2', 'Tahap 3', 'Tahap 4'],
         'DJAGAD LAND SINGHASARI': ['1'],
         'DPARK CITY': ['Alexandria', 'Sevilla', 'Andalusia', 'Granada']
     };
 
     function updateKlusterOptions() {
         const selectedLokasi = lokasiSelect.value;
-    klusterSelect.innerHTML = '';
+        klusterSelect.innerHTML = '';
 
         klusters[selectedLokasi].forEach(kluster => {
             const option = document.createElement('option');
@@ -169,37 +168,43 @@ const lokasiSelect = document.getElementById('lokasi');
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-    // Call updateKlusterOptions() to populate kluster based on initial lokasi value
-    updateKlusterOptions();
+        // Call updateKlusterOptions() to populate kluster based on initial lokasi value
+        updateKlusterOptions();
 
-    // Get the initially selected kluster value from the server-side old() method
-    const initialKluster = '{{ old("kluster", $data->kluster) }}';
+        // Get the initially selected kluster value from the server-side old() method
+        const initialKluster = '{{ old("kluster", $data->kluster) }}';
 
-    // Set the initial kluster value in the select element
-    klusterSelect.value = initialKluster;
-});
+        // Set the initial kluster value in the select element
+        klusterSelect.value = initialKluster;
 
-lokasiSelect.addEventListener('change', updateKlusterOptions);
+        // Tampilkan pratinjau gambar yang diunggah jika ada
+        loadPreviousImages();
+        previewImages();
+    });
 
-    function previewImages() {
+    lokasiSelect.addEventListener('change', updateKlusterOptions);
+
+    function loadPreviousImages() {
+        const ktpPhotos = {!! json_encode($ktpPhotos) !!}; // Convert the PHP array to a JavaScript array
+
+        // Use the previewContainer that you declared at the beginning
         const previewContainer = document.querySelector('#preview-container');
-    const files = document.querySelector('#ktp').files;
 
-    previewContainer.innerHTML = ''; // Clear previous previews
+        previewContainer.innerHTML = ''; // Clear previous previews
 
-    for (const file of files) {
-        const img = document.createElement('img');
-        img.src = URL.createObjectURL(file);
-        img.style.maxWidth = '100%'; // Set the width to fit the container
-        img.style.height = 'auto'; // Keep the aspect ratio
-        
-        const imgPreviewContainer = document.createElement('div');
-        imgPreviewContainer.className = 'img-preview-container mr-2 mb-2';
-        imgPreviewContainer.style.flexBasis = '20%';
-        imgPreviewContainer.appendChild(img);
+        for (const photo of ktpPhotos) {
+            const img = document.createElement('img');
+            img.src = photo;
+            img.style.maxWidth = '100%';
+            img.style.height = 'auto';
 
-        previewContainer.appendChild(imgPreviewContainer);
+            const imgPreviewContainer = document.createElement('div');
+            imgPreviewContainer.className = 'img-preview-container mr-2 mb-2';
+            imgPreviewContainer.style.flexBasis = '20%';
+            imgPreviewContainer.appendChild(img);
+
+            previewContainer.appendChild(imgPreviewContainer);
+        }
     }
-}
 </script>
 @endsection

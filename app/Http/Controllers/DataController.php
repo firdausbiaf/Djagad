@@ -207,6 +207,9 @@ class DataController extends Controller
             'progres' => 'required|integer',
             'sales' => 'required',
             'ktp.*' => 'image|mimes:jpeg,png,jpg|max:2048',
+            'ktp' => 'max:10', // Batasi maksimal 10 foto KTP
+        ], [
+            'ktp.max' => 'Maximum 10 KTP photos are allowed.', // Pesan khusus jika jumlah melebihi 10
         ]);
 
         $data = Data::findOrFail($id);
@@ -222,7 +225,7 @@ class DataController extends Controller
         $data->sales = $request->get('sales');
 
         // Get existing KTP paths
-        $existingKtpPaths = explode(',', $data->ktp);
+        $existingKtpPaths = json_decode($data->ktp) ?? [];
 
         // Handle photo upload
         // if ($request->hasFile('ktp')) {
@@ -245,10 +248,14 @@ class DataController extends Controller
                 $nama_ktp = $file->store('ktp', 'public');
                 $ktpPaths[] = $nama_ktp;
             }
-            $data->ktp = implode(',', $ktpPaths); // Simpan hanya foto baru yang diunggah
+        
+            $ktpPaths = array_merge($existingKtpPaths, $ktpPaths);
+            $data->ktp = json_encode($ktpPaths);
+        } else {
+            $data->ktp = json_encode($existingKtpPaths);
         }
-
-        $data->save(); // Save the data after updating fields
+        
+        $data->save();
 
         return redirect()->route('data.index')->with('success', 'Data berhasil diedit');
     } catch (\Exception $e) {
@@ -271,6 +278,22 @@ class DataController extends Controller
         return redirect()->route('data.index')->with('success', 'Data berhasil dihapus');
     }
 
+    public function deletePhoto(Request $request)
+    {
+        try {
+            $photoPath = $request->input('photoPath');
+    
+            // Hapus foto menggunakan Storage atau unlink
+            Storage::delete($photoPath); // Menggunakan Storage
+            // atau
+            // unlink(public_path('storage/' . $photoPath)); // Menggunakan unlink
+    
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'error' => $e->getMessage()]);
+        }
+    }
+    
     public function importExcel(Request $request)
     {
         $data = $request->file('file');
