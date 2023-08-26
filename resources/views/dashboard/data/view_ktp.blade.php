@@ -20,7 +20,7 @@
                                 @foreach ($ktpPhotos as $index => $ktpPhoto)
                                     @if ($index < 10) {{-- Batasi hingga 10 foto --}}
                                     <div class="col-md-6 mb-3">
-                                        <div class="photo-container">
+                                        <div class="photo-container" data-photo="{{ $ktpPhoto }}">
                                             <img class="img-fluid" src="{{ asset('storage/'.$ktpPhoto) }}" alt="Foto KTP {{ $index + 1 }}">
                                             <div class="btn-group mt-2">
                                                 <a href="{{ asset('storage/'.$ktpPhoto) }}" class="btn btn-sm btn-primary" target="_blank">View</a>
@@ -47,32 +47,35 @@
         padding: 5px; /* Sesuaikan nilai ini untuk mengatur jarak antara gambar */
     }
 </style>
-    <script>
-    function deletePhoto(photoPath) {
-        if (confirm('Apakah Anda yakin ingin menghapus foto ini?')) {
-            // Lakukan aksi penghapusan foto, misalnya dengan AJAX request ke server
-            // Contoh aksi penghapusan dengan AJAX
-            fetch('{{ route('delete.photo') }}', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-    },
-    body: JSON.stringify({ photoPath: photoPath })
-})
-.then(response => response.json())
-.then(data => {
-    if (data.success) {
-        // Refresh halaman setelah penghapusan berhasil
-        window.location.reload();
-    } else {
-        alert('Gagal menghapus foto.');
+<script>
+   function deletePhoto(photoPath) {
+    if (confirm('Apakah Anda yakin ingin menghapus foto ini?')) {
+        fetch('{{ route('delete.photo') }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({ photoPath: photoPath })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Remove the deleted photo's parent element from the DOM
+                const photoContainer = document.querySelector(`[data-photo="${photoPath}"]`);
+                if (photoContainer) {
+                    photoContainer.remove();
+                }
+            } else {
+                alert('Gagal menghapus foto.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
     }
-})
-.catch(error => {
-    console.error('Error:', error);
-});
-        }
-    }
+}
+
 </script>
+
 @endsection

@@ -285,9 +285,7 @@ class DataController extends Controller
         $photoPath = $request->input('photoPath');
 
         // Hapus foto menggunakan Storage atau unlink
-        Storage::delete($photoPath); // Menggunakan Storage
-        // atau
-        // unlink(public_path('storage/' . $photoPath)); // Menggunakan unlink
+        Storage::delete('public/' . $photoPath); // Menggunakan Storage
 
         return response()->json(['success' => true]);
     } catch (\Exception $e) {
