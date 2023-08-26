@@ -66,12 +66,12 @@
         </div>
         
         <div class="row justify-content-center">
-            <div class="col-4">
-                <a class="navbar-brand" href="/">
+            <div class="col-lg-4 mb-3">
+                <a class="navbar-brand" href="https://www.djagadland.com/">
                     <img src="{{ asset('images\singosari.png') }}" alt="logo" height="35" class="d-inline-block align-text-top">     
                 </a>
             </div>
-            <div class="col-4">
+            <div class="col-lg-4 mb-3">
                 <a class="navbar-brand" href="/">
                     <img src="{{ asset('images\villa.png') }}" alt="logo" height="35" class="d-inline-block align-text-top">     
                 </a>
