@@ -49,12 +49,12 @@
         
         <div class="row justify-content-center mb-3">
             <div class="col-lg-4 mb-3">
-                <a class="navbar-brand" href="/">
+                <a class="navbar-brand" href="https://www.djagadland.com/djagadlandbatu/">
                     <img src="{{ asset('images\batu.png') }}" alt="logo" height="35" class="d-inline-block align-text-top">     
                 </a>
             </div>
             <div class="col-lg-4 mb-3">
-                <a class="navbar-brand" href="/">
+                <a class="navbar-brand" href="https://www.instagram.com/d_bintanvalley/">
                     <img src="{{ asset('images\bintan.png') }}" alt="logo" height="35" class="d-inline-block align-text-top">     
                 </a>
             </div>
@@ -67,7 +67,7 @@
         
         <div class="row justify-content-center">
             <div class="col-lg-4 mb-3">
-                <a class="navbar-brand" href="https://www.djagadland.com/">
+                <a class="navbar-brand" href="">
                     <img src="{{ asset('images\singosari.png') }}" alt="logo" height="35" class="d-inline-block align-text-top">     
                 </a>
             </div>
