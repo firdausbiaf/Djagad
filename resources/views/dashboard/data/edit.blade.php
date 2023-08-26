@@ -148,6 +148,8 @@
 <script>
     const lokasiSelect = document.getElementById('lokasi');
     const klusterSelect = document.getElementById('kluster');
+    const ktpInput = document.getElementById('ktp');
+    const previewContainer = document.getElementById('preview-container');
 
     const klusters = {
         'DJAGAD LAND BATU': ['Tahap 1', 'Tahap 2', 'Tahap 3', 'Tahap 4'],
@@ -179,7 +181,9 @@
 
         // Tampilkan pratinjau gambar yang diunggah jika ada
         loadPreviousImages();
-        previewImages();
+        
+        // Tambahkan event listener untuk mengupdate pratinjau gambar saat input berubah
+        ktpInput.addEventListener('change', previewImages);
     });
 
     lokasiSelect.addEventListener('change', updateKlusterOptions);
@@ -187,14 +191,31 @@
     function loadPreviousImages() {
         const ktpPhotos = {!! json_encode($ktpPhotos) !!}; // Convert the PHP array to a JavaScript array
 
-        // Use the previewContainer that you declared at the beginning
-        const previewContainer = document.querySelector('#preview-container');
-
         previewContainer.innerHTML = ''; // Clear previous previews
 
         for (const photo of ktpPhotos) {
             const img = document.createElement('img');
-            img.src = photo;
+            img.src = '{{ asset("storage") }}/' + photo; // Update this line
+            img.style.maxWidth = '100%';
+            img.style.height = 'auto';
+
+            const imgPreviewContainer = document.createElement('div');
+            imgPreviewContainer.className = 'img-preview-container mr-2 mb-2';
+            imgPreviewContainer.style.flexBasis = '20%';
+            imgPreviewContainer.appendChild(img);
+
+            previewContainer.appendChild(imgPreviewContainer);
+        }
+    }
+
+    function previewImages() {
+        previewContainer.innerHTML = ''; // Clear previous previews
+
+        const files = ktpInput.files;
+
+        for (const file of files) {
+            const img = document.createElement('img');
+            img.src = URL.createObjectURL(file);
             img.style.maxWidth = '100%';
             img.style.height = 'auto';
 
@@ -207,4 +228,5 @@
         }
     }
 </script>
+
 @endsection
