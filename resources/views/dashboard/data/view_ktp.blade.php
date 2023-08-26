@@ -23,8 +23,8 @@
                                         <div class="photo-container">
                                             <img class="img-fluid" src="{{ asset('storage/'.$ktpPhoto) }}" alt="Foto KTP {{ $index + 1 }}">
                                             <div class="btn-group mt-2">
-                                                <a href="{{ asset('storage/'.$ktpPhoto) }}" class="btn btn-primary" target="_blank">View</a>
-                                                <button class="btn btn-danger ml-2" onclick="deletePhoto('{{ $ktpPhoto }}')">Hapus</button>
+                                                <a href="{{ asset('storage/'.$ktpPhoto) }}" class="btn btn-sm btn-primary" target="_blank">View</a>
+                                                <button class="btn btn-sm btn-danger ml-2" onclick="deletePhoto('{{ $ktpPhoto }}')">Hapus</button>
                                             </div>
                                         </div>
                                     </div>
@@ -47,37 +47,31 @@
         padding: 5px; /* Sesuaikan nilai ini untuk mengatur jarak antara gambar */
     }
 </style>
-
-<script>
+    <script>
     function deletePhoto(photoPath) {
         if (confirm('Apakah Anda yakin ingin menghapus foto ini?')) {
             // Lakukan aksi penghapusan foto, misalnya dengan AJAX request ke server
-        }
+            // Contoh aksi penghapusan dengan AJAX
+            fetch('{{ route('delete.photo') }}', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+    },
+    body: JSON.stringify({ photoPath: photoPath })
+})
+.then(response => response.json())
+.then(data => {
+    if (data.success) {
+        // Refresh halaman setelah penghapusan berhasil
+        window.location.reload();
+    } else {
+        alert('Gagal menghapus foto.');
     }
-
-    function deletePhoto(photoPath) {
-        if (confirm('Apakah Anda yakin ingin menghapus foto ini?')) {
-            // Lakukan aksi penghapusan foto, misalnya dengan AJAX request ke server
-            fetch('/delete-photo', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                body: JSON.stringify({ photoPath: photoPath })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // Refresh halaman setelah penghapusan berhasil
-                    window.location.reload();
-                } else {
-                    alert('Gagal menghapus foto.');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+})
+.catch(error => {
+    console.error('Error:', error);
+});
         }
     }
 </script>

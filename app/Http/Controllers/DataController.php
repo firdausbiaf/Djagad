@@ -278,21 +278,22 @@ class DataController extends Controller
         return redirect()->route('data.index')->with('success', 'Data berhasil dihapus');
     }
 
+
     public function deletePhoto(Request $request)
-    {
-        try {
-            $photoPath = $request->input('photoPath');
-    
-            // Hapus foto menggunakan Storage atau unlink
-            Storage::delete($photoPath); // Menggunakan Storage
-            // atau
-            // unlink(public_path('storage/' . $photoPath)); // Menggunakan unlink
-    
-            return response()->json(['success' => true]);
-        } catch (\Exception $e) {
-            return response()->json(['success' => false, 'error' => $e->getMessage()]);
-        }
+{
+    try {
+        $photoPath = $request->input('photoPath');
+
+        // Hapus foto menggunakan Storage atau unlink
+        Storage::delete($photoPath); // Menggunakan Storage
+        // atau
+        // unlink(public_path('storage/' . $photoPath)); // Menggunakan unlink
+
+        return response()->json(['success' => true]);
+    } catch (\Exception $e) {
+        return response()->json(['success' => false, 'error' => $e->getMessage()]);
     }
+}
     
     public function importExcel(Request $request)
     {
