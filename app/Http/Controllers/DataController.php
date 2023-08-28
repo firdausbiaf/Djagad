@@ -280,18 +280,26 @@ class DataController extends Controller
 
 
     public function deletePhoto(Request $request)
-{
-    try {
-        $photoPath = $request->input('photoPath');
-
-        // Hapus foto menggunakan Storage atau unlink
-        Storage::delete('public/' . $photoPath); // Menggunakan Storage
-
-        return response()->json(['success' => true]);
-    } catch (\Exception $e) {
-        return response()->json(['success' => false, 'error' => $e->getMessage()]);
+    {
+        try {
+            $photoPath = $request->input('photoPath');
+    
+            // Hapus foto menggunakan Storage atau unlink
+            Storage::delete('public/' . $photoPath); // Menggunakan Storage
+    
+            $data = Data::find($request->data_id); // Ganti Data dengan nama model yang sesuai
+            $ktpPhotos = json_decode($data->ktp);
+    
+            // Hapus foto dari array
+            $updatedKtpPhotos = array_diff($ktpPhotos, [$photoPath]);
+            $data->ktp = json_encode(array_values($updatedKtpPhotos));
+            $data->save();
+    
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'error' => $e->getMessage()]);
+        }
     }
-}
     
     public function importExcel(Request $request)
     {

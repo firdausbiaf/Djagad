@@ -11,6 +11,7 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
                         <b>Foto KTP :</b><br><br>
+
                         @php
                             $ktpPhotos = json_decode($data->ktp);
                         @endphp
@@ -56,7 +57,7 @@
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
-            body: JSON.stringify({ photoPath: photoPath })
+            body: JSON.stringify({ photoPath: photoPath, data_id: {{ $data->id }} }) // Ganti dengan ID data yang sesuai
         })
         .then(response => response.json())
         .then(data => {
@@ -75,7 +76,5 @@
         });
     }
 }
-
 </script>
-
 @endsection
