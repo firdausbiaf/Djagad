@@ -97,7 +97,7 @@ class FotoController extends Controller
             $foto->photo = $nama_photo;
 
             // Set nilai default untuk kolom "komplain" dan "status"
-            $foto->komplain = null;
+            $foto->komplain = $request->input('komplain');
             $foto->status = 0;
 
             $foto->save();

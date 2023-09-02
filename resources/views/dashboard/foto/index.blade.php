@@ -36,7 +36,7 @@
                 <table class="table table-striped table-sm">
                     <thead>
                         <tr>
-                            <th scope="col">ID</th>
+                            <th scope="col">No.</th>
                             <th scope="col">Lokasi</th>
                             <th scope="col">Kavling</th>
                             <th scope="col">Foto</th>
@@ -46,10 +46,16 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                            $count = 1; 
+                        @endphp
                         <!-- Tampilkan data foto sesuai dengan lokasi -->
                         @foreach ($fotosByLokasi[$lokasi] as $foto)
                             <tr class="table-row" data-lokasi="{{ $lokasi }}" data-kavling="{{ $foto->data->kavling }}">
-                                <td>{{ $foto->id }}</td>
+                                <td>{{ $count }}</td> <!-- Display the incrementing number -->
+                                @php
+                                    $count++; // Increment the counter
+                                @endphp
                                 <td>{{ $foto->data->lokasi }}</td>
                                 <td>{{ $foto->data->kavling }}</td>                                
                                 <td>

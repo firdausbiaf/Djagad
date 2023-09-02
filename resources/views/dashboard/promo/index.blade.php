@@ -12,16 +12,22 @@
     <table class="table table-striped table-sm">
         <thead>
             <tr>
-                <th scope="col">ID</th>
+                <th scope="col">No.</th>
                 <th scope="col">Gambar</th>
                 <th scope="col">Keterangan</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
+            @php
+              $count = 1; 
+            @endphp
             @foreach ($promos as $promo)
                 <tr>
-                    <td>{{ $promo->id }}</td>
+                    <td>{{ $count }}</td> <!-- Display the incrementing number -->
+                    @php
+                        $count++; // Increment the counter
+                    @endphp
                     <td>
                         @if ($promo->gambar)
                             <img src="{{ asset('storage/' . $promo->gambar) }}" class="card-img-top" style="max-width: 100px;" alt="Gambar">
