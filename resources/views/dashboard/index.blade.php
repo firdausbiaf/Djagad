@@ -22,11 +22,11 @@
                       <p class="statistics-title">Petugas</p>
                       <h4 class="rate-percentage">{{ $petugas->count() }} Persons</h4>
                     </div>
-                    <div class="d-none d-md-block">
+                    <div class="d-block">
                       <p class="statistics-title">Data User</p>
                       <h4 class="rate-percentage">{{ $data->count() }} Data</h4>
                     </div>
-                    <div class="d-none d-md-block">
+                    <div class="d-block">
                       <p class="statistics-title">Legalitas</p>
                       <h4 class="rate-percentage">{{ $legalitas->count() }} Data</h4>
                     </div>
@@ -53,7 +53,7 @@
                 var personData = {
                   labels: ['Member', 'Admin', 'Petugas'],
                   datasets: [{
-                    label: 'Total Persons',
+                    
                     data: [{{ $member->count() }}, {{ $admin->count() }}, {{ $petugas->count() }}],
                     backgroundColor: ['red', 'green', 'orange']
                   }]
@@ -71,7 +71,7 @@
                     },
                     plugins: {
                       legend: {
-                        display: true,
+                        display: false,
                         position: 'right' // Anda dapat mengatur posisi legenda sesuai keinginan
                       }
                     }
@@ -88,7 +88,7 @@
                 var dataData = {
                   labels: {!! json_encode(['Data User', 'Legalitas']) !!},
                   datasets: [{
-                    label: 'Total Data',
+                    
                     data: [{{ $data->count() }}, {{ $legalitas->count() }}],
                     backgroundColor: ['blue', 'purple']
                   }]
@@ -106,7 +106,7 @@
                     },
                     plugins: {
                       legend: {
-                        display: true,
+                        display: false,
                         position: 'right' // Anda dapat mengatur posisi legenda sesuai keinginan
                       }
                     }

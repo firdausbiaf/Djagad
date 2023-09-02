@@ -1,7 +1,7 @@
 <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
   <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
     <div>
-        <img src="{{ asset('images/logologo.png') }}" alt="logo" width="100%" height=auto>
+        <img src="{{ asset('images/logologo.png') }}" alt="logo" width="100%" height="auto">
     </div>
   </div>
   <div class="navbar-menu-wrapper d-flex align-items-top"> 
@@ -27,7 +27,7 @@
         </div>
       </li>
     </ul>
-    <button class="navbar-toggler navbar-toggler-right align-self-center" type="button" data-bs-toggle="offcanvas">
+    <button class="navbar-toggler navbar-toggler-right align-self-center d-lg-none" type="button" data-bs-toggle="offcanvas">
       <span class="mdi mdi-menu"></span>
     </button>
   </div>
